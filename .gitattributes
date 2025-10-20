@@ -1,0 +1,14 @@
+# Text Normalization
+*           text=auto
+
+# Force LF for Linux scripts/code
+*.sh        text eol=lf
+*.py        text eol=lf
+*.service   text eol=lf
+*.timer     text eol=lf
+Dockerfile  text eol=lf
+
+# Windows-native
+*.ps1       text eol=crlf
+*.bat       text eol=crlf
+
