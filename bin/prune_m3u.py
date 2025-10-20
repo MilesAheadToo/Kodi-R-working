@@ -3,6 +3,7 @@
 
 # Favourites-only writer using paths from ~/Kodi/.env when --use-env
 # Writes:  <M3U_DIR>/<M3U>, channel_cc_map.json, prune_report.csv
+# Includes country in group-title so Kodi can group channels by country.
 
 import argparse, csv, io, json, os, re
 from typing import Dict, List, Tuple
@@ -62,9 +63,13 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
             name = _get(r, hdr, "ChannelName","Name","Channel")
             tvg  = _get(r, hdr, "TvgId","tvg-id")
             cc   = _get(r, hdr, "Country","tvg-country")
+            grp  = _get(r, hdr, "GroupTitle","Group","Category")
             ext = "#EXTINF:-1"
             if tvg: ext = set_attr(ext, "tvg-id", tvg)
             if cc:  ext = set_attr(ext, "tvg-country", cc)
+            group_pieces = [val for val in (cc, grp) if val]
+            if group_pieces:
+                ext = set_attr(ext, "group-title", " - ".join(group_pieces))
             ext = f"{ext},{name or ''}"
             fo.write(ext + "\n"); fo.write(url + "\n")
             ch2cc[name or url] = cc or ""
@@ -113,4 +118,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
