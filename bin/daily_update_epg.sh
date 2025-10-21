@@ -1,63 +1,43 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-ENV_FILE="$HOME/Kodi/.env"
-# shellcheck disable=SC1090
-source "$ENV_FILE"
+ENV_FILE="${HOME}/Kodi/.env"
+if [ -f "$ENV_FILE" ]; then
+  sed -i 's/\r$//' "$ENV_FILE"
+  set -a
+  . "$ENV_FILE"
+  set +a
+else
+  echo "ERROR: $ENV_FILE not found" >&2
+  exit 1
+fi
 
-# Required from .env
-: "${BIN_DIR:?set in .env}"
-: "${M3U_DIR:?set in .env}"
-: "${EPG_DIR:?set in .env}"
-: "${LOG_DIR:?set in .env}"
-: "${KODI_SMB_PATH:?set in .env}"
-: "${COUNTRY_EPG_URLS:?set in .env}"
-: "${M3U:?set in .env}"           # input playlist filename
-: "${EPG:?set in .env}"           # output epg filename (e.g., pruned.epg.xml.gz)
+mkdir -p "${BIN_DIR}" "${M3U_DIR}" "${EPG_DIR}" "${LOG_DIR}"
 
-PRUNED_M3U="${M3U_DIR}/${M3U}"
-PRUNED_EPG="${EPG_DIR}/${EPG}"
-CC_MAP="${M3U_DIR}/channel_cc_map.json"
-EPG_REPORT="${LOG_DIR}/epg_match_report.csv"
+LOG_FILE="${LOG_DIR}/daily_update_epg.log"
+echo "[$(date -Iseconds)] Start daily_update_epg" | tee -a "${LOG_FILE}"
 
-mkdir -p "$LOG_DIR" "$EPG_DIR"
+for url in ${COUNTRY_EPG_URLS}; do
+  [ -n "$url" ] || continue
+  fname="$(basename "$url")"
+  out="${EPG_DIR}/${fname}"
+  echo "Downloading ${url} -> ${out}" | tee -a "${LOG_FILE}"
+  curl -fsSL "${url}" -o "${out}"
+done
 
-fetch_epg_list () {
-  echo "[info] Fetching XMLTV into $EPG_DIR"
-  for url in $COUNTRY_EPG_URLS; do
-    out="$EPG_DIR/$(basename "$url")"
-    echo "  - $url -> $out"
-    curl -L --fail --retry 3 --retry-delay 2 --connect-timeout 15 -sS "$url" -o "$out" || {
-      echo "    [warn] download failed: $url"
-      continue
-    }
-    [[ -s "$out" ]] || echo "    [warn] empty file: $out"
-  done
-}
+# Never process previous pruned output as input
+if [ -n "${EPG:-}" ] && [ -f "${EPG_DIR}/${EPG}" ]; then
+  rm -f "${EPG_DIR}/${EPG}"
+fi
 
-{
-  echo "[$(date -Is)] daily_update_epg.sh start"
-  echo "[info] .env loaded from $ENV_FILE"
-  echo "[info] EPG_DIR=$EPG_DIR  M3U_DIR=$M3U_DIR  KODI_SMB_PATH=$KODI_SMB_PATH"
+echo "Pruning EPG with ${BIN_DIR}/prune_epg_from_country.py" | tee -a "${LOG_FILE}"
+python3 "${BIN_DIR}/prune_epg_from_country.py" --use-env --progress | tee -a "${LOG_FILE}"
 
-  [[ -s "$PRUNED_M3U" ]] || { echo "[error] $PRUNED_M3U missing/empty. Run monthly_update_m3u.sh."; exit 2; }
+if [ -n "${KODI_SMB_PATH:-}" ]; then
+  mkdir -p "${KODI_SMB_PATH}"
+  cp -f "${M3U_DIR}/${M3U}" "${KODI_SMB_PATH}/${M3U}"
+  cp -f "${EPG_DIR}/${EPG}" "${KODI_SMB_PATH}/${EPG}"
+  echo "Copied M3U+EPG to ${KODI_SMB_PATH}" | tee -a "${LOG_FILE}"
+fi
 
-  # 1) Pull fresh EPGs
-  fetch_epg_list
-  ls "$EPG_DIR"/*.xml* >/dev/null 2>&1 || { echo "[error] No XMLTV files present in $EPG_DIR"; exit 2; }
-
-  # 2) Build matched-only EPG (prune_epg_from_country.py reads M3U_DIR/EPG_DIR/LOG_DIR/EPG/FUZZY from .env)
-  python3 "${BIN_DIR}/prune_epg_from_country.py" --use-env --progress
-
-  [[ -s "$PRUNED_EPG" ]] || { echo "[error] Failed to produce $PRUNED_EPG"; exit 3; }
-
-  # 3) Publish
-  cp -f "$PRUNED_M3U" "$KODI_SMB_PATH/"
-  cp -f "$PRUNED_EPG" "$KODI_SMB_PATH/"
-  if [[ -s "$CC_MAP" ]]; then cp -f "$CC_MAP" "$KODI_SMB_PATH/"; fi
-  if [[ -s "$EPG_REPORT" ]]; then cp -f "$EPG_REPORT" "$KODI_SMB_PATH/"; fi
-
-  echo "[ok] Deployed ${M3U} and ${EPG} to $KODI_SMB_PATH"
-  echo "[$(date -Is)] daily_update_epg.sh done"
-} | tee -a "${LOG_DIR}/daily_update_epg.log"
-
+echo "[$(date -Iseconds)] Done daily_update_epg" | tee -a "${LOG_FILE}"

@@ -6,7 +6,8 @@
 # Includes country in group-title so Kodi can group channels by country.
 
 import argparse, csv, io, json, os, re
-from typing import Dict, List, Tuple
+from datetime import datetime
+from typing import Dict, List, Tuple, Optional
 
 ENV_PATH = os.path.expanduser("~/Kodi/.env")
 
@@ -51,9 +52,105 @@ def _is_fav(r: Dict[str, str], hdr: Dict[str, str]) -> bool:
     val = (_get(r, hdr, "Favourite", "Favorite", "Include") or "").lower()
     return val in {"1","true","yes","y"}
 
-def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[int,int,int]:
+def _channel_key(name: str, tvg: str, url: str) -> str:
+    for cand in (name, tvg, url):
+        if cand:
+            key = cand.strip()
+            if key:
+                return key
+    return url.strip()
+
+def _build_overrides(channel_meta: Dict[str, Dict[str, str]]) -> Dict[str, str]:
+    overrides: Dict[str, str] = {}
+    for chan, meta in channel_meta.items():
+        cc = (meta.get("country") or "").strip()
+        if cc:
+            overrides[chan] = cc
+    return dict(sorted(overrides.items(), key=lambda kv: kv[0].lower()))
+
+def _write_channel_map(channel_meta: Dict[str, Dict[str, str]], cc_map_path: str) -> Dict[str, str]:
+    overrides = _build_overrides(channel_meta)
+    payload = {
+        "version": 2,
+        "generated_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
+        "summary": {
+            "total_channels": len(channel_meta),
+            "with_country": len(overrides)
+        },
+        "channels": {},
+        "mappings": {
+            "channel_overrides": overrides
+        },
+        "lookup": overrides  # legacy compatibility
+    }
+
+    sorted_items = sorted(channel_meta.items(), key=lambda kv: kv[0].lower())
+    for chan, meta in sorted_items:
+        payload["channels"][chan] = {
+            "country": meta.get("country", ""),
+            "tvg_id": meta.get("tvg_id", ""),
+            "group": meta.get("group", "")
+        }
+
+    with io.open(cc_map_path, "w", encoding="utf-8") as f:
+        json.dump(payload, f, ensure_ascii=False, indent=2)
+    return overrides
+
+def _find_cc_profile_template(env: Dict[str, str], fallback_dir: Optional[str]=None) -> Optional[str]:
+    candidates = [
+        env.get("CC_TO_PROFILE_TEMPLATE"),
+        env.get("CC_PROFILE_TEMPLATE"),
+        env.get("CHANNEL_CC_TEMPLATE"),
+        os.environ.get("CC_TO_PROFILE_TEMPLATE"),
+        os.environ.get("CC_PROFILE_TEMPLATE"),
+        os.environ.get("CHANNEL_CC_TEMPLATE"),
+    ]
+    if fallback_dir:
+        candidates.append(os.path.join(fallback_dir, "cc_to_profile.json"))
+
+    candidates.extend([
+        "/storage/.kodi/userdata/addon_data/service.channel_vpn_cc/cc_to_profile.json",
+        os.path.expanduser("~/Kodi/cc_to_profile.json")
+    ])
+
+    seen = set()
+    for cand in candidates:
+        if not cand: continue
+        expanded = os.path.expanduser(cand)
+        if expanded in seen:
+            continue
+        seen.add(expanded)
+        if os.path.isfile(expanded):
+            return expanded
+    return None
+
+def _update_cc_profile(template_path: str, overrides: Dict[str, str]) -> None:
+    if not overrides:
+        return
+    try:
+        with io.open(template_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+    except FileNotFoundError:
+        return
+    except json.JSONDecodeError:
+        return
+
+    mappings = data.setdefault("mappings", {})
+    existing = mappings.get("channel_overrides")
+    if isinstance(existing, dict):
+        for chan, val in existing.items():
+            if chan not in overrides and isinstance(val, str) and val.strip():
+                overrides[chan] = val.strip()
+    mappings["channel_overrides"] = dict(sorted(overrides.items(), key=lambda kv: kv[0].lower()))
+    data["generated_at"] = datetime.utcnow().replace(microsecond=0).isoformat() + "Z"
+
+    with io.open(template_path, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[int,int,int,Dict[str,Dict[str,str]],Dict[str,str]]:
     written = sk_notfav = sk_nourl = 0
-    ch2cc: Dict[str, str] = {}
+    channel_meta: Dict[str, Dict[str, str]] = {}
+    overrides: Dict[str, str] = {}
     with io.open(out_path, "w", encoding="utf-8") as fo:
         fo.write("#EXTM3U\n")
         for r in favs:
@@ -62,7 +159,8 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
             if not url: sk_nourl += 1; continue
             name = _get(r, hdr, "ChannelName","Name","Channel")
             tvg  = _get(r, hdr, "TvgId","tvg-id")
-            cc   = _get(r, hdr, "Country","tvg-country")
+            cc_raw = _get(r, hdr, "Country","tvg-country")
+            cc = cc_raw.upper() if cc_raw else ""
             grp  = _get(r, hdr, "GroupTitle","Group","Category")
             ext = "#EXTINF:-1"
             if tvg: ext = set_attr(ext, "tvg-id", tvg)
@@ -72,12 +170,21 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
                 ext = set_attr(ext, "group-title", " - ".join(group_pieces))
             ext = f"{ext},{name or ''}"
             fo.write(ext + "\n"); fo.write(url + "\n")
-            ch2cc[name or url] = cc or ""
+
+            key = _channel_key(name, tvg, url)
+            meta = channel_meta.setdefault(key, {
+                "name": name,
+                "tvg_id": tvg,
+                "country": cc,
+                "group": grp
+            })
+            if cc:
+                meta["country"] = cc
+                overrides[key] = cc
             written += 1
     if cc_map_path:
-        with io.open(cc_map_path, "w", encoding="utf-8") as f:
-            json.dump(ch2cc, f, ensure_ascii=False, indent=2, sort_keys=True)
-    return written, sk_notfav, sk_nourl
+        overrides = _write_channel_map(channel_meta, cc_map_path)
+    return written, sk_notfav, sk_nourl, channel_meta, overrides
 
 def main():
     ap = argparse.ArgumentParser()
@@ -87,6 +194,8 @@ def main():
     ap.add_argument("--m3u-dir"); ap.add_argument("--out-dir"); ap.add_argument("--fav")
     ap.add_argument("--country-map"); ap.add_argument("--report")
     args = ap.parse_args()
+
+    env: Dict[str, str] = {}
 
     if args.use_env:
         env = parse_env_file(ENV_PATH)
@@ -105,7 +214,12 @@ def main():
     os.makedirs(LOG_DIR, exist_ok=True)
 
     favs, hdr = _read_csv(TV_FAV)
-    written, sk_notfav, sk_nourl = write_pruned_m3u_from_favs(favs, hdr, pruned_out, cc_map_path=cc_map)
+    written, sk_notfav, sk_nourl, channel_meta, overrides = write_pruned_m3u_from_favs(
+        favs, hdr, pruned_out, cc_map_path=cc_map)
+
+    template_path = _find_cc_profile_template(env, os.path.dirname(cc_map) if cc_map else None)
+    if template_path:
+        _update_cc_profile(template_path, overrides.copy())
 
     if report:
         with io.open(report, "w", encoding="utf-8", newline="") as f:
