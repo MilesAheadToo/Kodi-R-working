@@ -1,197 +1,1381 @@
 {
-  "23 ABC Bakersfield CA (KERO) (720p)": "US",
-  "30A Music (720p)": "US",
-  "3sat HD (1080p)": "DE",
-  "70s Cinema": "US",
-  "80s Rewind": "US",
-  "90s Throwback": "US",
-  "ABC News (720p)": "US",
-  "AMC East (1080p)": "US",
-  "Amazing Discoveries TV (720p)": "CA",
-  "Ameritrade (1080p) [Not 24/7]": "US",
-  "Antenna TV": "US",
-  "Antiques Road Show UK": "US",
-  "BBC Earth (1080p) [Geo-blocked]": "GB",
-  "BBC Four UK HD": "UK",
-  "BBC News (1080p)": "UK",
-  "BBC News (North America) (1080p)": "UK",
-  "BBC News Europe": "GB",
-  "BBC One London HD (1080p)": "UK",
-  "BBC Three": "GB",
-  "BBC Three HD (720p)": "UK",
-  "BBC Travel": "US",
-  "BBC Two HD (1080p)": "GB",
-  "BBC UHD 1 (2160p) [Geo-blocked] [Not 24/7]": "GB",
-  "BBC UHD 2 (2160p) [Geo-blocked] [Not 24/7]": "GB",
-  "BBC UHD 3 (2160p) [Geo-blocked] [Not 24/7]": "GB",
-  "BBC UHD 4 (2160p) [Geo-blocked] [Not 24/7]": "GB",
-  "BBC UHD 5 (2160p) [Geo-blocked] [Not 24/7]": "GB",
-  "BNN Bloomberg": "CA",
-  "BR Fernsehen Nord (720p)": "DE",
-  "Big Ten Network": "US",
-  "Black Cinema": "US",
-  "Black Classics": "US",
-  "Bloomberg TV Europe (720p)": "US",
-  "Bloomberg TV+ (1080p)": "US",
-  "Blues TV": "US",
-  "Bravo East": "US",
-  "BritBox Mysteries": "US",
-  "CBC Toronto (CBLT-DT) (720p) [Geo-blocked]": "CA",
-  "CBS News 24/7": "US",
-  "CBS Sports HQ": "US",
-  "CBS Sports Network USA": "US",
-  "CNBC": "US",
-  "CNBC Europe HD (1080p)": "GB",
-  "CNBC World": "US",
-  "Canada One (720p) [Not 24/7]": "CA",
-  "Channel 5 HD (1080p)": "GB",
-  "Chef Champion (720p) [Not 24/7]": "US",
-  "Chemnitz Fernsehen (1080p)": "DE",
-  "Classic Cinema (240p) [Not 24/7]": "US",
-  "Classic Movies Channel": "US",
-  "Classic TV Comedy": "US",
-  "Classic TV Drama": "US",
-  "Classic TV: Families": "US",
-  "DW English (1080p)": "DE",
-  "Das Erste (1080p)": "DE",
-  "Das Erste HD (1080p)": "DE",
-  "Dateline 24/7": "US",
-  "DiscoverFilm": "UK",
-  "Disney XD (720p)": "US",
-  "Dokusat (1080p)": "DE",
-  "Dresden Fernsehen (1080p) [Not 24/7]": "DE",
-  "ESPN U (720p)": "US",
-  "ESPNews (720p)": "US",
-  "FOX Business (1080p)": "US",
-  "Go2Travel (1080p)": "US",
-  "Gordon Ramsay's Hell's Kitchen": "US",
-  "Hallmark Drama (720p)": "US",
-  "Hell's Kitchen (1080p)": "US",
-  "History": "US",
-  "Homes Under Hammer (720p)": "US",
-  "ITV2": "GB",
-  "ITV3 (1080p)": "GB",
-  "ITV4 (1080p)": "GB",
-  "KulturMD (1080p)": "DE",
-  "Lifetime Movies East": "US",
-  "Love Nature HD (1080i)": "CA",
-  "MGM+ East": "US",
-  "MGM+ Marquee": "US",
-  "MOVIEDOME": "US",
-  "MSNBC (720p)": "US",
-  "Midsomer Murders": "US",
-  "Mission Impossible": "US",
-  "Movies!": "US",
-  "München TV (1080p) [Not 24/7]": "DE",
-  "N24 Doku": "DE",
-  "NBC News NOW (1080p)": "US",
-  "NBC Sports Boston (1080p) [Not 24/7]": "US",
-  "NDR Fernsehen": "DE",
-  "NDR Mecklenburg-Vorpommern (720p)": "DE",
-  "NDR Niedersachsen (720p)": "DE",
-  "NDR Schleswig-Holstein (720p)": "DE",
-  "National Geographic East": "US",
-  "National Geographic HD East (720p) [Not 24/7]": "US",
-  "National Geographic Wild East": "US",
-  "National Geographic Wild HD East (720p) [Not 24/7]": "US",
-  "Nick Music (720p)": "US",
-  "Nickelodeon": "US",
-  "Nickelodeon (720p)": "UK",
-  "Now 70's": "UK",
-  "Now 80's": "UK",
-  "OK Magdeburg (1080p)": "DE",
-  "Outdoor America": "US",
-  "Pluto TV Classic TV (720p)": "US",
-  "Pluto TV Comedy": "US",
-  "Pluto TV Crime Movies": "US",
-  "Pluto TV Cult Films": "US",
-  "Pluto TV Drama": "US",
-  "Pluto TV History": "US",
-  "Pluto TV Paranormal": "US",
-  "Pluto TV Romance": "US",
-  "Pluto TV Romance (720p)": "US",
-  "Pluto TV Science": "US",
-  "Pluto TV Serie": "US",
-  "Pluto TV Staff Picks": "US",
-  "Pluto TV True Crime": "US",
-  "Qello Concerts": "CA",
-  "RAN1 (1080p)": "DE",
-  "RBW (1080p)": "DE",
-  "RFH (1080p)": "DE",
-  "RNF (1080p)": "DE",
-  "RTL HD": "DE",
-  "Radio Bremen Fernsehen (1080p) [Geo-blocked]": "DE",
-  "Radio Weser TV Bremen (576p)": "DE",
-  "Regio TV Stuttgart (1080p)": "DE",
-  "SR Fernsehen (720p)": "DE",
-  "Saarland Fernsehen 1 (1080p)": "DE",
-  "Saarland Fernsehen 2 (720p) [Not 24/7]": "DE",
-  "Samuel Goldwyn Classics (1080p)": "US",
-  "Schlager Deluxe (1080p)": "DE",
-  "Scripps News": "US",
-  "Seenluft24 (1080p)": "DE",
-  "Showtime 2 East": "US",
-  "Showtime East": "US",
-  "Showtime Next East": "US",
-  "Showtime West (1080p)": "US",
-  "Showtime Women East": "US",
-  "Smithsonian Channel East": "US",
-  "Smithsonian Channel Selects": "US",
-  "Sonnenklar TV (1080p)": "DE",
-  "SportsGrid (1080p)": "US",
-  "SportsNet New York (540p)": "US",
-  "Sportsman Channel": "US",
-  "Starz East": "US",
-  "Starz Encore Classic East": "US",
-  "Starz West": "US",
-  "Sundance TV East": "US",
-  "Syfy East": "US",
-  "TSN1 (1080p)": "CA",
-  "TSN2": "CA",
-  "TSN3": "CA",
-  "TSN4": "CA",
-  "TSN5": "CA",
-  "TV Berlin (720p)": "DE",
-  "TV Mainfranken (1080p) [Not 24/7]": "DE",
-  "TV38 Südost-Niedersachen (1080p)": "DE",
-  "TVS Classic Sports (360p)": "US",
-  "TVS Comedy Network (720p)": "US",
-  "TVS Flashback Network (360p)": "US",
-  "TVS Music Network (720p)": "US",
-  "TVS Nostalgia (472p)": "US",
-  "TVS Nostalgia Movies (480p)": "US",
-  "TVS Television Network (480p)": "US",
-  "TVS Travel Network (720p) [Not 24/7]": "US",
-  "Tagesschau 24 (720p)": "DE",
-  "Takeshi's Castle": "US",
-  "The Archive (1080p)": "US",
-  "The Challenge": "US",
-  "The Design Network (1080p)": "US",
-  "The Weather Network": "CA",
-  "Toronto 360 TV (720p) [Not 24/7]": "CA",
-  "Totally Turtles": "US",
-  "USA Network (720p)": "US",
-  "VH1 East": "US",
-  "Vevo '70s": "US",
-  "Vevo '90s": "US",
-  "Vevo 2K": "US",
-  "Vevo Latino (1080p)": "US",
-  "Vevo R&B": "US",
-  "Vevo Retro Rock": "US",
-  "Victorious": "US",
-  "W Network (720p)": "CA",
-  "WDR 1 Live (720p)": "DE",
-  "WDR Fernsehen Bonn (720p) [Geo-blocked]": "DE",
-  "WeatherNation": "US",
-  "Women's Sports Network (720p)": "US",
-  "World of Freesports (1080p)": "DE",
-  "Yahoo! Finance (1080p)": "US",
-  "beIN Sports USA": "US",
-  "bon appétit (1080p)": "US",
-  "hr-fernsehen (1080p)": "DE",
-  "iCarly": "US",
-  "iHeartRadio 90s": "US",
-  "iSTUFF (720p) [Not 24/7]": "DE",
-  "kabel eins (576p)": "DE",
-  "teltOwkanal (1080p)": "DE"
+  "version": 2,
+  "generated_at": "2025-10-21T18:07:57Z",
+  "summary": {
+    "total_channels": 195,
+    "with_country": 195
+  },
+  "channels": {
+    "23 ABC Bakersfield CA (KERO) (720p)": {
+      "country": "US",
+      "tvg_id": "KERODT1.us",
+      "group": ""
+    },
+    "30A Music (720p)": {
+      "country": "US",
+      "tvg_id": "30AMusic.us",
+      "group": ""
+    },
+    "3sat HD (1080p)": {
+      "country": "DE",
+      "tvg_id": "3sat.de@HD",
+      "group": ""
+    },
+    "70s Cinema": {
+      "country": "US",
+      "tvg_id": "70sCinema.us",
+      "group": ""
+    },
+    "80s Rewind": {
+      "country": "US",
+      "tvg_id": "80sRewind.us",
+      "group": ""
+    },
+    "90s Throwback": {
+      "country": "US",
+      "tvg_id": "90sThrowback.us",
+      "group": ""
+    },
+    "ABC News (720p)": {
+      "country": "US",
+      "tvg_id": "ABCNewsLive.us",
+      "group": ""
+    },
+    "Amazing Discoveries TV (720p)": {
+      "country": "CA",
+      "tvg_id": "AmazingDiscoveriesTV.ca",
+      "group": ""
+    },
+    "AMC East (1080p)": {
+      "country": "US",
+      "tvg_id": "AMC.us@East",
+      "group": ""
+    },
+    "Ameritrade (1080p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "Ameritrade.us",
+      "group": ""
+    },
+    "Antenna TV": {
+      "country": "US",
+      "tvg_id": "AntennaTV.us",
+      "group": ""
+    },
+    "Antiques Road Show UK": {
+      "country": "US",
+      "tvg_id": "AntiquesRoadshowUK.us@SD",
+      "group": ""
+    },
+    "BBC Earth (1080p) [Geo-blocked]": {
+      "country": "GB",
+      "tvg_id": "BBCEarth.uk@US",
+      "group": ""
+    },
+    "BBC Four UK HD": {
+      "country": "UK",
+      "tvg_id": "BBCFour.uk@UKHD",
+      "group": ""
+    },
+    "BBC News (1080p)": {
+      "country": "UK",
+      "tvg_id": "BBCNews.uk",
+      "group": ""
+    },
+    "BBC News (North America) (1080p)": {
+      "country": "UK",
+      "tvg_id": "BBCNews.uk@NorthAmerica",
+      "group": ""
+    },
+    "BBC News Europe": {
+      "country": "GB",
+      "tvg_id": "BBCNews.uk@Europe",
+      "group": ""
+    },
+    "BBC One London HD (1080p)": {
+      "country": "UK",
+      "tvg_id": "BBCOne.uk@LondonHD",
+      "group": ""
+    },
+    "BBC Three": {
+      "country": "GB",
+      "tvg_id": "BBCThree.uk",
+      "group": ""
+    },
+    "BBC Three HD (720p)": {
+      "country": "UK",
+      "tvg_id": "BBCThree.uk@HD",
+      "group": ""
+    },
+    "BBC Travel": {
+      "country": "US",
+      "tvg_id": "BBCTravel.us@Germany",
+      "group": ""
+    },
+    "BBC Two HD (1080p)": {
+      "country": "GB",
+      "tvg_id": "BBCTwo.uk@HD",
+      "group": ""
+    },
+    "BBC UHD 1 (2160p) [Geo-blocked] [Not 24/7]": {
+      "country": "GB",
+      "tvg_id": "BBCUHD1.uk",
+      "group": ""
+    },
+    "BBC UHD 2 (2160p) [Geo-blocked] [Not 24/7]": {
+      "country": "GB",
+      "tvg_id": "BBCUHD2.uk",
+      "group": ""
+    },
+    "BBC UHD 3 (2160p) [Geo-blocked] [Not 24/7]": {
+      "country": "GB",
+      "tvg_id": "BBCUHD3.uk",
+      "group": ""
+    },
+    "BBC UHD 4 (2160p) [Geo-blocked] [Not 24/7]": {
+      "country": "GB",
+      "tvg_id": "BBCUHD4.uk",
+      "group": ""
+    },
+    "BBC UHD 5 (2160p) [Geo-blocked] [Not 24/7]": {
+      "country": "GB",
+      "tvg_id": "BBCUHD5.uk",
+      "group": ""
+    },
+    "beIN Sports USA": {
+      "country": "US",
+      "tvg_id": "beINSportsUSA.us",
+      "group": ""
+    },
+    "Big Ten Network": {
+      "country": "US",
+      "tvg_id": "BigTenNetwork.us",
+      "group": ""
+    },
+    "Black Cinema": {
+      "country": "US",
+      "tvg_id": "BlackCinema.us",
+      "group": ""
+    },
+    "Black Classics": {
+      "country": "US",
+      "tvg_id": "BlackClassics.us",
+      "group": ""
+    },
+    "Bloomberg TV Europe (720p)": {
+      "country": "US",
+      "tvg_id": "BloombergTV.us@Europe",
+      "group": ""
+    },
+    "Bloomberg TV+ (1080p)": {
+      "country": "US",
+      "tvg_id": "BloombergTV.us@Plus",
+      "group": ""
+    },
+    "Blues TV": {
+      "country": "US",
+      "tvg_id": "KMBYLD5.us",
+      "group": ""
+    },
+    "BNN Bloomberg": {
+      "country": "CA",
+      "tvg_id": "BNNBloomberg.ca",
+      "group": ""
+    },
+    "bon appétit (1080p)": {
+      "country": "US",
+      "tvg_id": "bonappetit.us",
+      "group": ""
+    },
+    "BR Fernsehen Nord (720p)": {
+      "country": "DE",
+      "tvg_id": "BRFernsehen.de@Nord",
+      "group": ""
+    },
+    "Bravo East": {
+      "country": "US",
+      "tvg_id": "Bravo.us@East",
+      "group": ""
+    },
+    "BritBox Mysteries": {
+      "country": "US",
+      "tvg_id": "BritBoxMysteries.us",
+      "group": ""
+    },
+    "Canada One (720p) [Not 24/7]": {
+      "country": "CA",
+      "tvg_id": "CanadaOne.ca",
+      "group": ""
+    },
+    "CBC Toronto (CBLT-DT) (720p) [Geo-blocked]": {
+      "country": "CA",
+      "tvg_id": "CBLTDT.ca",
+      "group": ""
+    },
+    "CBS News 24/7": {
+      "country": "US",
+      "tvg_id": "CBSNews247.us",
+      "group": ""
+    },
+    "CBS Sports HQ": {
+      "country": "US",
+      "tvg_id": "CBSSportsHQ.us",
+      "group": ""
+    },
+    "CBS Sports Network USA": {
+      "country": "US",
+      "tvg_id": "CBSSportsNetworkUSA.us",
+      "group": ""
+    },
+    "Channel 5 HD (1080p)": {
+      "country": "GB",
+      "tvg_id": "Channel5.uk@HD",
+      "group": ""
+    },
+    "Chef Champion (720p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "ChefChampion.us",
+      "group": ""
+    },
+    "Chemnitz Fernsehen (1080p)": {
+      "country": "DE",
+      "tvg_id": "SachsenFernsehenChemnitz.de",
+      "group": ""
+    },
+    "Classic Cinema (240p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "ClassicCinema.us",
+      "group": ""
+    },
+    "Classic Movies Channel": {
+      "country": "US",
+      "tvg_id": "ClassicMoviesChannel.us",
+      "group": ""
+    },
+    "Classic TV Comedy": {
+      "country": "US",
+      "tvg_id": "ClassicTVComedy.us",
+      "group": ""
+    },
+    "Classic TV Drama": {
+      "country": "US",
+      "tvg_id": "ClassicTVDrama.us",
+      "group": ""
+    },
+    "Classic TV: Families": {
+      "country": "US",
+      "tvg_id": "ClassicTVFamilies.us",
+      "group": ""
+    },
+    "CNBC": {
+      "country": "US",
+      "tvg_id": "CNBC.us",
+      "group": ""
+    },
+    "CNBC Europe HD (1080p)": {
+      "country": "GB",
+      "tvg_id": "CNBCEurope.uk@HD",
+      "group": ""
+    },
+    "CNBC World": {
+      "country": "US",
+      "tvg_id": "CNBCWorld.us",
+      "group": ""
+    },
+    "Das Erste (1080p)": {
+      "country": "DE",
+      "tvg_id": "DasErste.de",
+      "group": ""
+    },
+    "Das Erste HD (1080p)": {
+      "country": "DE",
+      "tvg_id": "DasErste.de@HD",
+      "group": ""
+    },
+    "Dateline 24/7": {
+      "country": "US",
+      "tvg_id": "Dateline247.us",
+      "group": ""
+    },
+    "DiscoverFilm": {
+      "country": "UK",
+      "tvg_id": "DiscoverFilm.uk",
+      "group": ""
+    },
+    "Disney XD (720p)": {
+      "country": "US",
+      "tvg_id": "DisneyXD.us@East",
+      "group": ""
+    },
+    "Dokusat (1080p)": {
+      "country": "DE",
+      "tvg_id": "Dokusat.de",
+      "group": ""
+    },
+    "Dresden Fernsehen (1080p) [Not 24/7]": {
+      "country": "DE",
+      "tvg_id": "SachsenFernsehenDresden.de",
+      "group": ""
+    },
+    "DW English (1080p)": {
+      "country": "DE",
+      "tvg_id": "DW.de@English",
+      "group": ""
+    },
+    "ESPN U (720p)": {
+      "country": "US",
+      "tvg_id": "ESPNU.us",
+      "group": ""
+    },
+    "ESPNews (720p)": {
+      "country": "US",
+      "tvg_id": "ESPNews.us",
+      "group": ""
+    },
+    "FOX Business (1080p)": {
+      "country": "US",
+      "tvg_id": "FoxBusinessNetwork.us",
+      "group": ""
+    },
+    "Go2Travel (1080p)": {
+      "country": "US",
+      "tvg_id": "Go2Travel.us",
+      "group": ""
+    },
+    "Gordon Ramsay's Hell's Kitchen": {
+      "country": "US",
+      "tvg_id": "GordonRamsaysHellsKitchen.us@SD",
+      "group": ""
+    },
+    "Hallmark Drama (720p)": {
+      "country": "US",
+      "tvg_id": "HallmarkDrama.us",
+      "group": ""
+    },
+    "Hell's Kitchen (1080p)": {
+      "country": "US",
+      "tvg_id": "HellsKitchen.us@UK",
+      "group": ""
+    },
+    "History": {
+      "country": "US",
+      "tvg_id": "History.us@East",
+      "group": ""
+    },
+    "Homes Under Hammer (720p)": {
+      "country": "US",
+      "tvg_id": "HomesUnderHammer.us@UK",
+      "group": ""
+    },
+    "hr-fernsehen (1080p)": {
+      "country": "DE",
+      "tvg_id": "hrfernsehen.de",
+      "group": ""
+    },
+    "iCarly": {
+      "country": "US",
+      "tvg_id": "iCarly.us@Germany",
+      "group": ""
+    },
+    "iHeartRadio 90s": {
+      "country": "US",
+      "tvg_id": "IHeart90s.us",
+      "group": ""
+    },
+    "iSTUFF (720p) [Not 24/7]": {
+      "country": "DE",
+      "tvg_id": "iSTUFF.de",
+      "group": ""
+    },
+    "ITV2": {
+      "country": "GB",
+      "tvg_id": "ITV2.uk@SD",
+      "group": ""
+    },
+    "ITV3 (1080p)": {
+      "country": "GB",
+      "tvg_id": "ITV3.uk@SD",
+      "group": ""
+    },
+    "ITV4 (1080p)": {
+      "country": "GB",
+      "tvg_id": "ITV4.uk@SD",
+      "group": ""
+    },
+    "kabel eins (576p)": {
+      "country": "DE",
+      "tvg_id": "kabeleins.de@SD",
+      "group": ""
+    },
+    "KulturMD (1080p)": {
+      "country": "DE",
+      "tvg_id": "KulturMD.de",
+      "group": ""
+    },
+    "Lifetime Movies East": {
+      "country": "US",
+      "tvg_id": "LifetimeMovies.us@East",
+      "group": ""
+    },
+    "Love Nature HD (1080i)": {
+      "country": "CA",
+      "tvg_id": "LoveNature.ca@HD",
+      "group": ""
+    },
+    "MGM+ East": {
+      "country": "US",
+      "tvg_id": "MGMPlus.us@East",
+      "group": ""
+    },
+    "MGM+ Marquee": {
+      "country": "US",
+      "tvg_id": "MGMPlusMarquee.us",
+      "group": ""
+    },
+    "Midsomer Murders": {
+      "country": "US",
+      "tvg_id": "MidsomerMurders.us@SD",
+      "group": ""
+    },
+    "Mission Impossible": {
+      "country": "US",
+      "tvg_id": "MissionImpossible.us@SD",
+      "group": ""
+    },
+    "MOVIEDOME": {
+      "country": "US",
+      "tvg_id": "Moviedome.us@Germany",
+      "group": ""
+    },
+    "Movies!": {
+      "country": "US",
+      "tvg_id": "Movies.us@SD",
+      "group": ""
+    },
+    "MSNBC (720p)": {
+      "country": "US",
+      "tvg_id": "MSNBC.us",
+      "group": ""
+    },
+    "München TV (1080p) [Not 24/7]": {
+      "country": "DE",
+      "tvg_id": "MunchenTV.de",
+      "group": ""
+    },
+    "N24 Doku": {
+      "country": "DE",
+      "tvg_id": "N24Doku.de",
+      "group": ""
+    },
+    "National Geographic East": {
+      "country": "US",
+      "tvg_id": "NationalGeographic.us@East",
+      "group": ""
+    },
+    "National Geographic HD East (720p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "NationalGeographic.us@HDEast",
+      "group": ""
+    },
+    "National Geographic Wild East": {
+      "country": "US",
+      "tvg_id": "NationalGeographicWild.us@East",
+      "group": ""
+    },
+    "National Geographic Wild HD East (720p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "NationalGeographicWild.us@HDEast",
+      "group": ""
+    },
+    "NBC News NOW (1080p)": {
+      "country": "US",
+      "tvg_id": "NBCNewsNOW.us",
+      "group": ""
+    },
+    "NBC Sports Boston (1080p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "NBCSportsBoston.us",
+      "group": ""
+    },
+    "NDR Fernsehen": {
+      "country": "DE",
+      "tvg_id": "NDRFernsehen.de@Hamburg",
+      "group": ""
+    },
+    "NDR Mecklenburg-Vorpommern (720p)": {
+      "country": "DE",
+      "tvg_id": "NDRFernsehen.de@MecklenburgVorpommern",
+      "group": ""
+    },
+    "NDR Niedersachsen (720p)": {
+      "country": "DE",
+      "tvg_id": "NDRFernsehen.de@Niedersachsen",
+      "group": ""
+    },
+    "NDR Schleswig-Holstein (720p)": {
+      "country": "DE",
+      "tvg_id": "NDRFernsehen.de@SchleswigHolstein",
+      "group": ""
+    },
+    "Nick Music (720p)": {
+      "country": "US",
+      "tvg_id": "NickMusic.us",
+      "group": ""
+    },
+    "Nickelodeon": {
+      "country": "US",
+      "tvg_id": "Nickelodeon.us",
+      "group": ""
+    },
+    "Nickelodeon (720p)": {
+      "country": "UK",
+      "tvg_id": "Nickelodeon.uk",
+      "group": ""
+    },
+    "Now 70's": {
+      "country": "UK",
+      "tvg_id": "Now70s.uk",
+      "group": ""
+    },
+    "Now 80's": {
+      "country": "UK",
+      "tvg_id": "Now80s.uk",
+      "group": ""
+    },
+    "OK Magdeburg (1080p)": {
+      "country": "DE",
+      "tvg_id": "OKMagdeburg.de",
+      "group": ""
+    },
+    "Outdoor America": {
+      "country": "US",
+      "tvg_id": "OutdoorAmerica.us",
+      "group": ""
+    },
+    "Pluto TV Classic TV (720p)": {
+      "country": "US",
+      "tvg_id": "PlutoTVClassicTV.us@UK",
+      "group": ""
+    },
+    "Pluto TV Comedy": {
+      "country": "US",
+      "tvg_id": "PlutoTVComedy.us",
+      "group": ""
+    },
+    "Pluto TV Crime Movies": {
+      "country": "US",
+      "tvg_id": "PlutoTVCrimeMovies.us",
+      "group": ""
+    },
+    "Pluto TV Cult Films": {
+      "country": "US",
+      "tvg_id": "PlutoTVCultFilms.us",
+      "group": ""
+    },
+    "Pluto TV Drama": {
+      "country": "US",
+      "tvg_id": "PlutoTVDrama.us",
+      "group": ""
+    },
+    "Pluto TV History": {
+      "country": "US",
+      "tvg_id": "PlutoTVHistory.us",
+      "group": ""
+    },
+    "Pluto TV Paranormal": {
+      "country": "US",
+      "tvg_id": "PlutoTVParanormal.us",
+      "group": ""
+    },
+    "Pluto TV Romance": {
+      "country": "US",
+      "tvg_id": "PlutoTVRomance.us",
+      "group": ""
+    },
+    "Pluto TV Romance (720p)": {
+      "country": "US",
+      "tvg_id": "PlutoTVRomance.us@UK",
+      "group": ""
+    },
+    "Pluto TV Science": {
+      "country": "US",
+      "tvg_id": "PlutoTVScience.us",
+      "group": ""
+    },
+    "Pluto TV Serie": {
+      "country": "US",
+      "tvg_id": "PlutoTVSerie.us@Germany",
+      "group": ""
+    },
+    "Pluto TV Staff Picks": {
+      "country": "US",
+      "tvg_id": "PlutoTVStaffPicks.us",
+      "group": ""
+    },
+    "Pluto TV True Crime": {
+      "country": "US",
+      "tvg_id": "PlutoTVTrueCrime.us",
+      "group": ""
+    },
+    "Qello Concerts": {
+      "country": "CA",
+      "tvg_id": "QelloConcertsbyStingray.ca@SD",
+      "group": ""
+    },
+    "Radio Bremen Fernsehen (1080p) [Geo-blocked]": {
+      "country": "DE",
+      "tvg_id": "RadioBremenFernsehen.de",
+      "group": ""
+    },
+    "Radio Weser TV Bremen (576p)": {
+      "country": "DE",
+      "tvg_id": "RadioWeserTVBremen.de",
+      "group": ""
+    },
+    "RAN1 (1080p)": {
+      "country": "DE",
+      "tvg_id": "RAN1.de",
+      "group": ""
+    },
+    "RBW (1080p)": {
+      "country": "DE",
+      "tvg_id": "RBW.de",
+      "group": ""
+    },
+    "Regio TV Stuttgart (1080p)": {
+      "country": "DE",
+      "tvg_id": "RegioTVStuttgart.de",
+      "group": ""
+    },
+    "RFH (1080p)": {
+      "country": "DE",
+      "tvg_id": "RFH.de",
+      "group": ""
+    },
+    "RNF (1080p)": {
+      "country": "DE",
+      "tvg_id": "RNF.de",
+      "group": ""
+    },
+    "RTL HD": {
+      "country": "DE",
+      "tvg_id": "RTL.de@HD",
+      "group": ""
+    },
+    "Saarland Fernsehen 1 (1080p)": {
+      "country": "DE",
+      "tvg_id": "SaarlandFernsehen1.de",
+      "group": ""
+    },
+    "Saarland Fernsehen 2 (720p) [Not 24/7]": {
+      "country": "DE",
+      "tvg_id": "SaarlandFernsehen2.de",
+      "group": ""
+    },
+    "Samuel Goldwyn Classics (1080p)": {
+      "country": "US",
+      "tvg_id": "SamuelGoldwynClassics.us",
+      "group": ""
+    },
+    "Schlager Deluxe (1080p)": {
+      "country": "DE",
+      "tvg_id": "SchlagerDeluxe.de",
+      "group": ""
+    },
+    "Scripps News": {
+      "country": "US",
+      "tvg_id": "ScrippsNews.us",
+      "group": ""
+    },
+    "Seenluft24 (1080p)": {
+      "country": "DE",
+      "tvg_id": "Seenluft24.de",
+      "group": ""
+    },
+    "Showtime 2 East": {
+      "country": "US",
+      "tvg_id": "Showtime2.us@East",
+      "group": ""
+    },
+    "Showtime East": {
+      "country": "US",
+      "tvg_id": "Showtime.us@East",
+      "group": ""
+    },
+    "Showtime Next East": {
+      "country": "US",
+      "tvg_id": "ShowtimeNext.us@East",
+      "group": ""
+    },
+    "Showtime West (1080p)": {
+      "country": "US",
+      "tvg_id": "Showtime.us@West",
+      "group": ""
+    },
+    "Showtime Women East": {
+      "country": "US",
+      "tvg_id": "ShowtimeWomen.us@East",
+      "group": ""
+    },
+    "Smithsonian Channel East": {
+      "country": "US",
+      "tvg_id": "SmithsonianChannel.us@East",
+      "group": ""
+    },
+    "Smithsonian Channel Selects": {
+      "country": "US",
+      "tvg_id": "SmithsonianChannelSelects.us",
+      "group": ""
+    },
+    "Sonnenklar TV (1080p)": {
+      "country": "DE",
+      "tvg_id": "SonnenklarTV.de",
+      "group": ""
+    },
+    "SportsGrid (1080p)": {
+      "country": "US",
+      "tvg_id": "SportsGrid.us",
+      "group": ""
+    },
+    "Sportsman Channel": {
+      "country": "US",
+      "tvg_id": "SportsmanChannel.us",
+      "group": ""
+    },
+    "SportsNet New York (540p)": {
+      "country": "US",
+      "tvg_id": "SportsNetNewYork.us",
+      "group": ""
+    },
+    "SR Fernsehen (720p)": {
+      "country": "DE",
+      "tvg_id": "SRFernsehen.de",
+      "group": ""
+    },
+    "Starz East": {
+      "country": "US",
+      "tvg_id": "Starz.us@East",
+      "group": ""
+    },
+    "Starz Encore Classic East": {
+      "country": "US",
+      "tvg_id": "StarzEncoreClassic.us@East",
+      "group": ""
+    },
+    "Starz West": {
+      "country": "US",
+      "tvg_id": "Starz.us@West",
+      "group": ""
+    },
+    "Sundance TV East": {
+      "country": "US",
+      "tvg_id": "SundanceTV.us@East",
+      "group": ""
+    },
+    "Syfy East": {
+      "country": "US",
+      "tvg_id": "Syfy.us@East",
+      "group": ""
+    },
+    "Tagesschau 24 (720p)": {
+      "country": "DE",
+      "tvg_id": "tagesschau24.de",
+      "group": ""
+    },
+    "Takeshi's Castle": {
+      "country": "US",
+      "tvg_id": "TakeshisCastle.us@Germany",
+      "group": ""
+    },
+    "teltOwkanal (1080p)": {
+      "country": "DE",
+      "tvg_id": "teltOwkanal.de",
+      "group": ""
+    },
+    "The Archive (1080p)": {
+      "country": "US",
+      "tvg_id": "TheArchive.us@SD",
+      "group": ""
+    },
+    "The Challenge": {
+      "country": "US",
+      "tvg_id": "TheChallenge.us@SD",
+      "group": ""
+    },
+    "The Design Network (1080p)": {
+      "country": "US",
+      "tvg_id": "TheDesignNetwork.us@SD",
+      "group": ""
+    },
+    "The Weather Network": {
+      "country": "CA",
+      "tvg_id": "TheWeatherNetwork.ca",
+      "group": ""
+    },
+    "Toronto 360 TV (720p) [Not 24/7]": {
+      "country": "CA",
+      "tvg_id": "Toronto360TV.ca",
+      "group": ""
+    },
+    "Totally Turtles": {
+      "country": "US",
+      "tvg_id": "TotallyTurtles.us",
+      "group": ""
+    },
+    "TSN1 (1080p)": {
+      "country": "CA",
+      "tvg_id": "TSN1.ca",
+      "group": ""
+    },
+    "TSN2": {
+      "country": "CA",
+      "tvg_id": "TSN2.ca",
+      "group": ""
+    },
+    "TSN3": {
+      "country": "CA",
+      "tvg_id": "TSN3.ca",
+      "group": ""
+    },
+    "TSN4": {
+      "country": "CA",
+      "tvg_id": "TSN4.ca",
+      "group": ""
+    },
+    "TSN5": {
+      "country": "CA",
+      "tvg_id": "TSN5.ca",
+      "group": ""
+    },
+    "TV Berlin (720p)": {
+      "country": "DE",
+      "tvg_id": "TVBerlin.de",
+      "group": ""
+    },
+    "TV Mainfranken (1080p) [Not 24/7]": {
+      "country": "DE",
+      "tvg_id": "TVMainfranken.de",
+      "group": ""
+    },
+    "TV38 Südost-Niedersachen (1080p)": {
+      "country": "DE",
+      "tvg_id": "TV38SudostNiedersachen.de",
+      "group": ""
+    },
+    "TVS Classic Sports (360p)": {
+      "country": "US",
+      "tvg_id": "TVSClassicSports.us",
+      "group": ""
+    },
+    "TVS Comedy Network (720p)": {
+      "country": "US",
+      "tvg_id": "TVSComedyNetwork.us",
+      "group": ""
+    },
+    "TVS Flashback Network (360p)": {
+      "country": "US",
+      "tvg_id": "TVSFlashbackNetwork.us",
+      "group": ""
+    },
+    "TVS Music Network (720p)": {
+      "country": "US",
+      "tvg_id": "TVSMusicNetwork.us",
+      "group": ""
+    },
+    "TVS Nostalgia (472p)": {
+      "country": "US",
+      "tvg_id": "TVSNostalgia.us",
+      "group": ""
+    },
+    "TVS Nostalgia Movies (480p)": {
+      "country": "US",
+      "tvg_id": "TVSNostalgiaMovies.us",
+      "group": ""
+    },
+    "TVS Television Network (480p)": {
+      "country": "US",
+      "tvg_id": "TVSTelevisionNetwork.us",
+      "group": ""
+    },
+    "TVS Travel Network (720p) [Not 24/7]": {
+      "country": "US",
+      "tvg_id": "TVSTravelNetwork.us",
+      "group": ""
+    },
+    "USA Network (720p)": {
+      "country": "US",
+      "tvg_id": "USANetwork.us@East",
+      "group": ""
+    },
+    "Vevo '70s": {
+      "country": "US",
+      "tvg_id": "Vevo70s.us",
+      "group": ""
+    },
+    "Vevo '90s": {
+      "country": "US",
+      "tvg_id": "Vevo90s.us",
+      "group": ""
+    },
+    "Vevo 2K": {
+      "country": "US",
+      "tvg_id": "Vevo2K.us",
+      "group": ""
+    },
+    "Vevo Latino (1080p)": {
+      "country": "US",
+      "tvg_id": "VevoLatino.us@SD",
+      "group": ""
+    },
+    "Vevo R&B": {
+      "country": "US",
+      "tvg_id": "VevoRB.us",
+      "group": ""
+    },
+    "Vevo Retro Rock": {
+      "country": "US",
+      "tvg_id": "VevoRetroRock.us",
+      "group": ""
+    },
+    "VH1 East": {
+      "country": "US",
+      "tvg_id": "VH1.us@East",
+      "group": ""
+    },
+    "Victorious": {
+      "country": "US",
+      "tvg_id": "Victorious.us@Germany",
+      "group": ""
+    },
+    "W Network (720p)": {
+      "country": "CA",
+      "tvg_id": "WNetwork.ca@East",
+      "group": ""
+    },
+    "WDR 1 Live (720p)": {
+      "country": "DE",
+      "tvg_id": "WDR1Live.de",
+      "group": ""
+    },
+    "WDR Fernsehen Bonn (720p) [Geo-blocked]": {
+      "country": "DE",
+      "tvg_id": "WDRFernsehen.de@Bonn",
+      "group": ""
+    },
+    "WeatherNation": {
+      "country": "US",
+      "tvg_id": "WeatherNation.us",
+      "group": ""
+    },
+    "Women's Sports Network (720p)": {
+      "country": "US",
+      "tvg_id": "WomensSportsNetwork.us",
+      "group": ""
+    },
+    "World of Freesports (1080p)": {
+      "country": "DE",
+      "tvg_id": "WorldofFreesports.de@SD",
+      "group": ""
+    },
+    "Yahoo! Finance (1080p)": {
+      "country": "US",
+      "tvg_id": "YahooFinance.us",
+      "group": ""
+    }
+  },
+  "mappings": {
+    "channel_overrides": {
+      "23 ABC Bakersfield CA (KERO) (720p)": "US",
+      "30A Music (720p)": "US",
+      "3sat HD (1080p)": "DE",
+      "70s Cinema": "US",
+      "80s Rewind": "US",
+      "90s Throwback": "US",
+      "ABC News (720p)": "US",
+      "Amazing Discoveries TV (720p)": "CA",
+      "AMC East (1080p)": "US",
+      "Ameritrade (1080p) [Not 24/7]": "US",
+      "Antenna TV": "US",
+      "Antiques Road Show UK": "US",
+      "BBC Earth (1080p) [Geo-blocked]": "GB",
+      "BBC Four UK HD": "UK",
+      "BBC News (1080p)": "UK",
+      "BBC News (North America) (1080p)": "UK",
+      "BBC News Europe": "GB",
+      "BBC One London HD (1080p)": "UK",
+      "BBC Three": "GB",
+      "BBC Three HD (720p)": "UK",
+      "BBC Travel": "US",
+      "BBC Two HD (1080p)": "GB",
+      "BBC UHD 1 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+      "BBC UHD 2 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+      "BBC UHD 3 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+      "BBC UHD 4 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+      "BBC UHD 5 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+      "beIN Sports USA": "US",
+      "Big Ten Network": "US",
+      "Black Cinema": "US",
+      "Black Classics": "US",
+      "Bloomberg TV Europe (720p)": "US",
+      "Bloomberg TV+ (1080p)": "US",
+      "Blues TV": "US",
+      "BNN Bloomberg": "CA",
+      "bon appétit (1080p)": "US",
+      "BR Fernsehen Nord (720p)": "DE",
+      "Bravo East": "US",
+      "BritBox Mysteries": "US",
+      "Canada One (720p) [Not 24/7]": "CA",
+      "CBC Toronto (CBLT-DT) (720p) [Geo-blocked]": "CA",
+      "CBS News 24/7": "US",
+      "CBS Sports HQ": "US",
+      "CBS Sports Network USA": "US",
+      "Channel 5 HD (1080p)": "GB",
+      "Chef Champion (720p) [Not 24/7]": "US",
+      "Chemnitz Fernsehen (1080p)": "DE",
+      "Classic Cinema (240p) [Not 24/7]": "US",
+      "Classic Movies Channel": "US",
+      "Classic TV Comedy": "US",
+      "Classic TV Drama": "US",
+      "Classic TV: Families": "US",
+      "CNBC": "US",
+      "CNBC Europe HD (1080p)": "GB",
+      "CNBC World": "US",
+      "Das Erste (1080p)": "DE",
+      "Das Erste HD (1080p)": "DE",
+      "Dateline 24/7": "US",
+      "DiscoverFilm": "UK",
+      "Disney XD (720p)": "US",
+      "Dokusat (1080p)": "DE",
+      "Dresden Fernsehen (1080p) [Not 24/7]": "DE",
+      "DW English (1080p)": "DE",
+      "ESPN U (720p)": "US",
+      "ESPNews (720p)": "US",
+      "FOX Business (1080p)": "US",
+      "Go2Travel (1080p)": "US",
+      "Gordon Ramsay's Hell's Kitchen": "US",
+      "Hallmark Drama (720p)": "US",
+      "Hell's Kitchen (1080p)": "US",
+      "History": "US",
+      "Homes Under Hammer (720p)": "US",
+      "hr-fernsehen (1080p)": "DE",
+      "iCarly": "US",
+      "iHeartRadio 90s": "US",
+      "iSTUFF (720p) [Not 24/7]": "DE",
+      "ITV2": "GB",
+      "ITV3 (1080p)": "GB",
+      "ITV4 (1080p)": "GB",
+      "kabel eins (576p)": "DE",
+      "KulturMD (1080p)": "DE",
+      "Lifetime Movies East": "US",
+      "Love Nature HD (1080i)": "CA",
+      "MGM+ East": "US",
+      "MGM+ Marquee": "US",
+      "Midsomer Murders": "US",
+      "Mission Impossible": "US",
+      "MOVIEDOME": "US",
+      "Movies!": "US",
+      "MSNBC (720p)": "US",
+      "München TV (1080p) [Not 24/7]": "DE",
+      "N24 Doku": "DE",
+      "National Geographic East": "US",
+      "National Geographic HD East (720p) [Not 24/7]": "US",
+      "National Geographic Wild East": "US",
+      "National Geographic Wild HD East (720p) [Not 24/7]": "US",
+      "NBC News NOW (1080p)": "US",
+      "NBC Sports Boston (1080p) [Not 24/7]": "US",
+      "NDR Fernsehen": "DE",
+      "NDR Mecklenburg-Vorpommern (720p)": "DE",
+      "NDR Niedersachsen (720p)": "DE",
+      "NDR Schleswig-Holstein (720p)": "DE",
+      "Nick Music (720p)": "US",
+      "Nickelodeon": "US",
+      "Nickelodeon (720p)": "UK",
+      "Now 70's": "UK",
+      "Now 80's": "UK",
+      "OK Magdeburg (1080p)": "DE",
+      "Outdoor America": "US",
+      "Pluto TV Classic TV (720p)": "US",
+      "Pluto TV Comedy": "US",
+      "Pluto TV Crime Movies": "US",
+      "Pluto TV Cult Films": "US",
+      "Pluto TV Drama": "US",
+      "Pluto TV History": "US",
+      "Pluto TV Paranormal": "US",
+      "Pluto TV Romance": "US",
+      "Pluto TV Romance (720p)": "US",
+      "Pluto TV Science": "US",
+      "Pluto TV Serie": "US",
+      "Pluto TV Staff Picks": "US",
+      "Pluto TV True Crime": "US",
+      "Qello Concerts": "CA",
+      "Radio Bremen Fernsehen (1080p) [Geo-blocked]": "DE",
+      "Radio Weser TV Bremen (576p)": "DE",
+      "RAN1 (1080p)": "DE",
+      "RBW (1080p)": "DE",
+      "Regio TV Stuttgart (1080p)": "DE",
+      "RFH (1080p)": "DE",
+      "RNF (1080p)": "DE",
+      "RTL HD": "DE",
+      "Saarland Fernsehen 1 (1080p)": "DE",
+      "Saarland Fernsehen 2 (720p) [Not 24/7]": "DE",
+      "Samuel Goldwyn Classics (1080p)": "US",
+      "Schlager Deluxe (1080p)": "DE",
+      "Scripps News": "US",
+      "Seenluft24 (1080p)": "DE",
+      "Showtime 2 East": "US",
+      "Showtime East": "US",
+      "Showtime Next East": "US",
+      "Showtime West (1080p)": "US",
+      "Showtime Women East": "US",
+      "Smithsonian Channel East": "US",
+      "Smithsonian Channel Selects": "US",
+      "Sonnenklar TV (1080p)": "DE",
+      "SportsGrid (1080p)": "US",
+      "Sportsman Channel": "US",
+      "SportsNet New York (540p)": "US",
+      "SR Fernsehen (720p)": "DE",
+      "Starz East": "US",
+      "Starz Encore Classic East": "US",
+      "Starz West": "US",
+      "Sundance TV East": "US",
+      "Syfy East": "US",
+      "Tagesschau 24 (720p)": "DE",
+      "Takeshi's Castle": "US",
+      "teltOwkanal (1080p)": "DE",
+      "The Archive (1080p)": "US",
+      "The Challenge": "US",
+      "The Design Network (1080p)": "US",
+      "The Weather Network": "CA",
+      "Toronto 360 TV (720p) [Not 24/7]": "CA",
+      "Totally Turtles": "US",
+      "TSN1 (1080p)": "CA",
+      "TSN2": "CA",
+      "TSN3": "CA",
+      "TSN4": "CA",
+      "TSN5": "CA",
+      "TV Berlin (720p)": "DE",
+      "TV Mainfranken (1080p) [Not 24/7]": "DE",
+      "TV38 Südost-Niedersachen (1080p)": "DE",
+      "TVS Classic Sports (360p)": "US",
+      "TVS Comedy Network (720p)": "US",
+      "TVS Flashback Network (360p)": "US",
+      "TVS Music Network (720p)": "US",
+      "TVS Nostalgia (472p)": "US",
+      "TVS Nostalgia Movies (480p)": "US",
+      "TVS Television Network (480p)": "US",
+      "TVS Travel Network (720p) [Not 24/7]": "US",
+      "USA Network (720p)": "US",
+      "Vevo '70s": "US",
+      "Vevo '90s": "US",
+      "Vevo 2K": "US",
+      "Vevo Latino (1080p)": "US",
+      "Vevo R&B": "US",
+      "Vevo Retro Rock": "US",
+      "VH1 East": "US",
+      "Victorious": "US",
+      "W Network (720p)": "CA",
+      "WDR 1 Live (720p)": "DE",
+      "WDR Fernsehen Bonn (720p) [Geo-blocked]": "DE",
+      "WeatherNation": "US",
+      "Women's Sports Network (720p)": "US",
+      "World of Freesports (1080p)": "DE",
+      "Yahoo! Finance (1080p)": "US"
+    }
+  },
+  "lookup": {
+    "23 ABC Bakersfield CA (KERO) (720p)": "US",
+    "30A Music (720p)": "US",
+    "3sat HD (1080p)": "DE",
+    "70s Cinema": "US",
+    "80s Rewind": "US",
+    "90s Throwback": "US",
+    "ABC News (720p)": "US",
+    "Amazing Discoveries TV (720p)": "CA",
+    "AMC East (1080p)": "US",
+    "Ameritrade (1080p) [Not 24/7]": "US",
+    "Antenna TV": "US",
+    "Antiques Road Show UK": "US",
+    "BBC Earth (1080p) [Geo-blocked]": "GB",
+    "BBC Four UK HD": "UK",
+    "BBC News (1080p)": "UK",
+    "BBC News (North America) (1080p)": "UK",
+    "BBC News Europe": "GB",
+    "BBC One London HD (1080p)": "UK",
+    "BBC Three": "GB",
+    "BBC Three HD (720p)": "UK",
+    "BBC Travel": "US",
+    "BBC Two HD (1080p)": "GB",
+    "BBC UHD 1 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+    "BBC UHD 2 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+    "BBC UHD 3 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+    "BBC UHD 4 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+    "BBC UHD 5 (2160p) [Geo-blocked] [Not 24/7]": "GB",
+    "beIN Sports USA": "US",
+    "Big Ten Network": "US",
+    "Black Cinema": "US",
+    "Black Classics": "US",
+    "Bloomberg TV Europe (720p)": "US",
+    "Bloomberg TV+ (1080p)": "US",
+    "Blues TV": "US",
+    "BNN Bloomberg": "CA",
+    "bon appétit (1080p)": "US",
+    "BR Fernsehen Nord (720p)": "DE",
+    "Bravo East": "US",
+    "BritBox Mysteries": "US",
+    "Canada One (720p) [Not 24/7]": "CA",
+    "CBC Toronto (CBLT-DT) (720p) [Geo-blocked]": "CA",
+    "CBS News 24/7": "US",
+    "CBS Sports HQ": "US",
+    "CBS Sports Network USA": "US",
+    "Channel 5 HD (1080p)": "GB",
+    "Chef Champion (720p) [Not 24/7]": "US",
+    "Chemnitz Fernsehen (1080p)": "DE",
+    "Classic Cinema (240p) [Not 24/7]": "US",
+    "Classic Movies Channel": "US",
+    "Classic TV Comedy": "US",
+    "Classic TV Drama": "US",
+    "Classic TV: Families": "US",
+    "CNBC": "US",
+    "CNBC Europe HD (1080p)": "GB",
+    "CNBC World": "US",
+    "Das Erste (1080p)": "DE",
+    "Das Erste HD (1080p)": "DE",
+    "Dateline 24/7": "US",
+    "DiscoverFilm": "UK",
+    "Disney XD (720p)": "US",
+    "Dokusat (1080p)": "DE",
+    "Dresden Fernsehen (1080p) [Not 24/7]": "DE",
+    "DW English (1080p)": "DE",
+    "ESPN U (720p)": "US",
+    "ESPNews (720p)": "US",
+    "FOX Business (1080p)": "US",
+    "Go2Travel (1080p)": "US",
+    "Gordon Ramsay's Hell's Kitchen": "US",
+    "Hallmark Drama (720p)": "US",
+    "Hell's Kitchen (1080p)": "US",
+    "History": "US",
+    "Homes Under Hammer (720p)": "US",
+    "hr-fernsehen (1080p)": "DE",
+    "iCarly": "US",
+    "iHeartRadio 90s": "US",
+    "iSTUFF (720p) [Not 24/7]": "DE",
+    "ITV2": "GB",
+    "ITV3 (1080p)": "GB",
+    "ITV4 (1080p)": "GB",
+    "kabel eins (576p)": "DE",
+    "KulturMD (1080p)": "DE",
+    "Lifetime Movies East": "US",
+    "Love Nature HD (1080i)": "CA",
+    "MGM+ East": "US",
+    "MGM+ Marquee": "US",
+    "Midsomer Murders": "US",
+    "Mission Impossible": "US",
+    "MOVIEDOME": "US",
+    "Movies!": "US",
+    "MSNBC (720p)": "US",
+    "München TV (1080p) [Not 24/7]": "DE",
+    "N24 Doku": "DE",
+    "National Geographic East": "US",
+    "National Geographic HD East (720p) [Not 24/7]": "US",
+    "National Geographic Wild East": "US",
+    "National Geographic Wild HD East (720p) [Not 24/7]": "US",
+    "NBC News NOW (1080p)": "US",
+    "NBC Sports Boston (1080p) [Not 24/7]": "US",
+    "NDR Fernsehen": "DE",
+    "NDR Mecklenburg-Vorpommern (720p)": "DE",
+    "NDR Niedersachsen (720p)": "DE",
+    "NDR Schleswig-Holstein (720p)": "DE",
+    "Nick Music (720p)": "US",
+    "Nickelodeon": "US",
+    "Nickelodeon (720p)": "UK",
+    "Now 70's": "UK",
+    "Now 80's": "UK",
+    "OK Magdeburg (1080p)": "DE",
+    "Outdoor America": "US",
+    "Pluto TV Classic TV (720p)": "US",
+    "Pluto TV Comedy": "US",
+    "Pluto TV Crime Movies": "US",
+    "Pluto TV Cult Films": "US",
+    "Pluto TV Drama": "US",
+    "Pluto TV History": "US",
+    "Pluto TV Paranormal": "US",
+    "Pluto TV Romance": "US",
+    "Pluto TV Romance (720p)": "US",
+    "Pluto TV Science": "US",
+    "Pluto TV Serie": "US",
+    "Pluto TV Staff Picks": "US",
+    "Pluto TV True Crime": "US",
+    "Qello Concerts": "CA",
+    "Radio Bremen Fernsehen (1080p) [Geo-blocked]": "DE",
+    "Radio Weser TV Bremen (576p)": "DE",
+    "RAN1 (1080p)": "DE",
+    "RBW (1080p)": "DE",
+    "Regio TV Stuttgart (1080p)": "DE",
+    "RFH (1080p)": "DE",
+    "RNF (1080p)": "DE",
+    "RTL HD": "DE",
+    "Saarland Fernsehen 1 (1080p)": "DE",
+    "Saarland Fernsehen 2 (720p) [Not 24/7]": "DE",
+    "Samuel Goldwyn Classics (1080p)": "US",
+    "Schlager Deluxe (1080p)": "DE",
+    "Scripps News": "US",
+    "Seenluft24 (1080p)": "DE",
+    "Showtime 2 East": "US",
+    "Showtime East": "US",
+    "Showtime Next East": "US",
+    "Showtime West (1080p)": "US",
+    "Showtime Women East": "US",
+    "Smithsonian Channel East": "US",
+    "Smithsonian Channel Selects": "US",
+    "Sonnenklar TV (1080p)": "DE",
+    "SportsGrid (1080p)": "US",
+    "Sportsman Channel": "US",
+    "SportsNet New York (540p)": "US",
+    "SR Fernsehen (720p)": "DE",
+    "Starz East": "US",
+    "Starz Encore Classic East": "US",
+    "Starz West": "US",
+    "Sundance TV East": "US",
+    "Syfy East": "US",
+    "Tagesschau 24 (720p)": "DE",
+    "Takeshi's Castle": "US",
+    "teltOwkanal (1080p)": "DE",
+    "The Archive (1080p)": "US",
+    "The Challenge": "US",
+    "The Design Network (1080p)": "US",
+    "The Weather Network": "CA",
+    "Toronto 360 TV (720p) [Not 24/7]": "CA",
+    "Totally Turtles": "US",
+    "TSN1 (1080p)": "CA",
+    "TSN2": "CA",
+    "TSN3": "CA",
+    "TSN4": "CA",
+    "TSN5": "CA",
+    "TV Berlin (720p)": "DE",
+    "TV Mainfranken (1080p) [Not 24/7]": "DE",
+    "TV38 Südost-Niedersachen (1080p)": "DE",
+    "TVS Classic Sports (360p)": "US",
+    "TVS Comedy Network (720p)": "US",
+    "TVS Flashback Network (360p)": "US",
+    "TVS Music Network (720p)": "US",
+    "TVS Nostalgia (472p)": "US",
+    "TVS Nostalgia Movies (480p)": "US",
+    "TVS Television Network (480p)": "US",
+    "TVS Travel Network (720p) [Not 24/7]": "US",
+    "USA Network (720p)": "US",
+    "Vevo '70s": "US",
+    "Vevo '90s": "US",
+    "Vevo 2K": "US",
+    "Vevo Latino (1080p)": "US",
+    "Vevo R&B": "US",
+    "Vevo Retro Rock": "US",
+    "VH1 East": "US",
+    "Victorious": "US",
+    "W Network (720p)": "CA",
+    "WDR 1 Live (720p)": "DE",
+    "WDR Fernsehen Bonn (720p) [Geo-blocked]": "DE",
+    "WeatherNation": "US",
+    "Women's Sports Network (720p)": "US",
+    "World of Freesports (1080p)": "DE",
+    "Yahoo! Finance (1080p)": "US"
+  }
 }
