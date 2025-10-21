@@ -15,3 +15,5 @@ temp/
 Database/*.db*
 *.bak
 logs/
+*.gz
+*.m3u
