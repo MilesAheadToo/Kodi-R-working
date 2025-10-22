@@ -50,9 +50,15 @@ python3 "${BIN_DIR}/prune_m3u.py" --use-env | tee -a "${LOG_FILE}"
 
 # Deploy to Samba-mounted path
 if [ -n "${KODI_SMB_PATH:-}" ]; then
-  mkdir -p "${KODI_SMB_PATH}"
-  cp -f "${M3U_DIR}/${M3U}" "${KODI_SMB_PATH}/${M3U}"
-  echo "Copied pruned M3U to ${KODI_SMB_PATH}/${M3U}" | tee -a "${LOG_FILE}"
+  if mountpoint -q "${KODI_SMB_PATH}"; then
+    cp -f "${M3U_DIR}/${M3U}" "${KODI_SMB_PATH}/${M3U}"
+    if [ -f "${M3U_DIR}/channel_cc_map.json" ]; then
+      cp -f "${M3U_DIR}/channel_cc_map.json" "${KODI_SMB_PATH}/channel_cc_map.json"
+    fi
+    echo "Copied pruned M3U and channel map to ${KODI_SMB_PATH}" | tee -a "${LOG_FILE}"
+  else
+    echo "[warn] ${KODI_SMB_PATH} not mounted; skipping copy" | tee -a "${LOG_FILE}"
+  fi
 fi
 
 echo "[$(date -Iseconds)] Done monthly_update_m3u" | tee -a "${LOG_FILE}"
