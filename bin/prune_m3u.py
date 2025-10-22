@@ -70,30 +70,8 @@ def _build_overrides(channel_meta: Dict[str, Dict[str, str]]) -> Dict[str, str]:
 
 def _write_channel_map(channel_meta: Dict[str, Dict[str, str]], cc_map_path: str) -> Dict[str, str]:
     overrides = _build_overrides(channel_meta)
-    payload = {
-        "version": 2,
-        "generated_at": datetime.utcnow().replace(microsecond=0).isoformat() + "Z",
-        "summary": {
-            "total_channels": len(channel_meta),
-            "with_country": len(overrides)
-        },
-        "channels": {},
-        "mappings": {
-            "channel_overrides": overrides
-        },
-        "lookup": overrides  # legacy compatibility
-    }
-
-    sorted_items = sorted(channel_meta.items(), key=lambda kv: kv[0].lower())
-    for chan, meta in sorted_items:
-        payload["channels"][chan] = {
-            "country": meta.get("country", ""),
-            "tvg_id": meta.get("tvg_id", ""),
-            "group": meta.get("group", "")
-        }
-
     with io.open(cc_map_path, "w", encoding="utf-8") as f:
-        json.dump(payload, f, ensure_ascii=False, indent=2)
+        json.dump(dict(sorted(overrides.items(), key=lambda kv: kv[0].lower())), f, ensure_ascii=False, indent=2)
     return overrides
 
 def _find_cc_profile_template(env: Dict[str, str], fallback_dir: Optional[str]=None) -> Optional[str]:
@@ -162,12 +140,24 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
             cc_raw = _get(r, hdr, "Country","tvg-country")
             cc = cc_raw.upper() if cc_raw else ""
             grp  = _get(r, hdr, "GroupTitle","Group","Category")
+            logo = _get(r, hdr, "Logo", "tvg-logo", "TvgLogo")
             ext = "#EXTINF:-1"
             if tvg: ext = set_attr(ext, "tvg-id", tvg)
             if cc:  ext = set_attr(ext, "tvg-country", cc)
-            group_pieces = [val for val in (cc, grp) if val]
-            if group_pieces:
-                ext = set_attr(ext, "group-title", " - ".join(group_pieces))
+            if logo:
+                ext = set_attr(ext, "tvg-logo", logo)
+
+            country_labels = {
+                "UK": "United Kingdom",
+                "GB": "United Kingdom",
+                "DE": "Germany",
+                "CA": "Canada",
+                "US": "USA",
+            }
+            country_label = country_labels.get(cc) or (cc if cc else grp or "")
+            if country_label:
+                ext = set_attr(ext, "group-title", country_label)
+
             ext = f"{ext},{name or ''}"
             fo.write(ext + "\n"); fo.write(url + "\n")
 
@@ -176,11 +166,13 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
                 "name": name,
                 "tvg_id": tvg,
                 "country": cc,
-                "group": grp
+                "logo": logo
             })
             if cc:
                 meta["country"] = cc
                 overrides[key] = cc
+            if logo:
+                meta["logo"] = logo
             written += 1
     if cc_map_path:
         overrides = _write_channel_map(channel_meta, cc_map_path)
