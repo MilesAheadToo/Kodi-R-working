@@ -1,0 +1,6 @@
+m3u_name,tvg_id_current,tvg_id_target,notes
+"ITV1 London","",itv1.uk,"normalize region"
+"BBC One HD","",bbc-one.uk,"drop HD suffix"
+"ARD Das Erste","",ard.de,"canonical name"
+"Discovery Channel US","",discovery.us,"country disambiguation"
+"BBC Four UK HD","BBCFour.uk@UKHD",BBCFour.uk,"drop HD suffix"

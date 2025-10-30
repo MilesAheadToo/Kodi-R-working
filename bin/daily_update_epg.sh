@@ -30,13 +30,13 @@ if [ -n "${EPG:-}" ] && [ -f "${EPG_DIR}/${EPG}" ]; then
   rm -f "${EPG_DIR}/${EPG}"
 fi
 
-echo "Pruning EPG with ${BIN_DIR}/prune_epg_from_country.py" | tee -a "${LOG_FILE}"
-python3 "${BIN_DIR}/prune_epg_from_country.py" --use-env --progress | tee -a "${LOG_FILE}"
+echo "Pruning EPG with ${BIN_DIR}/match_epg_m3u.py" | tee -a "${LOG_FILE}"
+python3 "${BIN_DIR}/match_epg_m3u.py" --use-env --progress | tee -a "${LOG_FILE}"
 
 if [ -n "${KODI_SMB_PATH:-}" ]; then
   mkdir -p "${KODI_SMB_PATH}"
-  cp -f "${M3U_DIR}/${M3U}" "${KODI_SMB_PATH}/${M3U}"
-  cp -f "${EPG_DIR}/${EPG}" "${KODI_SMB_PATH}/${EPG}"
+  cp -f "${M3U_DIR}/${M3U_OUT}" "${KODI_SMB_PATH}/${M3U}"
+  cp -f "${EPG_DIR}/${EPG_OUT}" "${KODI_SMB_PATH}/${EPG}"
   echo "Copied M3U+EPG to ${KODI_SMB_PATH}" | tee -a "${LOG_FILE}"
 fi
 
