@@ -29,23 +29,20 @@ echo "[SD] Generating XMLTV for $EPG_DAYS days -> $EPG_DIR/epg_sd.xml"
 tv_grab_zz_sdjson --days "$EPG_DAYS" --output "$EPG_DIR/epg_sd.xml"
 gzip -f "$EPG_DIR/epg_sd.xml"
 
-echo "[SD] Matching M3U -> SD channel ids"
-python3 "$BIN_DIR/sd_daily_match_epg_m3u.py"
-
-# Optional: point your active files to the matched versions
-# ln -sf "$M3U_DIR/pruned_tv_sd_matched.m3u" "$M3U_DIR/$M3U"
-# ln -sf "$EPG_DIR/epg_sd_matched.xml.gz"   "$EPG_DIR/epg_sd.xml.gz"
+echo "[SD] Fetching EPG for favourites"
+python3 "$BIN_DIR/sd_fetch_favourites_epg.py"
 
 echo "[SD] Done. Files:"
-echo " - $M3U_DIR/pruned_tv_sd_matched.m3u"
-echo " - $EPG_DIR/epg_sd_matched.xml.gz"
+echo " - $M3U_DIR/$M3U_OUT"
+echo " - $EPG_DIR/$EPG_OUT"
 echo " - $LOG_DIR/sd_m3u_epg_report.csv"
 echo " - $LOG_DIR/sd_m3u_epg_unmatched.csv"
+echo " - $LOG_DIR/sd_m3u_epg_match_trace.log"
 
 if [ -n "${KODI_SMB_PATH:-}" ]; then
   mkdir -p "${KODI_SMB_PATH}"
-  cp -f "${M3U_DIR}/pruned_tv_sd_matched.m3u" "${KODI_SMB_PATH}/${M3U}"
-  cp -f "${EPG_DIR}/${EPG_OUT}" "${KODI_SMB_PATH}/${EPG}"
+  cp -f "${M3U_DIR}/${M3U_OUT}" "${KODI_SMB_PATH}/${M3U_OUT}"
+  cp -f "${EPG_DIR}/${EPG_OUT}" "${KODI_SMB_PATH}/${EPG_OUT}"
   echo "Copied M3U+EPG to ${KODI_SMB_PATH}" | tee -a "${LOG_FILE}"
 fi
 

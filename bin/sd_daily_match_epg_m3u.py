@@ -47,7 +47,7 @@ os.makedirs(LOG_DIR, exist_ok=True)
 M3U_IN  = os.path.join(M3U_DIR, env.get("M3U", "pruned_tv.m3u"))
 EPG_IN  = os.path.join(EPG_DIR, "epg_sd.xml.gz")
 M3U_OUT = os.path.join(M3U_DIR, "pruned_tv_sd_matched.m3u")
-EPG_OUT = os.path.join(EPG_DIR, "pruned.epg.xml.gz")
+EPG_OUT = os.path.join(EPG_DIR, "epg_sd_matched.xml.gz")
 REPORT  = os.path.join(LOG_DIR, "sd_m3u_epg_report.csv")
 UNMATCH = os.path.join(LOG_DIR, "sd_m3u_epg_unmatched.csv")
 ALIASES = os.path.join(BIN_DIR, "epg_aliases.csv")
@@ -185,7 +185,7 @@ df.to_csv(os.path.join(LOG_DIR, "sd_m3u_epg_report.csv"), index=False)
 df[df["match_method"]=="unmatched"][["name","tvg_id","tvg_name","group"]].to_csv(os.path.join(LOG_DIR, "sd_m3u_epg_unmatched.csv"), index=False)
 
 # rewrite M3U
-THRESH = float(os.environ.get("SD_MATCH_THRESHOLD", "0.9"))
+THRESH = float(os.environ.get("SD_MATCH_THRESHOLD", "0.6"))
 lines = ["#EXTM3U"]
 matched_ids = set()
 match_log_lines = []
