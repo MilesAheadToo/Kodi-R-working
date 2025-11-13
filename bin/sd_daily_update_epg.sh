@@ -1,9 +1,22 @@
-
 #!/usr/bin/env bash
-# daily_update_epg.sh — SchedulesDirect flow
-# Refresh SchedulesDirect XMLTV and align M3U tvg-id to SD channel ids.
+# daily_update_epg.sh 
+# SchedulesDirect XMLTV and align M3U tvg-id to SD channel ids.
+set -Eeuo pipefail
 
-set -euo pipefail
+# Force correct HOME and PATH even if root calls us
+export HOME=/home/trevor
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Load your env explicitly (no ~)
+set -a
+. /home/trevor/Kodi/.env
+set +a
+
+# Optional: self-logging
+mkdir -p /home/trevor/Kodi/logs
+exec >>/home/trevor/Kodi/logs/${0##*/}.cron.log 2>&1
+echo "[$(date -Is)] START as $(whoami) HOME=$HOME"
+
 # Force a sane, fully-generated locale for Perl/Python tools
 export LANG=en_GB.UTF-8
 export LC_ALL=en_GB.UTF-8

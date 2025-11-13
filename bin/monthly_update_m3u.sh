@@ -1,5 +1,20 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -Eeuo pipefail
+
+# Force correct HOME and PATH even if root calls us
+export HOME=/home/trevor
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+# Load your env explicitly (no ~)
+set -a
+. /home/trevor/Kodi/.env
+set +a
+
+# Optional: self-logging
+mkdir -p /home/trevor/Kodi/logs
+exec >>/home/trevor/Kodi/logs/${0##*/}.cron.log 2>&1
+echo "[$(date -Is)] START as $(whoami) HOME=$HOME"
+
 
 # Load .env
 ENV_FILE="${HOME}/Kodi/.env"
@@ -23,24 +38,45 @@ mkdir -p "${BIN_DIR}" "${M3U_DIR}" "${EPG_DIR}" "${LOG_DIR}"
 LOG_FILE="${LOG_DIR}/monthly_update_m3u.log"
 echo "[$(date -Iseconds)] Start monthly_update_m3u" | tee -a "${LOG_FILE}"
 
-# Download all M3U sources listed in IPTV_M3U_URLS (space or newline separated)
-i=0
-echo "${IPTV_M3U_URLS}" | tr '\n' ' ' | tr -s ' ' | while read -r url; do
-  if [ -n "${url}" ]; then
-    i=$((i+1))
-    out="${M3U_DIR}/source_${i}.m3u"
-    echo "Downloading ${url} -> ${out}" | tee -a "${LOG_FILE}"
-    curl -fsSL "${url}" -o "${out}"
-  fi
-done
+download_sources() {
+  local urls="$1" prefix="$2" label="$3"
+  rm -f "${M3U_DIR}/${prefix}"_*.m3u
+  local i=0
+  echo "${urls}" | tr '\n' ' ' | tr -s ' ' | while read -r url; do
+    if [ -n "${url}" ]; then
+      i=$((i+1))
+      local out="${M3U_DIR}/${prefix}_${i}.m3u"
+      echo "Downloading ${label} ${url} -> ${out}" | tee -a "${LOG_FILE}"
+      curl -fsSL "${url}" -o "${out}"
+    fi
+  done
+}
 
-# Build a master.m3u by concatenating sources (if MASTER_M3U provided in .env, use that path)
+build_master_from_prefix() {
+  local prefix="$1" target="$2"
+  echo "#EXTM3U" > "${target}"
+  shopt -s nullglob
+  for f in "${M3U_DIR}/${prefix}"_*.m3u; do
+    awk 'NR==1 && $0 ~ /^#EXTM3U/ {next} {print}' "$f" >> "${target}"
+  done
+  shopt -u nullglob
+  echo "Built ${target} from ${prefix}_*.m3u" | tee -a "${LOG_FILE}"
+}
+
+download_sources "${FREE_TV_M3U_URLS:-}" "free_source" "Free-TV"
+download_sources "${IPTV_M3U_URLS:-}" "iptv_source" "IPTV-org"
+
+FREE_MASTER="${FREE_TV_MASTER_M3U:-${M3U_DIR}/free_tv_master.m3u}"
+IPTV_MASTER="${IPTV_MASTER_M3U:-${M3U_DIR}/iptv_master.m3u}"
+build_master_from_prefix "free_source" "${FREE_MASTER}"
+build_master_from_prefix "iptv_source" "${IPTV_MASTER}"
+
+# Build a combined master (Free-TV entries first so they win when deduping later)
 MASTER="${MASTER_M3U:-${M3U_DIR}/master.m3u}"
 echo "#EXTM3U" > "${MASTER}"
-for f in "${M3U_DIR}"/source_*.m3u; do
-  [ -f "$f" ] || continue
-  # skip header lines
-  awk 'NR==1 && $0 ~ /^#EXTM3U/ {next} {print}' "$f" >> "${MASTER}"
+for source in "${FREE_MASTER}" "${IPTV_MASTER}"; do
+  [ -f "${source}" ] || continue
+  awk 'NR==1 && $0 ~ /^#EXTM3U/ {next} {print}' "${source}" >> "${MASTER}"
 done
 echo "Built master playlist: ${MASTER}" | tee -a "${LOG_FILE}"
 

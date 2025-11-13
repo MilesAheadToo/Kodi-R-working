@@ -7,7 +7,8 @@
 
 import argparse, csv, io, json, os, re
 from datetime import datetime
-from typing import Dict, List, Tuple, Optional
+from dataclasses import dataclass
+from typing import Dict, List, Tuple, Optional, Sequence
 
 ENV_PATH = os.path.expanduser("~/Kodi/.env")
 
@@ -125,7 +126,119 @@ def _update_cc_profile(template_path: str, overrides: Dict[str, str]) -> None:
     with io.open(template_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
-def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[int,int,int,Dict[str,Dict[str,str]],Dict[str,str]]:
+@dataclass
+class MasterEntry:
+    name: str
+    tvg_id: str
+    url: str
+    props: List[str]
+    priority: int = 0
+
+def _norm_key(val: Optional[str]) -> str:
+    return (val or "").strip().lower()
+
+def _split_url_and_props(value: str) -> Tuple[str, List[str]]:
+    if not value:
+        return "", []
+    url = ""
+    props: List[str] = []
+    for line in value.splitlines():
+        stripped = line.strip()
+        if not stripped:
+            continue
+        if stripped.startswith("#KODIPROP:"):
+            props.append(stripped)
+        else:
+            url = stripped
+    if not url:
+        url = value.strip()
+    return url, props
+
+def _merge_props(*prop_groups: List[str]) -> List[str]:
+    merged: List[str] = []
+    seen = set()
+    for group in prop_groups:
+        for line in group:
+            key = line.strip()
+            if not key or not key.startswith("#KODIPROP:"):
+                continue
+            if key in seen:
+                continue
+            seen.add(key)
+            merged.append(key)
+    return merged
+
+def _parse_master_playlist(paths: Optional[Sequence[str]]) -> Dict[str, Dict[str, MasterEntry]]:
+    lookup: Dict[str, Dict[str, MasterEntry]] = {"by_url": {}, "by_tvg": {}, "by_name": {}}
+    if not paths:
+        return lookup
+    if isinstance(paths, str):
+        iterable = [paths]
+    else:
+        iterable = list(paths)
+    for priority, raw_path in enumerate(iterable):
+        if not raw_path:
+            continue
+        path = os.path.expanduser(raw_path)
+        try:
+            fh = io.open(path, "r", encoding="utf-8", errors="ignore")
+        except FileNotFoundError:
+            continue
+        with fh:
+            current_ext = None
+            props: List[str] = []
+            for raw in fh:
+                line = raw.rstrip("\n")
+                if line.startswith("#EXTINF:"):
+                    current_ext = line
+                    props = []
+                    continue
+                if current_ext and line.startswith("#"):
+                    if line.startswith("#KODIPROP:"):
+                        props.append(line.strip())
+                    continue
+                if current_ext and line and not line.startswith("#"):
+                    url = line.strip()
+                    attrs = dict(re.findall(r'([\w\-]+)="(.*?)"', current_ext))
+                    name = current_ext.split(",", 1)[1].strip() if "," in current_ext else ""
+                    entry = MasterEntry(
+                        name=name,
+                        tvg_id=attrs.get("tvg-id") or attrs.get("tvg_id") or "",
+                        url=url,
+                        props=props[:],
+                        priority=priority,
+                    )
+                    url_key = entry.url.strip()
+                    if url_key and url_key not in lookup["by_url"]:
+                        lookup["by_url"][url_key] = entry
+                    tvg_key = _norm_key(entry.tvg_id)
+                    if tvg_key and tvg_key not in lookup["by_tvg"]:
+                        lookup["by_tvg"][tvg_key] = entry
+                    name_key = _norm_key(entry.name)
+                    if name_key and name_key not in lookup["by_name"]:
+                        lookup["by_name"][name_key] = entry
+                    current_ext = None
+                    props = []
+    return lookup
+
+def _find_master_entry(lookup: Optional[Dict[str, Dict[str, MasterEntry]]],
+                       name: str, tvg_id: str, url: str) -> Optional[MasterEntry]:
+    if not lookup:
+        return None
+    url_key = url.strip()
+    if url_key and url_key in lookup["by_url"]:
+        return lookup["by_url"][url_key]
+    tvg_key = _norm_key(tvg_id)
+    if tvg_key and tvg_key in lookup["by_tvg"]:
+        return lookup["by_tvg"][tvg_key]
+    name_key = _norm_key(name)
+    if name_key and name_key in lookup["by_name"]:
+        return lookup["by_name"][name_key]
+    return None
+
+def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
+                               master_lookup: Optional[Dict[str, Dict[str, MasterEntry]]] = None
+                               ) -> Tuple[int,int,int,Dict[str,Dict[str,str]],Dict[str,str]]:
     written = sk_notfav = sk_nourl = 0
     channel_meta: Dict[str, Dict[str, str]] = {}
     overrides: Dict[str, str] = {}
@@ -133,8 +246,9 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
         fo.write("#EXTM3U\n")
         for r in favs:
             if not _is_fav(r, hdr): sk_notfav += 1; continue
-            url = _get(r, hdr, "Url","URL","StreamUrl")
-            if not url: sk_nourl += 1; continue
+            url_raw = _get(r, hdr, "Url","URL","StreamUrl")
+            stream_url, inline_props = _split_url_and_props(url_raw)
+            if not stream_url: sk_nourl += 1; continue
             name = _get(r, hdr, "ChannelName","Name","Channel")
             tvg  = _get(r, hdr, "TvgId","tvg-id")
             cc_raw = _get(r, hdr, "Country","tvg-country")
@@ -159,9 +273,16 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
                 ext = set_attr(ext, "group-title", country_label)
 
             ext = f"{ext},{name or ''}"
-            fo.write(ext + "\n"); fo.write(url + "\n")
+            fo.write(ext + "\n")
 
-            key = _channel_key(name, tvg, url)
+            master_entry = _find_master_entry(master_lookup, name, tvg, stream_url)
+            prop_lines = _merge_props(inline_props, master_entry.props if master_entry else [])
+            for line in prop_lines:
+                fo.write(line + "\n")
+            final_url = (master_entry.url if master_entry else stream_url).strip()
+            fo.write(final_url + "\n")
+
+            key = _channel_key(name, tvg, final_url)
             meta = channel_meta.setdefault(key, {
                 "name": name,
                 "tvg_id": tvg,
@@ -178,6 +299,16 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None) -> Tuple[i
         overrides = _write_channel_map(channel_meta, cc_map_path)
     return written, sk_notfav, sk_nourl, channel_meta, overrides
 
+def _unique_paths(*paths: Optional[str]) -> List[str]:
+    out: List[str] = []
+    for p in paths:
+        if not p:
+            continue
+        expanded = os.path.expanduser(p)
+        if expanded not in out:
+            out.append(expanded)
+    return out
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--use-env", action="store_true",
@@ -185,6 +316,8 @@ def main():
     # legacy args (ignored with --use-env)
     ap.add_argument("--m3u-dir"); ap.add_argument("--out-dir"); ap.add_argument("--fav")
     ap.add_argument("--country-map"); ap.add_argument("--report")
+    ap.add_argument("--master-m3u", action="append",
+                    help="Optional master playlist(s) to copy #KODIPROP lines from (highest priority first).")
     args = ap.parse_args()
 
     env: Dict[str, str] = {}
@@ -195,19 +328,32 @@ def main():
         pruned_out = os.path.join(M3U_DIR, M3U_NAME)
         cc_map     = os.path.join(M3U_DIR, "channel_cc_map.json")
         report     = os.path.join(LOG_DIR, "prune_report.csv")
+        master_paths = _unique_paths(
+            *(args.master_m3u or []),
+            env.get("FREE_TV_MASTER_M3U") or os.path.join(M3U_DIR, "free_tv_master.m3u"),
+            env.get("MASTER_M3U") or os.path.join(M3U_DIR, "master.m3u"),
+            env.get("IPTV_MASTER_M3U") or os.path.join(M3U_DIR, "iptv_master.m3u"),
+        )
     else:
         # (compat mode)
         TV_FAV = args.fav; M3U_DIR = args.m3u_dir
         pruned_out = os.path.join(args.out_dir, "pruned.m3u")
         cc_map = args.country_map; report = args.report
         LOG_DIR = report and os.path.dirname(report) or "."
+        master_paths = _unique_paths(
+            *(args.master_m3u or []),
+            os.path.join(M3U_DIR, "free_tv_master.m3u") if M3U_DIR else None,
+            os.path.join(M3U_DIR, "master.m3u") if M3U_DIR else None,
+            os.path.join(M3U_DIR, "iptv_master.m3u") if M3U_DIR else None,
+        )
 
     os.makedirs(M3U_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
 
     favs, hdr = _read_csv(TV_FAV)
+    master_lookup = _parse_master_playlist(master_paths)
     written, sk_notfav, sk_nourl, channel_meta, overrides = write_pruned_m3u_from_favs(
-        favs, hdr, pruned_out, cc_map_path=cc_map)
+        favs, hdr, pruned_out, cc_map_path=cc_map, master_lookup=master_lookup)
 
     template_path = _find_cc_profile_template(env, os.path.dirname(cc_map) if cc_map else None)
     if template_path:

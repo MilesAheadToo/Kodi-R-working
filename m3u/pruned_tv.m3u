@@ -1,36 +1,84 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="CanadaOne.ca" tvg-country="CA" group-title="Canada",Canada One (720p) [Not 24/7]
-http://cdn8.live247stream.com/canadaone/tv/playlist.m3u8
-#EXTINF:-1 tvg-id="Toronto360TV.ca" tvg-country="CA" group-title="Canada",Toronto 360 TV (720p) [Not 24/7]
-http://cdn3.toronto360.tv:8081/toronto360/hd/playlist.m3u8
-#EXTINF:-1 tvg-id="DW.de@English" tvg-country="DE" group-title="Germany",DW English (1080p)
-https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/master.m3u8
 #EXTINF:-1 tvg-id="3sat.de@HD" tvg-country="DE" group-title="Germany",3sat HD (1080p)
 https://viamotionhsi.netplus.ch/live/eds/3sathd/browser-HLS8/3sathd.m3u8
+#EXTINF:-1 tvg-id="ABCNewsLive.us" tvg-country="US" group-title="USA",ABC News (720p)
+https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8
+#EXTINF:-1 tvg-id="Ameritrade.us" tvg-country="US" group-title="USA",Ameritrade (1080p) [Not 24/7]
+https://tdameritrade-vizio.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="BBCFour.uk@UKHD" tvg-country="GB" group-title="United Kingdom",BBC Four UK HD
+https://streamer.nexyl.uk/48559ccd-6400-457d-8acc-06b9e24c2ed8.m3u8
+#EXTINF:-1 tvg-id="BBCNews.uk" tvg-country="GB" group-title="United Kingdom",BBC News (1080p)
+https://vs-cmaf-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/iptv_mse_v0_hevc.mpd
+#EXTINF:-1 tvg-id="BBCOne.uk" tvg-country="GB" group-title="United Kingdom",BBC One (720p)
+https://november.queazified.co.uk/ee971134-115e-4418-8d1d-69dff7d4c6eb.m3u8
+#EXTINF:-1 tvg-id="BBCOne.uk@LondonHD" tvg-country="GB" group-title="United Kingdom",BBC One London HD (1080p)
+https://streamer.nexyl.uk/5c858268-a93b-45f8-9e82-41d66b526d6c.m3u8
+#EXTINF:-1 tvg-id="BBCThree.uk@HD" tvg-country="GB" group-title="United Kingdom",BBC Three HD (720p)
+https://streamer.nexyl.uk/39290a19-b8dd-43ea-b8dc-081c37790f24.m3u8
+#EXTINF:-1 tvg-id="BBCTwo.uk@HD" tvg-country="GB" group-title="United Kingdom",BBC Two HD (1080p)
+https://viamotionhsi.netplus.ch/live/eds/bbc2/browser-HLS8/bbc2.m3u8
+#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" group-title="USA",Big Ten Network
+https://fl7.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8
+#EXTINF:-1 tvg-id="BloombergTV.us@Plus" tvg-country="US" group-title="USA",Bloomberg TV+ (1080p)
+https://bloomberg.com/media-manifest/streams/phoenix-us.m3u8
+#EXTINF:-1 tvg-id="bonappetit.us" tvg-country="US" group-title="USA",bon appétit (1080p)
+https://bonappetit-samsung.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="BRFernsehen.de@Nord" tvg-country="DE" group-title="Germany",BR Fernsehen Nord (720p)
 https://mcdn.br.de/br/fs/bfs_nord/hls/de/master.m3u8
+#EXTINF:-1 tvg-id="CanadaOne.ca" tvg-country="CA" group-title="Canada",Canada One (720p) [Not 24/7]
+http://cdn8.live247stream.com/canadaone/tv/playlist.m3u8
+#EXTINF:-1 tvg-id="CBLTDT.ca" tvg-country="CA" group-title="Canada",CBC Toronto (CBLT-DT) (720p) [Geo-blocked]
+https://cbcrclinear-tor.akamaized.net/hls/live/2042760/CBCRCLINEAR_TOR_6/master5.m3u8
+#EXTINF:-1 tvg-id="Channel5.uk@HD" tvg-country="GB" group-title="United Kingdom",Channel 5 HD (1080p)
+https://viamotionhsi.netplus.ch/live/eds/channel5/browser-HLS8/channel5.m3u8
 #EXTINF:-1 tvg-id="SachsenFernsehenChemnitz.de" tvg-country="DE" group-title="Germany",Chemnitz Fernsehen (1080p)
 https://chemnitz.iptv-playoutcenter.de/chemnitz/chemnitzfernsehen.stream_1/playlist.m3u8
+#EXTINF:-1 tvg-id="CityNewsToronto.ca" tvg-country="CA" group-title="Canada",CityNews Toronto (720p)
+https://citynewsregional.akamaized.net/hls/live/1024052/Regional_Live_7/master.m3u8
+#EXTINF:-1 tvg-id="CNBCEurope.uk@HD" tvg-country="GB" group-title="United Kingdom",CNBC Europe HD (1080p)
+https://viamotionhsi.netplus.ch/live/eds/cnbc/browser-HLS8/cnbc.m3u8
 #EXTINF:-1 tvg-id="DasErste.de@HD" tvg-country="DE" group-title="Germany",Das Erste HD (1080p)
 https://daserste-live.ard-mcdn.de/daserste/live/hls/int/master.m3u8
-#EXTINF:-1 tvg-id="Dokusat.de" tvg-country="DE" group-title="Germany",Dokusat (1080p)
-https://muc3.iptv-playoutcenter.de/dokusat/dokusat1/playlist.m3u8
+#EXTINF:-1 tvg-id="Dateline247.us" tvg-country="US" group-title="USA",Dateline 24/7
+https://dz59iptwz5rxs.cloudfront.net/live/master.m3u8
+#EXTINF:-1 tvg-id="DiscoverFilm.uk" tvg-country="GB" group-title="United Kingdom",DiscoverFilm
+https://discoverfilm-discoverfilm-1-nl.samsung.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="SachsenFernsehenDresden.de" tvg-country="DE" group-title="Germany",Dresden Fernsehen (1080p) [Not 24/7]
 https://dresden.iptv-playoutcenter.de/dresden/dresdenfernsehen.stream_1/playlist.m3u8
+#EXTINF:-1 tvg-id="DW.de@English" tvg-country="DE" group-title="Germany",DW English (1080p)
+https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/master.m3u8
+#EXTINF:-1 tvg-id="Go2Travel.us" tvg-country="US" group-title="USA",Go2Travel (1080p)
+https://go2thls.wns.live/hls/stream.m3u8
+#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" group-title="USA",Hell's Kitchen (1080p)
+https://itv-hellskitchen-rakuten.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="HomesUnderHammer.us@UK" tvg-country="US" group-title="USA",Homes Under Hammer (720p)
+https://all3media-homes-under-the-hammer-1-gb.rakuten.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="hrfernsehen.de" tvg-country="DE" group-title="Germany",hr-fernsehen (1080p)
 https://hrhls.akamaized.net/hls/live/2024525/hrhls/index.m3u8
 #EXTINF:-1 tvg-id="iSTUFF.de" tvg-country="DE" group-title="Germany",iSTUFF (720p) [Not 24/7]
 https://relay2.cdn.fem-net.de/hls/loop/istuff_live/istuff_live-720p.m3u8
+#EXTINF:-1 tvg-id="ITV2.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV2
+https://viamotionhsi.netplus.ch/live/eds/itv2/browser-dash/itv2.mpd
+#EXTINF:-1 tvg-id="ITV3.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV3 (1080p)
+https://viamotionhsi.netplus.ch/live/eds/itv3/browser-HLS8/itv3.m3u8
+#EXTINF:-1 tvg-id="ITV4.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV4 (1080p)
+https://viamotionhsi.netplus.ch/live/eds/itv4/browser-HLS8/itv4.m3u8
 #EXTINF:-1 tvg-id="kabeleins.de@SD" tvg-country="DE" group-title="Germany",kabel eins (576p)
 https://strm.hdtvizlecanli.com/live/kabel1.m3u8
 #EXTINF:-1 tvg-id="KulturMD.de" tvg-country="DE" group-title="Germany",KulturMD (1080p)
 http://58bd5b7a98e04.streamlock.net/medienasa-live/kulturmd_high/playlist.m3u8
 #EXTINF:-1 tvg-id="MunchenTV.de" tvg-country="DE" group-title="Germany",München TV (1080p) [Not 24/7]
 https://muenchentv.iptv-playoutcenter.de/muenchentv/muenchentv.stream_1/playlist.m3u8
+#EXTINF:-1 tvg-id="NBCNewsNOW.us" tvg-country="US" group-title="USA",NBC News NOW (1080p)
+https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
 #EXTINF:-1 tvg-id="NDRFernsehen.de@Hamburg" tvg-country="DE" group-title="Germany",NDR Fernsehen
 https://viamotionhsi.netplus.ch/live/eds/ndr/browser-HLS8/ndr.m3u8
 #EXTINF:-1 tvg-id="NDRFernsehen.de@SchleswigHolstein" tvg-country="DE" group-title="Germany",NDR Schleswig-Holstein (720p)
 https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_sh/master.m3u8
+#EXTINF:-1 tvg-id="Now70s.uk" tvg-country="GB" group-title="United Kingdom",Now 70's
+https://lightning-now70s-samsungnz.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="Now80s.uk" tvg-country="GB" group-title="United Kingdom",Now 80's
+https://lightning-now80s-samsungnz.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="OKMagdeburg.de" tvg-country="DE" group-title="Germany",OK Magdeburg (1080p)
 http://58bd5b7a98e04.streamlock.net/medienasa-live/ok-magdeburg_high/playlist.m3u8
 #EXTINF:-1 tvg-id="RadioWeserTVBremen.de" tvg-country="DE" group-title="Germany",Radio Weser TV Bremen (576p)
@@ -49,6 +97,8 @@ https://rnf.iptv-playoutcenter.de/rnf/rnf.stream_1/playlist.m3u8
 https://strm.hdtvizlecanli.com/live/rtl.m3u8
 #EXTINF:-1 tvg-id="SaarlandFernsehen2.de" tvg-country="DE" group-title="Germany",Saarland Fernsehen 2 (720p) [Not 24/7]
 https://saarland2.iptv-playoutcenter.de/saarland2/saarland2.stream_2/playlist.m3u8
+#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" group-title="USA",Samuel Goldwyn Classics (1080p)
+https://samuelgoldwyn-classics-1-us.roku.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="SchlagerDeluxe.de" tvg-country="DE" group-title="Germany",Schlager Deluxe (1080p)
 https://sdn-global-live-streaming-packager-cache.3qsdn.com/26658/26658_264_live.m3u8
 #EXTINF:-1 tvg-id="Seenluft24.de" tvg-country="DE" group-title="Germany",Seenluft24 (1080p)
@@ -59,81 +109,15 @@ https://srfs.akamaized.net/hls/live/689649/srfsgeo/index.m3u8
 https://tagesschau.akamaized.net/hls/live/2020115/tagesschau/tagesschau_1/master.m3u8
 #EXTINF:-1 tvg-id="teltOwkanal.de" tvg-country="DE" group-title="Germany",teltOwkanal (1080p)
 https://h056.video-stream-hosting.de/easycast8-live/_definst_/mp4:livestreamhd8/playlist.m3u8
-#EXTINF:-1 tvg-id="TV38SudostNiedersachen.de" tvg-country="DE" group-title="Germany",TV38 Südost-Niedersachen (1080p)
-https://h057.video-stream-hosting.de/tv38-live/_definst_/smil:livestream.smil/playlist.m3u8?ref=
+#EXTINF:-1 tvg-id="TheDesignNetwork.us@SD" tvg-country="US" group-title="USA",The Design Network (1080p)
+https://amg00441-amg00441c1-rakuten-us-6050.playouts.now.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="Toronto360TV.ca" tvg-country="CA" group-title="Canada",Toronto 360 TV (720p) [Not 24/7]
+http://cdn3.toronto360.tv:8081/toronto360/hd/playlist.m3u8
 #EXTINF:-1 tvg-id="TVBerlin.de" tvg-country="DE" group-title="Germany",TV Berlin (720p)
 https://live2.telvi.de/hls/tvberlin.m3u8
-#EXTINF:-1 tvg-id="TVMainfranken.de" tvg-country="DE" group-title="Germany",TV Mainfranken (1080p) [Not 24/7]
-https://tvtouringw.iptv-playoutcenter.de/tvtouringw/tvtouringw.stream_1/playlist.m3u8
+#EXTINF:-1 tvg-id="VevoLatino.us@SD" tvg-country="US" group-title="USA",Vevo Latino (1080p)
+https://amg00056-amg00056c13-rakuten-es-3246.playouts.now.amagi.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="WDR1Live.de" tvg-country="DE" group-title="Germany",WDR 1 Live (720p)
 https://wdrfs247.akamaized.net/hls/live/681509/wdr_msl4_fs247/index.m3u8
 #EXTINF:-1 tvg-id="WorldofFreesports.de@SD" tvg-country="DE" group-title="Germany",World of Freesports (1080p)
 https://mainstreammedia-worldoffreesportsintl-rakuten.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="BBCEarth.uk@US" tvg-country="GB" group-title="United Kingdom",BBC Earth (1080p) [Geo-blocked]
-https://amg00793-amg00793c6-firetv-us-4067.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="BBCFour.uk@UKHD" tvg-country="UK" group-title="United Kingdom",BBC Four UK HD
-https://streamer.nexyl.uk/48559ccd-6400-457d-8acc-06b9e24c2ed8.m3u8
-#EXTINF:-1 tvg-id="BBCNews.uk" tvg-country="UK" group-title="United Kingdom",BBC News (1080p)
-https://vs-cmaf-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/iptv_mse_v0_hevc.mpd
-#EXTINF:-1 tvg-id="BBCOne.uk@LondonHD" tvg-country="UK" group-title="United Kingdom",BBC One London HD (1080p)
-https://streamer.nexyl.uk/5c858268-a93b-45f8-9e82-41d66b526d6c.m3u8
-#EXTINF:-1 tvg-id="BBCThree.uk@HD" tvg-country="UK" group-title="United Kingdom",BBC Three HD (720p)
-https://streamer.nexyl.uk/39290a19-b8dd-43ea-b8dc-081c37790f24.m3u8
-#EXTINF:-1 tvg-id="BBCTwo.uk@HD" tvg-country="GB" group-title="United Kingdom",BBC Two HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/bbc2/browser-HLS8/bbc2.m3u8
-#EXTINF:-1 tvg-id="Channel5.uk@HD" tvg-country="GB" group-title="United Kingdom",Channel 5 HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/channel5/browser-HLS8/channel5.m3u8
-#EXTINF:-1 tvg-id="CNBCEurope.uk@HD" tvg-country="GB" group-title="United Kingdom",CNBC Europe HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/cnbc/browser-HLS8/cnbc.m3u8
-#EXTINF:-1 tvg-id="DiscoverFilm.uk" tvg-country="UK" group-title="United Kingdom",DiscoverFilm
-https://discoverfilm-discoverfilm-1-nl.samsung.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="ITV2.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV2
-https://viamotionhsi.netplus.ch/live/eds/itv2/browser-dash/itv2.mpd
-#EXTINF:-1 tvg-id="ITV3.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV3 (1080p)
-https://viamotionhsi.netplus.ch/live/eds/itv3/browser-HLS8/itv3.m3u8
-#EXTINF:-1 tvg-id="ITV4.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV4 (1080p)
-https://viamotionhsi.netplus.ch/live/eds/itv4/browser-HLS8/itv4.m3u8
-#EXTINF:-1 tvg-id="Now70s.uk" tvg-country="UK" group-title="United Kingdom",Now 70's
-https://lightning-now70s-samsungnz.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="Now80s.uk" tvg-country="UK" group-title="United Kingdom",Now 80's
-https://lightning-now80s-samsungnz.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="ABCNewsLive.us" tvg-country="US" group-title="USA",ABC News (720p)
-https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8
-#EXTINF:-1 tvg-id="Ameritrade.us" tvg-country="US" group-title="USA",Ameritrade (1080p) [Not 24/7]
-https://tdameritrade-vizio.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" group-title="USA",Big Ten Network
-https://fl7.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8
-#EXTINF:-1 tvg-id="BloombergTV.us@Plus" tvg-country="US" group-title="USA",Bloomberg TV+ (1080p)
-https://bloomberg.com/media-manifest/streams/phoenix-us.m3u8
-#EXTINF:-1 tvg-id="bonappetit.us" tvg-country="US" group-title="USA",bon appétit (1080p)
-https://bonappetit-samsung.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="CBSNews247.us" tvg-country="US" group-title="USA",CBS News 24/7
-http://cfd-v4-service-channel-stitcher-use1-1.prd.pluto.tv/stitch/hls/channel/62441d6ded1827000763dcda/master.m3u8?appName=web&appVersion=unknown&clientTime=0&deviceDNT=0&deviceId=1b1cee83-4b81-11ef-a8ac-e146e4e7be02&deviceMake=Chrome&deviceModel=web&deviceType=web&deviceVersion=unknown&includeExtendedEvents=false&serverSideAds=false&sid=4bddfb08-ac57-4769-a092-8bfc7ce71e23
-#EXTINF:-1 tvg-id="ClassicCinema.us" tvg-country="US" group-title="USA",Classic Cinema (240p) [Not 24/7]
-https://rpn.bozztv.com/gusa/gusa-classiccinema/index.m3u8
-#EXTINF:-1 tvg-id="Dateline247.us" tvg-country="US" group-title="USA",Dateline 24/7
-https://dz59iptwz5rxs.cloudfront.net/live/master.m3u8
-#EXTINF:-1 tvg-id="FoxBusinessNetwork.us" tvg-country="US" group-title="USA",FOX Business (1080p)
-http://41.205.93.154/FOXBUSINESS/index.m3u8
-#EXTINF:-1 tvg-id="Go2Travel.us" tvg-country="US" group-title="USA",Go2Travel (1080p)
-https://go2thls.wns.live/hls/stream.m3u8
-#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" group-title="USA",Hell's Kitchen (1080p)
-https://itv-hellskitchen-rakuten.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="HomesUnderHammer.us@UK" tvg-country="US" group-title="USA",Homes Under Hammer (720p)
-https://all3media-homes-under-the-hammer-1-gb.rakuten.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="NBCNewsNOW.us" tvg-country="US" group-title="USA",NBC News NOW (1080p)
-https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
-#EXTINF:-1 tvg-id="NBCSportsBoston.us" tvg-country="US" group-title="USA",NBC Sports Boston (1080p) [Not 24/7]
-https://tvpass.org/live/nbc-sports-boston/hd
-#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" group-title="USA",Samuel Goldwyn Classics (1080p)
-https://samuelgoldwyn-classics-1-us.roku.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="SportsGrid.us" tvg-country="US" group-title="USA",SportsGrid (1080p)
-https://sportsgrid-tribal.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="SportsNetNewYork.us" tvg-country="US" group-title="USA",SportsNet New York (540p)
-https://fl7.moveonjoy.com/SNY/index.m3u8
-#EXTINF:-1 tvg-id="TheDesignNetwork.us@SD" tvg-country="US" group-title="USA",The Design Network (1080p)
-https://amg00441-amg00441c1-rakuten-us-6050.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="VevoLatino.us@SD" tvg-country="US" group-title="USA",Vevo Latino (1080p)
-https://amg00056-amg00056c13-rakuten-es-3246.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="WomensSportsNetwork.us" tvg-country="US" group-title="USA",Women's Sports Network (720p)
-https://livetv-fa.tubi.video/fast-studios-womens-sports/playlist.m3u8
