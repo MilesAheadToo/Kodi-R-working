@@ -36,20 +36,26 @@ fi
 mkdir -p "${BIN_DIR}" "${M3U_DIR}" "${EPG_DIR}" "${LOG_DIR}"
 
 LOG_FILE="${LOG_DIR}/monthly_update_m3u.log"
+SOURCE_REPORT="${LOG_DIR}/pruned_sources.csv"
 echo "[$(date -Iseconds)] Start monthly_update_m3u" | tee -a "${LOG_FILE}"
 
 download_sources() {
   local urls="$1" prefix="$2" label="$3"
   rm -f "${M3U_DIR}/${prefix}"_*.m3u
   local i=0
-  echo "${urls}" | tr '\n' ' ' | tr -s ' ' | while read -r url; do
-    if [ -n "${url}" ]; then
-      i=$((i+1))
-      local out="${M3U_DIR}/${prefix}_${i}.m3u"
-      echo "Downloading ${label} ${url} -> ${out}" | tee -a "${LOG_FILE}"
-      curl -fsSL "${url}" -o "${out}"
-    fi
-  done
+  while IFS= read -r url; do
+    # trim leading/trailing whitespace
+    url="${url#"${url%%[![:space:]]*}"}"
+    url="${url%"${url##*[![:space:]]}"}"
+    [ -n "${url}" ] || continue
+    i=$((i+1))
+    local out="${M3U_DIR}/${prefix}_${i}.m3u"
+    echo "Downloading ${label} ${url} -> ${out}" | tee -a "${LOG_FILE}"
+    curl -fsSL "${url}" -o "${out}"
+  done <<< "$(printf '%s' "${urls}" | tr '\r' '\n')"
+  if [ "${i}" -eq 0 ]; then
+    echo "[warn] No ${label} URLs were downloaded (check ${label} list)" | tee -a "${LOG_FILE}"
+  fi
 }
 
 build_master_from_prefix() {
@@ -82,7 +88,8 @@ echo "Built master playlist: ${MASTER}" | tee -a "${LOG_FILE}"
 
 # Prune using favourites
 echo "Pruning with ${BIN_DIR}/prune_m3u.py" | tee -a "${LOG_FILE}"
-python3 "${BIN_DIR}/prune_m3u.py" --use-env | tee -a "${LOG_FILE}"
+python3 "${BIN_DIR}/prune_m3u.py" --use-env --source-report "${SOURCE_REPORT}" | tee -a "${LOG_FILE}"
+echo "Channel source CSV: ${SOURCE_REPORT}" | tee -a "${LOG_FILE}"
 
 # Deploy to Samba-mounted path
 if [ -n "${KODI_SMB_PATH:-}" ]; then
