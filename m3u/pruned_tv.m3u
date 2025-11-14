@@ -1,123 +1,129 @@
 #EXTM3U
-#EXTINF:-1 tvg-id="3sat.de@HD" tvg-country="DE" group-title="Germany",3sat HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/3sathd/browser-HLS8/3sathd.m3u8
-#EXTINF:-1 tvg-id="ABCNewsLive.us" tvg-country="US" group-title="USA",ABC News (720p)
-https://content.uplynk.com/channel/3324f2467c414329b3b0cc5cd987b6be.m3u8
-#EXTINF:-1 tvg-id="Ameritrade.us" tvg-country="US" group-title="USA",Ameritrade (1080p) [Not 24/7]
-https://tdameritrade-vizio.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="BBCFour.uk@UKHD" tvg-country="GB" group-title="United Kingdom",BBC Four UK HD
-https://streamer.nexyl.uk/48559ccd-6400-457d-8acc-06b9e24c2ed8.m3u8
-#EXTINF:-1 tvg-id="BBCNews.uk" tvg-country="GB" group-title="United Kingdom",BBC News (1080p)
-https://vs-cmaf-push-ww-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_news_channel_hd/iptv_mse_v0_hevc.mpd
-#EXTINF:-1 tvg-id="BBCOne.uk" tvg-country="GB" group-title="United Kingdom",BBC One (720p)
-https://november.queazified.co.uk/ee971134-115e-4418-8d1d-69dff7d4c6eb.m3u8
-#EXTINF:-1 tvg-id="BBCOne.uk@LondonHD" tvg-country="GB" group-title="United Kingdom",BBC One London HD (1080p)
-https://streamer.nexyl.uk/5c858268-a93b-45f8-9e82-41d66b526d6c.m3u8
-#EXTINF:-1 tvg-id="BBCThree.uk@HD" tvg-country="GB" group-title="United Kingdom",BBC Three HD (720p)
-https://streamer.nexyl.uk/39290a19-b8dd-43ea-b8dc-081c37790f24.m3u8
-#EXTINF:-1 tvg-id="BBCTwo.uk@HD" tvg-country="GB" group-title="United Kingdom",BBC Two HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/bbc2/browser-HLS8/bbc2.m3u8
-#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" group-title="USA",Big Ten Network
-https://fl7.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8
-#EXTINF:-1 tvg-id="BloombergTV.us@Plus" tvg-country="US" group-title="USA",Bloomberg TV+ (1080p)
-https://bloomberg.com/media-manifest/streams/phoenix-us.m3u8
-#EXTINF:-1 tvg-id="bonappetit.us" tvg-country="US" group-title="USA",bon appétit (1080p)
-https://bonappetit-samsung.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="BRFernsehen.de@Nord" tvg-country="DE" group-title="Germany",BR Fernsehen Nord (720p)
+#EXTINF:-1 tvg-id="3sat.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/3sat_2019.svg/640px-3sat_2019.svg.png" tvg-name="3sat Ⓖ" group-title="Germany",3sat Ⓖ
+https://zdf-hls-18.akamaized.net/hls/live/2016501/dach/veryhigh/master.m3u8
+#EXTINF:-1 tvg-id="AccuWeatherNOW.us" tvg-country="US" tvg-logo="https://i.imgur.com/M8wbVYK.png" tvg-name="AccuWeather NOW" group-title="USA",AccuWeather NOW
+https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00684-accuweather-accuweather-plex/playlist.m3u8
+#EXTINF:-1 tvg-id="ARDalpha.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/ARD_alpha.svg/640px-ARD_alpha.svg.png" tvg-name="ARD Alpha Ⓖ" group-title="Germany",ARD Alpha Ⓖ
+https://mcdn.br.de/br/fs/ard_alpha/hls/de/master.m3u8
+#EXTINF:-1 tvg-id="BBCFour.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/BBC_Four_logo_2021.svg/640px-BBC_Four_logo_2021.svg.png" tvg-name="BBC Four Ⓖ" group-title="United Kingdom",BBC Four Ⓖ
+https://vs-hls-pushb-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_four_hd/iptv_hd_abr_v1.m3u8
+#EXTINF:-1 tvg-id="BBCOne.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/BBC_One_logo_2021.svg/640px-BBC_One_logo_2021.svg.png" tvg-name="BBC One Ⓖ" group-title="United Kingdom",BBC One Ⓖ
+https://vs-hls-pushb-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_one_yorks/iptv_hd_abr_v1.m3u8
+#EXTINF:-1 tvg-id="BBCRadio1.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd1-epg.png" tvg-name="BBC Radio 1" group-title="United Kingdom",BBC Radio 1
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_one/bbc_radio_one.isml/bbc_radio_one-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio1Xtra.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd1x-epg.png" tvg-name="BBC Radio 1Xtra" group-title="United Kingdom",BBC Radio 1Xtra
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_1xtra/bbc_1xtra.isml/bbc_1xtra-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio2.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd2-epg.png" tvg-name="BBC Radio 2" group-title="United Kingdom",BBC Radio 2
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_two/bbc_radio_two.isml/bbc_radio_two-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio3.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd3-epg.png" tvg-name="BBC Radio 3" group-title="United Kingdom",BBC Radio 3
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_three/bbc_radio_three.isml/bbc_radio_three-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio4FM.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd4-epg.png" tvg-name="BBC Radio 4" group-title="United Kingdom",BBC Radio 4
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_fourfm/bbc_radio_fourfm.isml/bbc_radio_fourfm-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio4Extra.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd4x-epg.png" tvg-name="BBC Radio 4 Extra" group-title="United Kingdom",BBC Radio 4 Extra
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_four_extra/bbc_radio_four_extra.isml/bbc_radio_four_extra-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio5Live.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd5l-epg.png" tvg-name="BBC Radio 5 Live" group-title="United Kingdom",BBC Radio 5 Live
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_radio_five_live/bbc_radio_five_live.isml/bbc_radio_five_live-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio5SportsExtra.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd5s-epg.png" tvg-name="BBC Radio 5 Sports Extra" group-title="United Kingdom",BBC Radio 5 Sports Extra
+http://as-hls-uk-live.akamaized.net/pool_904/live/uk/bbc_radio_five_live_sports_extra/bbc_radio_five_live_sports_extra.isml/bbc_radio_five_live_sports_extra-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCRadio6Music.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcrd6-epg.png" tvg-name="BBC Radio 6 Music" group-title="United Kingdom",BBC Radio 6 Music
+http://as-hls-ww-live.akamaized.net/pool_904/live/ww/bbc_6music/bbc_6music.isml/bbc_6music-audio%3d96000.norewind.m3u8
+#EXTINF:-1 tvg-id="BBCThree.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/BBC_Three_2022.svg/640px-BBC_Three_2022.svg.png" tvg-name="BBC Three Ⓖ" group-title="United Kingdom",BBC Three Ⓖ
+https://vs-hls-pushb-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_three_hd/iptv_hd_abr_v1.m3u8
+#EXTINF:-1 tvg-id="BBCTwo.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/BBC_Two_logo_2021.svg/640px-BBC_Two_logo_2021.svg.png" tvg-name="BBC Two Ⓖ" group-title="United Kingdom",BBC Two Ⓖ
+https://vs-hls-push-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_two_hd/iptv_hd_abr_v1.m3u8
+#EXTINF:-1 tvg-country="UK" tvg-logo="https://i.imgur.com/joD38lo.png" tvg-name="BBC World News Ⓢ" group-title="United Kingdom",BBC World News Ⓢ
+http://ott-cdn.ucom.am/s24/index.m3u8
+#EXTINF:-1 tvg-id="BBCRadioWorldService.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcws-epg.png" tvg-name="BBC World Service" group-title="United Kingdom",BBC World Service
+http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8
+#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Big_Ten_Network_Logo.svg/512px-Big_Ten_Network_Logo.svg.png" group-title="USA",Big Ten Network
+https://fl1.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8
+#EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-country="UK" tvg-logo="https://d2n0069hmnqmmx.cloudfront.net/epgdata/1.0/newchanlogos/512/512/skychb1074.png" tvg-name="Bloomberg TV" group-title="United Kingdom",Bloomberg TV
+https://bloomberg.com/media-manifest/streams/eu.m3u8
+#EXTINF:-1 tvg-id="BRFernsehenNord.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9b/Logo_BR_Fernsehen_2021.svg/768px-Logo_BR_Fernsehen_2021.svg.png" tvg-name="BR Nord Ⓖ" group-title="Germany",BR Nord Ⓖ
 https://mcdn.br.de/br/fs/bfs_nord/hls/de/master.m3u8
-#EXTINF:-1 tvg-id="CanadaOne.ca" tvg-country="CA" group-title="Canada",Canada One (720p) [Not 24/7]
-http://cdn8.live247stream.com/canadaone/tv/playlist.m3u8
-#EXTINF:-1 tvg-id="CBLTDT.ca" tvg-country="CA" group-title="Canada",CBC Toronto (CBLT-DT) (720p) [Geo-blocked]
-https://cbcrclinear-tor.akamaized.net/hls/live/2042760/CBCRCLINEAR_TOR_6/master5.m3u8
-#EXTINF:-1 tvg-id="Channel5.uk@HD" tvg-country="GB" group-title="United Kingdom",Channel 5 HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/channel5/browser-HLS8/channel5.m3u8
-#EXTINF:-1 tvg-id="SachsenFernsehenChemnitz.de" tvg-country="DE" group-title="Germany",Chemnitz Fernsehen (1080p)
+#EXTINF:-1 tvg-id="CBCNewsNetwork.ca" tvg-country="CA" tvg-logo="https://i.imgur.com/1EqQGKS.png" tvg-name="CBC News" group-title="Canada",CBC News
+https://cbcnewshd-f.akamaihd.net/i/cbcnews_1@8981/index_2500_av-p.m3u8
+#EXTINF:-1 tvg-id="CBCTDT.ca" tvg-country="CA" tvg-logo="https://i.imgur.com/H5yEbxf.png" tvg-name="CBC Toronto" group-title="Canada",CBC Toronto
+https://bozztv.com/teleyupp1/teleup-ydcl2V1MVC/playlist.m3u8
+#EXTINF:-1 tvg-id="CGTNDocumentary.cn" tvg-country="US" tvg-logo="https://i.imgur.com/JHv0WxM.png" tvg-name="CGTN Documentary English Ⓢ" group-title="USA",CGTN Documentary English Ⓢ
+https://news.cgtn.com/resource/live/document/cgtn-doc.m3u8
+#EXTINF:-1 tvg-id="Channel4.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Channel_4_%28On_Demand%29_2023.svg/569px-Channel_4_%28On_Demand%29_2023.svg.png" tvg-name="Channel 4 Ⓢ" group-title="United Kingdom",Channel 4 Ⓢ
+http://176.65.146.105:8011/play/a07w/index.m3u8
+#EXTINF:-1 tvg-id="SachsenFernsehenChemnitz.de" tvg-country="DE" tvg-logo="https://i.imgur.com/4SEAbVf.png" group-title="Germany",Chemnitz Fernsehen (1080p)
 https://chemnitz.iptv-playoutcenter.de/chemnitz/chemnitzfernsehen.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="CityNewsToronto.ca" tvg-country="CA" group-title="Canada",CityNews Toronto (720p)
-https://citynewsregional.akamaized.net/hls/live/1024052/Regional_Live_7/master.m3u8
-#EXTINF:-1 tvg-id="CNBCEurope.uk@HD" tvg-country="GB" group-title="United Kingdom",CNBC Europe HD (1080p)
-https://viamotionhsi.netplus.ch/live/eds/cnbc/browser-HLS8/cnbc.m3u8
-#EXTINF:-1 tvg-id="DasErste.de@HD" tvg-country="DE" group-title="Germany",Das Erste HD (1080p)
-https://daserste-live.ard-mcdn.de/daserste/live/hls/int/master.m3u8
-#EXTINF:-1 tvg-id="Dateline247.us" tvg-country="US" group-title="USA",Dateline 24/7
-https://dz59iptwz5rxs.cloudfront.net/live/master.m3u8
-#EXTINF:-1 tvg-id="DiscoverFilm.uk" tvg-country="GB" group-title="United Kingdom",DiscoverFilm
-https://discoverfilm-discoverfilm-1-nl.samsung.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="SachsenFernsehenDresden.de" tvg-country="DE" group-title="Germany",Dresden Fernsehen (1080p) [Not 24/7]
+#EXTINF:-1 tvg-id="CNBC.us" tvg-country="US" tvg-logo="https://i.imgur.com/BTasyOy.png" tvg-name="CNBC Ⓨ" group-title="USA",CNBC Ⓨ
+https://www.youtube.com/c/CNBC/live
+#EXTINF:-1 tvg-id="CNN.us" tvg-country="US" tvg-logo="https://i.imgur.com/vyrc1I1.png" tvg-name="CNN" group-title="USA",CNN
+https://tve-live-lln.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8
+#EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/qOutOWN.png" tvg-name="CTV Toronto" group-title="Canada",CTV Toronto
+https://bozztv.com/teleyupp1/teleup-zxsJFt6VvY/playlist.m3u8
+#EXTINF:-1 tvg-id="DasErste.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Das_Erste_2014.svg/640px-Das_Erste_2014.svg.png" tvg-name="Das Erste Ⓖ" group-title="Germany",Das Erste Ⓖ
+https://daserste-live.ard-mcdn.de/daserste/live/hls/de/master.m3u8
+#EXTINF:-1 tvg-id="SachsenFernsehenDresden.de" tvg-country="DE" tvg-logo="https://i.imgur.com/rnvprGj.png" group-title="Germany",Dresden Fernsehen (1080p) [Not 24/7]
 https://dresden.iptv-playoutcenter.de/dresden/dresdenfernsehen.stream_1/playlist.m3u8
 #EXTINF:-1 tvg-id="DW.de@English" tvg-country="DE" group-title="Germany",DW English (1080p)
 https://dwamdstream102.akamaized.net/hls/live/2015525/dwstream102/master.m3u8
-#EXTINF:-1 tvg-id="Go2Travel.us" tvg-country="US" group-title="USA",Go2Travel (1080p)
-https://go2thls.wns.live/hls/stream.m3u8
-#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" group-title="USA",Hell's Kitchen (1080p)
-https://itv-hellskitchen-rakuten.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="HomesUnderHammer.us@UK" tvg-country="US" group-title="USA",Homes Under Hammer (720p)
-https://all3media-homes-under-the-hammer-1-gb.rakuten.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="hrfernsehen.de" tvg-country="DE" group-title="Germany",hr-fernsehen (1080p)
+#EXTINF:-1 tvg-id="EuronewsGerman.fr" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Euronews_2022.svg/640px-Euronews_2022.svg.png" tvg-name="Euronews Deutsch Ⓨ" group-title="Germany",Euronews Deutsch Ⓨ
+https://www.youtube.com/euronewsde/live
+#EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/IpfmG93.png" tvg-name="Global News" group-title="Canada",Global News
+https://i.mjh.nz/PlutoTV/62cbef9ebb857100072fc187-alt.m3u8
+#EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/2CxLO4H.png" tvg-name="Global Toronto" group-title="Canada",Global Toronto
+https://d128o1k7zh3htz.cloudfront.net/out/v1/74a58360a3734f97b74ba439bc678044/index.m3u8
+#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" tvg-logo="https://i.imgur.com/P9eT0O9.png" group-title="USA",Hell's Kitchen (1080p)
+https://amg00654-itv-amg00654c1-samsung-au-1072.playouts.now.amagi.tv/itv-hellskitchen-samsung/playlist.m3u8
+#EXTINF:-1 tvg-id="hrfernsehen.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/HR-Fernsehen_Logo_2023.svg/512px-HR-Fernsehen_Logo_2023.svg.png" group-title="Germany",hr-fernsehen (1080p)
 https://hrhls.akamaized.net/hls/live/2024525/hrhls/index.m3u8
-#EXTINF:-1 tvg-id="iSTUFF.de" tvg-country="DE" group-title="Germany",iSTUFF (720p) [Not 24/7]
-https://relay2.cdn.fem-net.de/hls/loop/istuff_live/istuff_live-720p.m3u8
-#EXTINF:-1 tvg-id="ITV2.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV2
+#EXTINF:-1 tvg-id="ITV2.uk@SD" tvg-country="UK" tvg-logo="https://i.imgur.com/2BpUK0W.png" group-title="United Kingdom",ITV2
 https://viamotionhsi.netplus.ch/live/eds/itv2/browser-dash/itv2.mpd
-#EXTINF:-1 tvg-id="ITV3.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV3 (1080p)
+#EXTINF:-1 tvg-id="ITV3.uk@SD" tvg-country="UK" tvg-logo="https://i.imgur.com/JuyM2z5.png" group-title="United Kingdom",ITV3 (1080p)
 https://viamotionhsi.netplus.ch/live/eds/itv3/browser-HLS8/itv3.m3u8
-#EXTINF:-1 tvg-id="ITV4.uk@SD" tvg-country="GB" group-title="United Kingdom",ITV4 (1080p)
+#EXTINF:-1 tvg-id="ITV4.uk@SD" tvg-country="UK" tvg-logo="https://i.imgur.com/DYI4IA2.png" group-title="United Kingdom",ITV4 (1080p)
 https://viamotionhsi.netplus.ch/live/eds/itv4/browser-HLS8/itv4.m3u8
-#EXTINF:-1 tvg-id="kabeleins.de@SD" tvg-country="DE" group-title="Germany",kabel eins (576p)
+#EXTINF:-1 tvg-id="kabeleins.de@SD" tvg-country="DE" tvg-logo="https://i.imgur.com/6pulSHZ.png" group-title="Germany",kabel eins (576p)
 https://strm.hdtvizlecanli.com/live/kabel1.m3u8
-#EXTINF:-1 tvg-id="KulturMD.de" tvg-country="DE" group-title="Germany",KulturMD (1080p)
+#EXTINF:-1 tvg-id="KulturMD.de" tvg-country="DE" tvg-logo="https://i.imgur.com/io7cJ1Z.png" group-title="Germany",KulturMD (1080p)
 http://58bd5b7a98e04.streamlock.net/medienasa-live/kulturmd_high/playlist.m3u8
-#EXTINF:-1 tvg-id="MunchenTV.de" tvg-country="DE" group-title="Germany",München TV (1080p) [Not 24/7]
+#EXTINF:-1 tvg-id="MunchenTV.de" tvg-country="DE" tvg-logo="https://i.imgur.com/lt7xNWW.png" group-title="Germany",München TV (1080p) [Not 24/7]
 https://muenchentv.iptv-playoutcenter.de/muenchentv/muenchentv.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="NBCNewsNOW.us" tvg-country="US" group-title="USA",NBC News NOW (1080p)
-https://livehub-voidnet.onrender.com/cluster/streamcore/us/NBC_REDIS.m3u8
-#EXTINF:-1 tvg-id="NDRFernsehen.de@Hamburg" tvg-country="DE" group-title="Germany",NDR Fernsehen
-https://viamotionhsi.netplus.ch/live/eds/ndr/browser-HLS8/ndr.m3u8
-#EXTINF:-1 tvg-id="NDRFernsehen.de@SchleswigHolstein" tvg-country="DE" group-title="Germany",NDR Schleswig-Holstein (720p)
+#EXTINF:-1 tvg-id="NBCNewsNow.us" tvg-country="US" tvg-logo="https://i.imgur.com/v48mMRT.png" tvg-name="NBC News" group-title="USA",NBC News
+http://dai2.xumo.com/xumocdn/p=roku/amagi_hls_data_xumo1212A-xumo-nbcnewsnow/CDN/playlist.m3u8
+#EXTINF:-1 tvg-id="NDRFernsehenHamburg.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Logo_NDR_Fernsehen_2017.svg/578px-Logo_NDR_Fernsehen_2017.svg.png" tvg-name="NDR Hamburg Ⓖ" group-title="Germany",NDR Hamburg Ⓖ
+https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_hh/master.m3u8
+#EXTINF:-1 tvg-id="NDRFernsehenInternational.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Logo_NDR_Fernsehen_2017.svg/578px-Logo_NDR_Fernsehen_2017.svg.png" tvg-name="NDR International" group-title="Germany",NDR International
+https://ndrint.akamaized.net/hls/live/2020766/ndr_int/index.m3u8
+#EXTINF:-1 tvg-id="NDRFernsehenSchleswigHolstein.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Logo_NDR_Fernsehen_2017.svg/578px-Logo_NDR_Fernsehen_2017.svg.png" tvg-name="NDR Schleswig-Holstein Ⓖ" group-title="Germany",NDR Schleswig-Holstein Ⓖ
 https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_sh/master.m3u8
-#EXTINF:-1 tvg-id="Now70s.uk" tvg-country="GB" group-title="United Kingdom",Now 70's
-https://lightning-now70s-samsungnz.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="Now80s.uk" tvg-country="GB" group-title="United Kingdom",Now 80's
-https://lightning-now80s-samsungnz.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="OKMagdeburg.de" tvg-country="DE" group-title="Germany",OK Magdeburg (1080p)
+#EXTINF:-1 tvg-id="OKMagdeburg.de" tvg-country="DE" tvg-logo="https://i.imgur.com/zftoymR.png" group-title="Germany",OK Magdeburg (1080p)
 http://58bd5b7a98e04.streamlock.net/medienasa-live/ok-magdeburg_high/playlist.m3u8
+#EXTINF:-1 tvg-id="PBSAmerica.uk" tvg-country="UK" tvg-logo="https://i.imgur.com/J4zE5z9.jpg" tvg-name="PBS America" group-title="United Kingdom",PBS America
+https://pbs-samsunguk.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="RadioBremenFernsehen.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Logo_Radio_Bremen.svg/640px-Logo_Radio_Bremen.svg.png" tvg-name="Radio Bremen Ⓖ" group-title="Germany",Radio Bremen Ⓖ
+https://rbhlslive.akamaized.net/hls/live/2020435/rbfs/master.m3u8
 #EXTINF:-1 tvg-id="RadioWeserTVBremen.de" tvg-country="DE" group-title="Germany",Radio Weser TV Bremen (576p)
 https://5857499ee635b.streamlock.net/radiowesertv-live/_definst_/mp4:livestreamTV/playlist.m3u8
-#EXTINF:-1 tvg-id="RAN1.de" tvg-country="DE" group-title="Germany",RAN1 (1080p)
-http://58bd5b7a98e04.streamlock.net/medienasa-live/ran1_high/playlist.m3u8
-#EXTINF:-1 tvg-id="RBW.de" tvg-country="DE" group-title="Germany",RBW (1080p)
-http://58bd5b7a98e04.streamlock.net/medienasa-live/rbw_high/playlist.m3u8
-#EXTINF:-1 tvg-id="RegioTVStuttgart.de" tvg-country="DE" group-title="Germany",Regio TV Stuttgart (1080p)
-https://regiotv-s.iptv-playoutcenter.de/regiotv-s/regiotv-s.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="RFH.de" tvg-country="DE" group-title="Germany",RFH (1080p)
-http://58bd5b7a98e04.streamlock.net/medienasa-live/RFH_high/playlist.m3u8
-#EXTINF:-1 tvg-id="RNF.de" tvg-country="DE" group-title="Germany",RNF (1080p)
-https://rnf.iptv-playoutcenter.de/rnf/rnf.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="RTL.de@HD" tvg-country="DE" group-title="Germany",RTL HD
-https://strm.hdtvizlecanli.com/live/rtl.m3u8
-#EXTINF:-1 tvg-id="SaarlandFernsehen2.de" tvg-country="DE" group-title="Germany",Saarland Fernsehen 2 (720p) [Not 24/7]
+#EXTINF:-1 tvg-id="SaarlandFernsehen2.de" tvg-country="DE" tvg-logo="https://i.imgur.com/Yv7j4ia.png" group-title="Germany",Saarland Fernsehen 2 (720p) [Not 24/7]
 https://saarland2.iptv-playoutcenter.de/saarland2/saarland2.stream_2/playlist.m3u8
-#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" group-title="USA",Samuel Goldwyn Classics (1080p)
+#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" tvg-logo="https://i.imgur.com/XC30JAF.png" group-title="USA",Samuel Goldwyn Classics (1080p)
 https://samuelgoldwyn-classics-1-us.roku.wurl.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="SchlagerDeluxe.de" tvg-country="DE" group-title="Germany",Schlager Deluxe (1080p)
-https://sdn-global-live-streaming-packager-cache.3qsdn.com/26658/26658_264_live.m3u8
-#EXTINF:-1 tvg-id="Seenluft24.de" tvg-country="DE" group-title="Germany",Seenluft24 (1080p)
-https://h056.video-stream-hosting.de/easycast7-live/_definst_/mp4:livestreamhd20/playlist.m3u8?ref=
-#EXTINF:-1 tvg-id="SRFernsehen.de" tvg-country="DE" group-title="Germany",SR Fernsehen (720p)
-https://srfs.akamaized.net/hls/live/689649/srfsgeo/index.m3u8
-#EXTINF:-1 tvg-id="tagesschau24.de" tvg-country="DE" group-title="Germany",Tagesschau 24 (720p)
+#EXTINF:-1 tvg-id="SkyNews.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/5/57/Sky_News_logo.svg/1024px-Sky_News_logo.svg.png" tvg-name="Sky News" group-title="United Kingdom",Sky News
+https://linear021-gb-hls1-prd-ak.cdn.skycdp.com/Content/HLS_001_hd/Live/channel(skynews)/index_mob.m3u8
+#EXTINF:-1 tvg-id="SkyNewsWeather.uk" tvg-country="UK" tvg-logo="https://pbs.twimg.com/profile_images/1604994875459518464/lGt2wEqM_400x400.jpg" tvg-name="Sky News Weather Ⓖ" group-title="United Kingdom",Sky News Weather Ⓖ
+https://distro001-gb-hls1-prd.delivery.skycdp.com/easel_cdn/ngrp:weather_loop.stream_all/playlist.m3u8
+#EXTINF:-1 tvg-id="SportyStuffTV.uk" tvg-country="UK" tvg-logo="https://i.imgur.com/uIgxHSY.png" tvg-name="SportyStuff TV" group-title="United Kingdom",SportyStuff TV
+https://cdn.rtmp1.vodhosting.com/hls/SportyStuffTV.m3u8
+#EXTINF:-1 tvg-id="SWRFernsehenBadenWurttemberg.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/SWR_Logo_2023.svg/640px-SWR_Logo_2023.svg.png" tvg-name="SWR Baden-Württemberg Ⓖ" group-title="Germany",SWR Baden-Württemberg Ⓖ
+https://swrbwd-hls.akamaized.net/hls/live/2018672/swrbwd/master.m3u8
+#EXTINF:-1 tvg-id="tagesschau24.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Tagesschau24-2012.svg/640px-Tagesschau24-2012.svg.png" tvg-name="Tagesschau24" group-title="Germany",Tagesschau24
 https://tagesschau.akamaized.net/hls/live/2020115/tagesschau/tagesschau_1/master.m3u8
-#EXTINF:-1 tvg-id="teltOwkanal.de" tvg-country="DE" group-title="Germany",teltOwkanal (1080p)
-https://h056.video-stream-hosting.de/easycast8-live/_definst_/mp4:livestreamhd8/playlist.m3u8
-#EXTINF:-1 tvg-id="TheDesignNetwork.us@SD" tvg-country="US" group-title="USA",The Design Network (1080p)
-https://amg00441-amg00441c1-rakuten-us-6050.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="Toronto360TV.ca" tvg-country="CA" group-title="Canada",Toronto 360 TV (720p) [Not 24/7]
-http://cdn3.toronto360.tv:8081/toronto360/hd/playlist.m3u8
-#EXTINF:-1 tvg-id="TVBerlin.de" tvg-country="DE" group-title="Germany",TV Berlin (720p)
+#EXTINF:-1 tvg-id="TVBerlin.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Tv.berlin_2009.svg/512px-Tv.berlin_2009.svg.png" group-title="Germany",TV Berlin (720p)
 https://live2.telvi.de/hls/tvberlin.m3u8
-#EXTINF:-1 tvg-id="VevoLatino.us@SD" tvg-country="US" group-title="USA",Vevo Latino (1080p)
-https://amg00056-amg00056c13-rakuten-es-3246.playouts.now.amagi.tv/playlist.m3u8
-#EXTINF:-1 tvg-id="WDR1Live.de" tvg-country="DE" group-title="Germany",WDR 1 Live (720p)
+#EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/PkBPPcL.png" tvg-name="TVO" group-title="Canada",TVO
+https://bozztv.com/teleyupp1/teleup-OMZsmYVUMp/playlist.m3u8
+#EXTINF:-1 tvg-id="WDR.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Wdr_fernsehen_logo_2016.svg/640px-Wdr_fernsehen_logo_2016.svg.png" tvg-name="WDR Ⓖ" group-title="Germany",WDR Ⓖ
 https://wdrfs247.akamaized.net/hls/live/681509/wdr_msl4_fs247/index.m3u8
-#EXTINF:-1 tvg-id="WorldofFreesports.de@SD" tvg-country="DE" group-title="Germany",World of Freesports (1080p)
+#EXTINF:-1 tvg-id="Welt.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Welt_TV_Logo_2016.svg/640px-Welt_TV_Logo_2016.svg.png" tvg-name="Welt" group-title="Germany",Welt
+https://w-live2weltcms.akamaized.net/hls/live/2041019/Welt-LivePGM/index.m3u8
+#EXTINF:-1 tvg-id="WorldofFreesports.de@SD" tvg-country="DE" tvg-logo="https://i.imgur.com/lta5Mog.png" group-title="Germany",World of Freesports (1080p)
 https://mainstreammedia-worldoffreesportsintl-rakuten.amagi.tv/playlist.m3u8
+#EXTINF:-1 tvg-id="ZDF.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/ZDF_logo.svg/640px-ZDF_logo.svg.png" tvg-name="ZDF Ⓖ" group-title="Germany",ZDF Ⓖ
+http://zdf-hls-15.akamaized.net/hls/live/2016498/de/veryhigh/master.m3u8

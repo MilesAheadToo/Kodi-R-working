@@ -313,6 +313,24 @@ def _collect_master_entries(lookup: Optional[Dict[str, Dict[str, MasterEntry]]])
             entries.append(entry)
     return entries
 
+def _write_favourites(tv_fav_path: str, favs: List[Dict[str, str]], headers: List[str],
+                      mirror_paths: Optional[List[str]] = None) -> None:
+    with io.open(tv_fav_path, "w", encoding="utf-8", newline="") as f:
+        writer = csv.DictWriter(f, fieldnames=headers)
+        writer.writeheader()
+        writer.writerows(favs)
+    for mirror in mirror_paths or []:
+        try:
+            if mirror == tv_fav_path:
+                continue
+            os.makedirs(os.path.dirname(mirror), exist_ok=True)
+            with io.open(mirror, "w", encoding="utf-8", newline="") as mf:
+                writer = csv.DictWriter(mf, fieldnames=headers)
+                writer.writeheader()
+                writer.writerows(favs)
+        except OSError as exc:
+            print(f"[warn] Failed to mirror tv_favourites to {mirror}: {exc}")
+
 def _ensure_header(hdr: Dict[str, str], headers: List[str], column: str) -> str:
     key = column.strip()
     low = key.lower()
@@ -325,15 +343,68 @@ def _set_field(row: Dict[str, str], hdr: Dict[str, str], headers: List[str], col
     actual = _ensure_header(hdr, headers, column)
     row[actual] = value
 
+def _apply_source_label(row: Dict[str, str], hdr: Dict[str, str], headers: List[str], label: str) -> None:
+    if not label:
+        return
+    _set_field(row, hdr, headers, "m3u_source", label)
+    _set_field(row, hdr, headers, "Source", label)
+
+def _preferred_source_kinds(row: Dict[str, str], hdr: Dict[str, str]) -> List[str]:
+    raw = (_get(row, hdr, "Source", "m3u_source") or "").strip().lower()
+    if not raw:
+        return []
+    mapping = {
+        "free-tv": "free_tv",
+        "free_tv": "free_tv",
+        "freetv": "free_tv",
+        "iptv-org": "iptv_org",
+        "iptv_org": "iptv_org",
+        "iptvorg": "iptv_org",
+    }
+    kind = mapping.get(raw)
+    return [kind] if kind else []
+
+def _reset_new_flags(tv_fav_path: str,
+                     favs: List[Dict[str, str]],
+                     hdr: Dict[str, str],
+                     headers: List[str],
+                     mirror_paths: Optional[List[str]] = None) -> bool:
+    col = _ensure_header(hdr, headers, "New")
+    m3u_col = _ensure_header(hdr, headers, "m3u_source")
+    source_col = _ensure_header(hdr, headers, "Source")
+    changed = False
+    for row in favs:
+        val = (row.get(col) or "").strip()
+        if val != "0":
+            row[col] = "0"
+            changed = True
+        m3u_val = (row.get(m3u_col) or "").strip()
+        source_val = (row.get(source_col) or "").strip()
+        if source_val and not m3u_val:
+            row[m3u_col] = source_val
+            changed = True
+        elif m3u_val and not source_val:
+            row[source_col] = m3u_val
+            changed = True
+        elif source_val and m3u_val and source_val != m3u_val:
+            row[m3u_col] = source_val
+            changed = True
+    if changed:
+        _write_favourites(tv_fav_path, favs, headers, mirror_paths)
+    return changed
+
 def _sync_favourites_with_master(tv_fav_path: str,
                                  favs: List[Dict[str, str]],
                                  hdr: Dict[str, str],
                                  headers: List[str],
                                  master_entries: List[MasterEntry],
-                                 mirror_paths: Optional[List[str]] = None) -> int:
+                                 mirror_paths: Optional[List[str]] = None,
+                                 master_lookup: Optional[Dict[str, Dict[str, MasterEntry]]] = None) -> int:
     if not master_entries:
         return 0
     existing_keys = set()
+    updated_existing = 0
+    backfilled_countries = 0
     for row in favs:
         name = _get(row, hdr, "ChannelName", "Name", "Channel")
         tvg = _get(row, hdr, "TvgId", "tvg-id")
@@ -341,6 +412,41 @@ def _sync_favourites_with_master(tv_fav_path: str,
         key = _channel_key(name, tvg, url).strip().lower()
         if key:
             existing_keys.add(key)
+        group_name = _get(row, hdr, "GroupTitle", "Group", "Category")
+        country = _get(row, hdr, "Country", "tvg-country")
+        preferred_kinds = _preferred_source_kinds(row, hdr)
+        source_hint = (_get(row, hdr, "m3u_source", "Source") or "").lower()
+        country_source_hint = (_get(row, hdr, "CountrySource") or "").lower()
+        is_row_free = "free-tv" in source_hint or "free-tv" in country_source_hint or ("free_tv" in preferred_kinds)
+        master_entry = None
+        master_kind = ""
+        if master_lookup and (not country or not group_name or not is_row_free):
+            master_entry = _find_master_entry(master_lookup, name, tvg, url, preferred_kinds=preferred_kinds)
+            if master_entry:
+                master_kind = _classify_source(master_entry.source, master_entry.origin_path)
+        if not group_name and master_entry:
+            group_name = (master_entry.attrs.get("group-title")
+                          or master_entry.attrs.get("group")
+                          or master_entry.attrs.get("category")
+                          or "")
+            if group_name:
+                _set_field(row, hdr, headers, "GroupTitle", group_name)
+                updated_existing += 1
+        should_fill_country = (not country) and group_name and (is_row_free or master_kind == "free_tv")
+        if should_fill_country:
+            base_source = (_source_category(master_entry.source, master_entry.origin_path)
+                           if master_entry else "Free-TV")
+            if base_source:
+                label = base_source if base_source.lower().startswith("free-tv") else "Free-TV"
+            else:
+                label = "Free-TV"
+            if "group" not in label.lower():
+                label = f"{label} (group)"
+            _set_field(row, hdr, headers, "Country", group_name)
+            _set_field(row, hdr, headers, "CountrySource", label)
+            country = group_name
+            updated_existing += 1
+            backfilled_countries += 1
 
     today = datetime.utcnow().strftime("%Y%m%d")
     changed = 0
@@ -358,58 +464,74 @@ def _sync_favourites_with_master(tv_fav_path: str,
         if not key or key in existing_keys:
             continue
         combined_url = "\n".join(entry.props + [entry.url]) if entry.props else entry.url
+        group_name = entry.attrs.get("group-title") or entry.attrs.get("group") or entry.attrs.get("category") or ""
         row = {col: "" for col in headers}
         _set_field(row, hdr, headers, "ChannelName", entry.name or entry.attrs.get("tvg-name", ""))
         _set_field(row, hdr, headers, "TvgId", entry.tvg_id or entry.attrs.get("tvg-id", ""))
         _set_field(row, hdr, headers, "Url", combined_url)
+        _set_field(row, hdr, headers, "GroupTitle", group_name)
         _set_field(row, hdr, headers, "Favourite", "0")
         _set_field(row, hdr, headers, "New", "1")
         _set_field(row, hdr, headers, "AddedOn", today)
         country = entry.attrs.get("tvg-country") or entry.attrs.get("country") or ""
+        country_source_label = _source_category(entry.source, entry.origin_path)
+        if not country and kind == "free_tv" and group_name:
+            # Free-TV playlists group channels by country name, so fall back to that label.
+            country = group_name
+            country_source_label = f"{country_source_label} (group)"
         _set_field(row, hdr, headers, "Country", country)
-        _set_field(row, hdr, headers, "CountrySource", _source_category(entry.source, entry.origin_path))
-        _set_field(row, hdr, headers, "m3u_source", _m3u_source_label(entry.source, entry.origin_path))
+        _set_field(row, hdr, headers, "CountrySource", country_source_label)
+        _apply_source_label(row, hdr, headers, _m3u_source_label(entry.source, entry.origin_path))
         favs.append(row)
         existing_keys.add(key)
         changed += 1
 
-    if changed:
-        with io.open(tv_fav_path, "w", encoding="utf-8", newline="") as f:
-            writer = csv.DictWriter(f, fieldnames=headers)
-            writer.writeheader()
-            writer.writerows(favs)
-        for mirror in mirrors:
-            try:
-                os.makedirs(os.path.dirname(mirror), exist_ok=True)
-                with io.open(mirror, "w", encoding="utf-8", newline="") as mf:
-                    writer = csv.DictWriter(mf, fieldnames=headers)
-                    writer.writeheader()
-                    writer.writerows(favs)
-            except OSError as exc:
-                print(f"[warn] Failed to mirror tv_favourites to {mirror}: {exc}")
+    needs_write = changed or updated_existing
+    if needs_write:
+        _write_favourites(tv_fav_path, favs, headers, mirrors)
+    if backfilled_countries:
+        print(f"[info] Filled country via group-title for {backfilled_countries} Free-TV entries in {tv_fav_path}")
     return changed
 
 def _find_master_entry(lookup: Optional[Dict[str, Dict[str, MasterEntry]]],
-                       name: str, tvg_id: str, url: str) -> Optional[MasterEntry]:
+                       name: str, tvg_id: str, url: str,
+                       preferred_kinds: Optional[Sequence[str]] = None) -> Optional[MasterEntry]:
     if not lookup:
         return None
+    def _accept(entry: Optional[MasterEntry]) -> Optional[MasterEntry]:
+        if not entry:
+            return None
+        if not preferred_kinds:
+            return entry
+        kind = _classify_source(entry.source, entry.origin_path)
+        return entry if kind in preferred_kinds else None
     url_key = url.strip()
     if url_key and url_key in lookup["by_url"]:
-        return lookup["by_url"][url_key]
+        cand = _accept(lookup["by_url"][url_key])
+        if cand:
+            return cand
     tvg_key = _norm_key(tvg_id)
     if tvg_key and tvg_key in lookup["by_tvg"]:
-        return lookup["by_tvg"][tvg_key]
+        cand = _accept(lookup["by_tvg"][tvg_key])
+        if cand:
+            return cand
     if tvg_key and "@" in tvg_key:
         base = tvg_key.split("@", 1)[0]
         if base in lookup["by_tvg"]:
-            return lookup["by_tvg"][base]
+            cand = _accept(lookup["by_tvg"][base])
+            if cand:
+                return cand
     if tvg_key and "." in tvg_key:
         lower = tvg_key.lower()
         if lower in lookup["by_tvg"]:
-            return lookup["by_tvg"][lower]
+            cand = _accept(lookup["by_tvg"][lower])
+            if cand:
+                return cand
     name_key = _norm_key(name)
     if name_key and name_key in lookup["by_name"]:
-        return lookup["by_name"][name_key]
+        cand = _accept(lookup["by_name"][name_key])
+        if cand:
+            return cand
     return None
 
 def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
@@ -429,12 +551,16 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
             if not stream_url: sk_nourl += 1; continue
             name = _get(r, hdr, "ChannelName","Name","Channel")
             tvg_seed = _get(r, hdr, "TvgId","tvg-id")
-            master_entry = _find_master_entry(master_lookup, name, tvg_seed, stream_url)
+            preferred_kinds = _preferred_source_kinds(r, hdr)
+            master_entry = _find_master_entry(master_lookup, name, tvg_seed, stream_url,
+                                              preferred_kinds=preferred_kinds)
             master_attrs = master_entry.attrs if master_entry else {}
 
             tvg  = tvg_seed or _attr_lookup(master_attrs, "tvg-id","tvg_id","tvgid")
             cc_raw = _get(r, hdr, "Country","tvg-country") or _attr_lookup(master_attrs, "tvg-country","country")
-            cc = cc_raw.upper() if cc_raw else ""
+            cc = cc_raw.strip()
+            if cc and len(cc) <= 3:
+                cc = cc.upper()
             grp  = _get(r, hdr, "GroupTitle","Group","Category") or _attr_lookup(master_attrs, "group-title","group","category")
             logo = _get(r, hdr, "Logo", "tvg-logo", "TvgLogo") or _attr_lookup(master_attrs, "tvg-logo","logo")
             if not name and master_entry and master_entry.name:
@@ -469,7 +595,11 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
             fo.write(final_url + "\n")
             raw_source = master_entry.source if master_entry else "favourites_only"
             origin_path = master_entry.origin_path if master_entry else None
-            source_label = _source_category(raw_source, origin_path)
+            if master_entry:
+                source_label = _source_category(raw_source, origin_path)
+            else:
+                row_source = (_get(r, hdr, "Source", "m3u_source") or "Unknown").strip()
+                source_label = row_source or "Unknown"
 
             key = _channel_key(name, tvg, final_url)
             meta = channel_meta.setdefault(key, {
@@ -598,9 +728,11 @@ def main():
     os.makedirs(LOG_DIR, exist_ok=True)
 
     favs, hdr, fav_headers = _read_csv(TV_FAV)
+    _reset_new_flags(TV_FAV, favs, hdr, fav_headers, mirror_paths=mirror_paths)
     master_lookup = _parse_master_playlist(master_paths)
     master_entries = _collect_master_entries(master_lookup)
-    added = _sync_favourites_with_master(TV_FAV, favs, hdr, fav_headers, master_entries, mirror_paths=mirror_paths)
+    added = _sync_favourites_with_master(TV_FAV, favs, hdr, fav_headers, master_entries,
+                                         mirror_paths=mirror_paths, master_lookup=master_lookup)
     if added:
         print(f"[info] Added {added} new channels to tv_favourites.csv at {TV_FAV}")
     else:
