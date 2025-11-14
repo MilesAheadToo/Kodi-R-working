@@ -364,6 +364,35 @@ def _preferred_source_kinds(row: Dict[str, str], hdr: Dict[str, str]) -> List[st
     kind = mapping.get(raw)
     return [kind] if kind else []
 
+def _group_title_label(country_code: str, existing_group: str, source_kind: str) -> str:
+    code = (country_code or "").strip().upper()
+    if source_kind == "iptv_org":
+        iptv_map = {
+            "CA": "Canada",
+            "DE": "Germany",
+            "UK": "United Kingdom",
+            "GB": "United Kingdom",
+            "US": "United States",
+        }
+        mapped = iptv_map.get(code)
+        if mapped:
+            return mapped
+    generic_map = {
+        "UK": "United Kingdom",
+        "GB": "United Kingdom",
+        "DE": "Germany",
+        "CA": "Canada",
+        "US": "United States",
+    }
+    mapped = generic_map.get(code)
+    if mapped:
+        return mapped
+    if country_code:
+        return country_code.strip()
+    if existing_group:
+        return existing_group.strip()
+    return "Unknown"
+
 def _reset_new_flags(tv_fav_path: str,
                      favs: List[Dict[str, str]],
                      hdr: Dict[str, str],
@@ -555,6 +584,11 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
             master_entry = _find_master_entry(master_lookup, name, tvg_seed, stream_url,
                                               preferred_kinds=preferred_kinds)
             master_attrs = master_entry.attrs if master_entry else {}
+            source_kind = ""
+            if master_entry:
+                source_kind = _classify_source(master_entry.source, master_entry.origin_path)
+            elif preferred_kinds:
+                source_kind = preferred_kinds[0]
 
             tvg  = tvg_seed or _attr_lookup(master_attrs, "tvg-id","tvg_id","tvgid")
             cc_raw = _get(r, hdr, "Country","tvg-country") or _attr_lookup(master_attrs, "tvg-country","country")
@@ -574,14 +608,7 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
             if tvg_name_attr:
                 ext = set_attr(ext, "tvg-name", tvg_name_attr)
 
-            country_labels = {
-                "UK": "United Kingdom",
-                "GB": "United Kingdom",
-                "DE": "Germany",
-                "CA": "Canada",
-                "US": "USA",
-            }
-            country_label = country_labels.get(cc) or (cc if cc else grp or "")
+            country_label = _group_title_label(cc or cc_raw.strip(), grp, source_kind)
             if country_label:
                 ext = set_attr(ext, "group-title", country_label)
 

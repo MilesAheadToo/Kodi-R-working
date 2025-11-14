@@ -1,7 +1,7 @@
 #EXTM3U
 #EXTINF:-1 tvg-id="3sat.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/3sat_2019.svg/640px-3sat_2019.svg.png" tvg-name="3sat Ⓖ" group-title="Germany",3sat Ⓖ
 https://zdf-hls-18.akamaized.net/hls/live/2016501/dach/veryhigh/master.m3u8
-#EXTINF:-1 tvg-id="AccuWeatherNOW.us" tvg-country="US" tvg-logo="https://i.imgur.com/M8wbVYK.png" tvg-name="AccuWeather NOW" group-title="USA",AccuWeather NOW
+#EXTINF:-1 tvg-id="AccuWeatherNOW.us" tvg-country="US" tvg-logo="https://i.imgur.com/M8wbVYK.png" tvg-name="AccuWeather NOW" group-title="United States",AccuWeather NOW
 https://cdn-ue1-prod.tsv2.amagi.tv/linear/amg00684-accuweather-accuweather-plex/playlist.m3u8
 #EXTINF:-1 tvg-id="ARDalpha.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/ARD_alpha.svg/640px-ARD_alpha.svg.png" tvg-name="ARD Alpha Ⓖ" group-title="Germany",ARD Alpha Ⓖ
 https://mcdn.br.de/br/fs/ard_alpha/hls/de/master.m3u8
@@ -35,7 +35,7 @@ https://vs-hls-push-uk-live.akamaized.net/x=4/i=urn:bbc:pips:service:bbc_two_hd/
 http://ott-cdn.ucom.am/s24/index.m3u8
 #EXTINF:-1 tvg-id="BBCRadioWorldService.uk" tvg-country="UK" tvg-logo="https://experiencersinternational.github.io/tvsetup/tvg-ico/bbcws-epg.png" tvg-name="BBC World Service" group-title="United Kingdom",BBC World Service
 http://a.files.bbci.co.uk/media/live/manifesto/audio/simulcast/hls/nonuk/sbr_low/ak/bbc_world_service.m3u8
-#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Big_Ten_Network_Logo.svg/512px-Big_Ten_Network_Logo.svg.png" group-title="USA",Big Ten Network
+#EXTINF:-1 tvg-id="BigTenNetwork.us" tvg-country="US" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/3/39/Big_Ten_Network_Logo.svg/512px-Big_Ten_Network_Logo.svg.png" group-title="United States",Big Ten Network
 https://fl1.moveonjoy.com/BIG_TEN_NETWORK/index.m3u8
 #EXTINF:-1 tvg-id="BloombergTVEurope.uk" tvg-country="UK" tvg-logo="https://d2n0069hmnqmmx.cloudfront.net/epgdata/1.0/newchanlogos/512/512/skychb1074.png" tvg-name="Bloomberg TV" group-title="United Kingdom",Bloomberg TV
 https://bloomberg.com/media-manifest/streams/eu.m3u8
@@ -45,15 +45,15 @@ https://mcdn.br.de/br/fs/bfs_nord/hls/de/master.m3u8
 https://cbcnewshd-f.akamaihd.net/i/cbcnews_1@8981/index_2500_av-p.m3u8
 #EXTINF:-1 tvg-id="CBCTDT.ca" tvg-country="CA" tvg-logo="https://i.imgur.com/H5yEbxf.png" tvg-name="CBC Toronto" group-title="Canada",CBC Toronto
 https://bozztv.com/teleyupp1/teleup-ydcl2V1MVC/playlist.m3u8
-#EXTINF:-1 tvg-id="CGTNDocumentary.cn" tvg-country="US" tvg-logo="https://i.imgur.com/JHv0WxM.png" tvg-name="CGTN Documentary English Ⓢ" group-title="USA",CGTN Documentary English Ⓢ
+#EXTINF:-1 tvg-id="CGTNDocumentary.cn" tvg-country="US" tvg-logo="https://i.imgur.com/JHv0WxM.png" tvg-name="CGTN Documentary English Ⓢ" group-title="United States",CGTN Documentary English Ⓢ
 https://news.cgtn.com/resource/live/document/cgtn-doc.m3u8
 #EXTINF:-1 tvg-id="Channel4.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/9/9b/Channel_4_%28On_Demand%29_2023.svg/569px-Channel_4_%28On_Demand%29_2023.svg.png" tvg-name="Channel 4 Ⓢ" group-title="United Kingdom",Channel 4 Ⓢ
 http://176.65.146.105:8011/play/a07w/index.m3u8
 #EXTINF:-1 tvg-id="SachsenFernsehenChemnitz.de" tvg-country="DE" tvg-logo="https://i.imgur.com/4SEAbVf.png" group-title="Germany",Chemnitz Fernsehen (1080p)
 https://chemnitz.iptv-playoutcenter.de/chemnitz/chemnitzfernsehen.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="CNBC.us" tvg-country="US" tvg-logo="https://i.imgur.com/BTasyOy.png" tvg-name="CNBC Ⓨ" group-title="USA",CNBC Ⓨ
+#EXTINF:-1 tvg-id="CNBC.us" tvg-country="US" tvg-logo="https://i.imgur.com/BTasyOy.png" tvg-name="CNBC Ⓨ" group-title="United States",CNBC Ⓨ
 https://www.youtube.com/c/CNBC/live
-#EXTINF:-1 tvg-id="CNN.us" tvg-country="US" tvg-logo="https://i.imgur.com/vyrc1I1.png" tvg-name="CNN" group-title="USA",CNN
+#EXTINF:-1 tvg-id="CNN.us" tvg-country="US" tvg-logo="https://i.imgur.com/vyrc1I1.png" tvg-name="CNN" group-title="United States",CNN
 https://tve-live-lln.warnermediacdn.com/hls/live/586495/cnngo/cnn_slate/VIDEO_0_3564000.m3u8
 #EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/qOutOWN.png" tvg-name="CTV Toronto" group-title="Canada",CTV Toronto
 https://bozztv.com/teleyupp1/teleup-zxsJFt6VvY/playlist.m3u8
@@ -69,7 +69,7 @@ https://www.youtube.com/euronewsde/live
 https://i.mjh.nz/PlutoTV/62cbef9ebb857100072fc187-alt.m3u8
 #EXTINF:-1 tvg-country="CA" tvg-logo="https://i.imgur.com/2CxLO4H.png" tvg-name="Global Toronto" group-title="Canada",Global Toronto
 https://d128o1k7zh3htz.cloudfront.net/out/v1/74a58360a3734f97b74ba439bc678044/index.m3u8
-#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" tvg-logo="https://i.imgur.com/P9eT0O9.png" group-title="USA",Hell's Kitchen (1080p)
+#EXTINF:-1 tvg-id="HellsKitchen.us@UK" tvg-country="US" tvg-logo="https://i.imgur.com/P9eT0O9.png" group-title="United States",Hell's Kitchen (1080p)
 https://amg00654-itv-amg00654c1-samsung-au-1072.playouts.now.amagi.tv/itv-hellskitchen-samsung/playlist.m3u8
 #EXTINF:-1 tvg-id="hrfernsehen.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/HR-Fernsehen_Logo_2023.svg/512px-HR-Fernsehen_Logo_2023.svg.png" group-title="Germany",hr-fernsehen (1080p)
 https://hrhls.akamaized.net/hls/live/2024525/hrhls/index.m3u8
@@ -85,7 +85,7 @@ https://strm.hdtvizlecanli.com/live/kabel1.m3u8
 http://58bd5b7a98e04.streamlock.net/medienasa-live/kulturmd_high/playlist.m3u8
 #EXTINF:-1 tvg-id="MunchenTV.de" tvg-country="DE" tvg-logo="https://i.imgur.com/lt7xNWW.png" group-title="Germany",München TV (1080p) [Not 24/7]
 https://muenchentv.iptv-playoutcenter.de/muenchentv/muenchentv.stream_1/playlist.m3u8
-#EXTINF:-1 tvg-id="NBCNewsNow.us" tvg-country="US" tvg-logo="https://i.imgur.com/v48mMRT.png" tvg-name="NBC News" group-title="USA",NBC News
+#EXTINF:-1 tvg-id="NBCNewsNow.us" tvg-country="US" tvg-logo="https://i.imgur.com/v48mMRT.png" tvg-name="NBC News" group-title="United States",NBC News
 http://dai2.xumo.com/xumocdn/p=roku/amagi_hls_data_xumo1212A-xumo-nbcnewsnow/CDN/playlist.m3u8
 #EXTINF:-1 tvg-id="NDRFernsehenHamburg.de" tvg-country="DE" tvg-logo="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Logo_NDR_Fernsehen_2017.svg/578px-Logo_NDR_Fernsehen_2017.svg.png" tvg-name="NDR Hamburg Ⓖ" group-title="Germany",NDR Hamburg Ⓖ
 https://mcdn.ndr.de/ndr/hls/ndr_fs/ndr_hh/master.m3u8
@@ -103,7 +103,7 @@ https://rbhlslive.akamaized.net/hls/live/2020435/rbfs/master.m3u8
 https://5857499ee635b.streamlock.net/radiowesertv-live/_definst_/mp4:livestreamTV/playlist.m3u8
 #EXTINF:-1 tvg-id="SaarlandFernsehen2.de" tvg-country="DE" tvg-logo="https://i.imgur.com/Yv7j4ia.png" group-title="Germany",Saarland Fernsehen 2 (720p) [Not 24/7]
 https://saarland2.iptv-playoutcenter.de/saarland2/saarland2.stream_2/playlist.m3u8
-#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" tvg-logo="https://i.imgur.com/XC30JAF.png" group-title="USA",Samuel Goldwyn Classics (1080p)
+#EXTINF:-1 tvg-id="SamuelGoldwynClassics.us" tvg-country="US" tvg-logo="https://i.imgur.com/XC30JAF.png" group-title="United States",Samuel Goldwyn Classics (1080p)
 https://samuelgoldwyn-classics-1-us.roku.wurl.tv/playlist.m3u8
 #EXTINF:-1 tvg-id="SkyNews.uk" tvg-country="UK" tvg-logo="https://upload.wikimedia.org/wikipedia/en/thumb/5/57/Sky_News_logo.svg/1024px-Sky_News_logo.svg.png" tvg-name="Sky News" group-title="United Kingdom",Sky News
 https://linear021-gb-hls1-prd-ak.cdn.skycdp.com/Content/HLS_001_hd/Live/channel(skynews)/index_mob.m3u8
