@@ -22,7 +22,7 @@ def parse_env_file(path: str) -> Dict[str, str]:
             env[k.strip()] = v.strip().strip("'").strip('"')
     return env
 
-def _read_csv(path: str) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
+def _read_csv(path: str) -> Tuple[List[Dict[str, str]], Dict[str, str], List[str]]:
     rows: List[Dict[str, str]] = []
     with io.open(path, "r", encoding="utf-8", newline="") as f:
         reader = csv.DictReader(f)
@@ -30,7 +30,7 @@ def _read_csv(path: str) -> Tuple[List[Dict[str, str]], Dict[str, str]]:
         for r in reader:
             rows.append({k: (r.get(k) or "").strip() for k in headers})
     header_map = {h.strip().lower(): h for h in (reader.fieldnames or [])}
-    return rows, header_map
+    return rows, header_map, headers
 
 def set_attr(extinf: str, key: str, val: str) -> str:
     if not val: return extinf
@@ -135,6 +135,7 @@ class MasterEntry:
     priority: int = 0
     source: str = ""
     attrs: Dict[str, str] = field(default_factory=dict)
+    origin_path: str = ""
 
 def _norm_key(val: Optional[str]) -> str:
     return (val or "").strip().lower()
@@ -181,13 +182,33 @@ def _attr_lookup(attrs: Optional[Dict[str, str]], *keys: str) -> str:
                 return val
     return ""
 
-def _source_category(raw: Optional[str]) -> str:
-    if not raw:
-        return "Unknown"
-    if raw == "free_tv_master":
+def _classify_source(raw: Optional[str], origin_path: Optional[str]) -> str:
+    tokens = []
+    if raw:
+        tokens.append(raw.lower())
+    if origin_path:
+        tokens.append(os.path.basename(origin_path).lower())
+    for token in tokens:
+        if "free_tv_master" in token or token == "free-tv":
+            return "free_tv"
+        if "iptv_master" in token or "iptv-org" in token:
+            return "iptv_org"
+    return "unknown"
+
+def _source_category(raw: Optional[str], origin_path: Optional[str] = None) -> str:
+    kind = _classify_source(raw, origin_path)
+    if kind == "free_tv":
         return "Free-TV"
-    if raw == "iptv_master":
+    if kind == "iptv_org":
         return "IPTV-org"
+    return "Unknown"
+
+def _m3u_source_label(raw: Optional[str], origin_path: Optional[str] = None) -> str:
+    kind = _classify_source(raw, origin_path)
+    if kind == "free_tv":
+        return "Free-TV"
+    if kind == "iptv_org":
+        return "iptv-org"
     return "Unknown"
 
 def _parse_master_playlist(sources: Optional[Sequence[Tuple[str, str]]]) -> Dict[str, Dict[str, MasterEntry]]:
@@ -233,7 +254,8 @@ def _parse_master_playlist(sources: Optional[Sequence[Tuple[str, str]]]) -> Dict
                         props=props[:],
                         priority=priority,
                         source=label or os.path.basename(path) or "unknown",
-                        attrs=attrs
+                        attrs=attrs,
+                        origin_path=path
                     )
                     url_key = entry.url.strip()
                     if url_key and url_key not in lookup["by_url"]:
@@ -247,6 +269,125 @@ def _parse_master_playlist(sources: Optional[Sequence[Tuple[str, str]]]) -> Dict
                     current_ext = None
                     props = []
     return lookup
+
+def _resolve_first_existing_path(candidates: List[str]) -> Tuple[str, bool]:
+    """Return (path, is_existing) choosing the first existing candidate or first non-empty."""
+    expanded: List[str] = []
+    for cand in candidates:
+        if not cand:
+            continue
+        path = os.path.expanduser(cand)
+        if path in expanded:
+            continue
+        expanded.append(path)
+        if os.path.isfile(path):
+            return path, True
+    if expanded:
+        return expanded[0], os.path.isfile(expanded[0])
+    raise FileNotFoundError("No candidate paths provided for tv_favourites.csv")
+
+def _normalize_mirror_list(raw: Optional[str]) -> List[str]:
+    if not raw:
+        return []
+    parts = []
+    for line in raw.splitlines():
+        for segment in line.split(","):
+            seg = segment.strip()
+            if seg:
+                parts.append(seg)
+    return parts
+
+def _collect_master_entries(lookup: Optional[Dict[str, Dict[str, MasterEntry]]]) -> List[MasterEntry]:
+    entries: List[MasterEntry] = []
+    if not lookup:
+        return entries
+    seen: set[str] = set()
+    for bucket in lookup.values():
+        for entry in bucket.values():
+            key = _channel_key(entry.name, entry.tvg_id, entry.url).strip().lower()
+            if not key:
+                continue
+            if key in seen:
+                continue
+            seen.add(key)
+            entries.append(entry)
+    return entries
+
+def _ensure_header(hdr: Dict[str, str], headers: List[str], column: str) -> str:
+    key = column.strip()
+    low = key.lower()
+    if low not in hdr:
+        hdr[low] = key
+        headers.append(key)
+    return hdr[low]
+
+def _set_field(row: Dict[str, str], hdr: Dict[str, str], headers: List[str], column: str, value: str) -> None:
+    actual = _ensure_header(hdr, headers, column)
+    row[actual] = value
+
+def _sync_favourites_with_master(tv_fav_path: str,
+                                 favs: List[Dict[str, str]],
+                                 hdr: Dict[str, str],
+                                 headers: List[str],
+                                 master_entries: List[MasterEntry],
+                                 mirror_paths: Optional[List[str]] = None) -> int:
+    if not master_entries:
+        return 0
+    existing_keys = set()
+    for row in favs:
+        name = _get(row, hdr, "ChannelName", "Name", "Channel")
+        tvg = _get(row, hdr, "TvgId", "tvg-id")
+        url = _get(row, hdr, "Url", "URL", "StreamUrl")
+        key = _channel_key(name, tvg, url).strip().lower()
+        if key:
+            existing_keys.add(key)
+
+    today = datetime.utcnow().strftime("%Y%m%d")
+    changed = 0
+    mirrors = []
+    for mirror in mirror_paths or []:
+        expanded = os.path.expanduser(mirror)
+        if expanded and expanded not in mirrors and expanded != tv_fav_path:
+            mirrors.append(expanded)
+    allowed_kinds = {"free_tv", "iptv_org"}
+    for entry in master_entries:
+        kind = _classify_source(entry.source, entry.origin_path)
+        if kind not in allowed_kinds:
+            continue
+        key = _channel_key(entry.name, entry.tvg_id, entry.url).strip().lower()
+        if not key or key in existing_keys:
+            continue
+        combined_url = "\n".join(entry.props + [entry.url]) if entry.props else entry.url
+        row = {col: "" for col in headers}
+        _set_field(row, hdr, headers, "ChannelName", entry.name or entry.attrs.get("tvg-name", ""))
+        _set_field(row, hdr, headers, "TvgId", entry.tvg_id or entry.attrs.get("tvg-id", ""))
+        _set_field(row, hdr, headers, "Url", combined_url)
+        _set_field(row, hdr, headers, "Favourite", "0")
+        _set_field(row, hdr, headers, "New", "1")
+        _set_field(row, hdr, headers, "AddedOn", today)
+        country = entry.attrs.get("tvg-country") or entry.attrs.get("country") or ""
+        _set_field(row, hdr, headers, "Country", country)
+        _set_field(row, hdr, headers, "CountrySource", _source_category(entry.source, entry.origin_path))
+        _set_field(row, hdr, headers, "m3u_source", _m3u_source_label(entry.source, entry.origin_path))
+        favs.append(row)
+        existing_keys.add(key)
+        changed += 1
+
+    if changed:
+        with io.open(tv_fav_path, "w", encoding="utf-8", newline="") as f:
+            writer = csv.DictWriter(f, fieldnames=headers)
+            writer.writeheader()
+            writer.writerows(favs)
+        for mirror in mirrors:
+            try:
+                os.makedirs(os.path.dirname(mirror), exist_ok=True)
+                with io.open(mirror, "w", encoding="utf-8", newline="") as mf:
+                    writer = csv.DictWriter(mf, fieldnames=headers)
+                    writer.writeheader()
+                    writer.writerows(favs)
+            except OSError as exc:
+                print(f"[warn] Failed to mirror tv_favourites to {mirror}: {exc}")
+    return changed
 
 def _find_master_entry(lookup: Optional[Dict[str, Dict[str, MasterEntry]]],
                        name: str, tvg_id: str, url: str) -> Optional[MasterEntry]:
@@ -327,7 +468,8 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
             final_url = (master_entry.url if master_entry else stream_url).strip()
             fo.write(final_url + "\n")
             raw_source = master_entry.source if master_entry else "favourites_only"
-            source_label = _source_category(raw_source)
+            origin_path = master_entry.origin_path if master_entry else None
+            source_label = _source_category(raw_source, origin_path)
 
             key = _channel_key(name, tvg, final_url)
             meta = channel_meta.setdefault(key, {
@@ -389,7 +531,21 @@ def main():
 
     if args.use_env:
         env = parse_env_file(ENV_PATH)
-        TV_FAV = env["TV_FAV"]; M3U_DIR = env["M3U_DIR"]; LOG_DIR = env["LOG_DIR"]; M3U_NAME = env["M3U"]
+        default_share = f"/run/user/{os.getuid()}/gvfs/smb-share:server=rpiserver.local,share=kodi/tv_favourites.csv"
+        tv_fav_candidates = [
+            os.environ.get("KODI_TV_FAV_PATH"),
+            default_share,
+            env.get("TV_FAV"),
+            os.environ.get("TV_FAV"),
+            os.path.join(os.path.expanduser("~/Kodi"), "tv_favourites.csv"),
+        ]
+        TV_FAV, fav_exists = _resolve_first_existing_path(tv_fav_candidates)
+        if not fav_exists:
+            print(f"[info] tv_favourites.csv missing, will create at {TV_FAV}")
+        mirror_paths = _normalize_mirror_list(env.get("TV_FAV_MIRRORS", ""))
+        if not mirror_paths and os.path.exists(default_share):
+            mirror_paths = [default_share]
+        M3U_DIR = env["M3U_DIR"]; LOG_DIR = env["LOG_DIR"]; M3U_NAME = env["M3U"]
         pruned_out = os.path.join(M3U_DIR, M3U_NAME)
         cc_map     = os.path.join(M3U_DIR, "channel_cc_map.json")
         report     = os.path.join(LOG_DIR, "prune_report.csv")
@@ -406,7 +562,21 @@ def main():
         source_report_path = args.source_report or os.path.join(LOG_DIR, "pruned_source_report.csv")
     else:
         # (compat mode)
-        TV_FAV = args.fav; M3U_DIR = args.m3u_dir
+        default_share = f"/run/user/{os.getuid()}/gvfs/smb-share:server=rpiserver.local,share=kodi/tv_favourites.csv"
+        tv_fav_candidates = [
+            os.environ.get("KODI_TV_FAV_PATH"),
+            default_share,
+            args.fav,
+            os.environ.get("TV_FAV"),
+            os.path.join(os.path.expanduser("~/Kodi"), "tv_favourites.csv"),
+        ]
+        TV_FAV, fav_exists = _resolve_first_existing_path(tv_fav_candidates)
+        if not fav_exists:
+            print(f"[info] tv_favourites.csv missing, will create at {TV_FAV}")
+        mirror_paths = _normalize_mirror_list(os.environ.get("TV_FAV_MIRRORS", ""))
+        if not mirror_paths and os.path.exists(default_share):
+            mirror_paths = [default_share]
+        M3U_DIR = args.m3u_dir
         pruned_out = os.path.join(args.out_dir, "pruned.m3u")
         cc_map = args.country_map; report = args.report
         LOG_DIR = report and os.path.dirname(report) or "."
@@ -427,8 +597,14 @@ def main():
     os.makedirs(M3U_DIR, exist_ok=True)
     os.makedirs(LOG_DIR, exist_ok=True)
 
-    favs, hdr = _read_csv(TV_FAV)
+    favs, hdr, fav_headers = _read_csv(TV_FAV)
     master_lookup = _parse_master_playlist(master_paths)
+    master_entries = _collect_master_entries(master_lookup)
+    added = _sync_favourites_with_master(TV_FAV, favs, hdr, fav_headers, master_entries, mirror_paths=mirror_paths)
+    if added:
+        print(f"[info] Added {added} new channels to tv_favourites.csv at {TV_FAV}")
+    else:
+        print(f"[info] No new channels detected for {TV_FAV}")
     written, sk_notfav, sk_nourl, channel_meta, overrides = write_pruned_m3u_from_favs(
         favs, hdr, pruned_out, cc_map_path=cc_map, master_lookup=master_lookup,
         source_report_path=source_report_path)

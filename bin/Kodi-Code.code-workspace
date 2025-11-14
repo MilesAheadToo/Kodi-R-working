@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../../../../home/trevor/Kodi/Kodi-Code"
+		},
+		{
+			"path": ".."
+		},
+		{
+			"path": "../../smb-share:server=kodi.local,share=userdata"
+		}
+	],
+	"settings": {}
+}
