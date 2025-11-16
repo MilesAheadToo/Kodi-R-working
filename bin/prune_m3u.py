@@ -5,12 +5,461 @@
 # Writes:  <M3U_DIR>/<M3U>, channel_cc_map.json, prune_report.csv
 # Includes country in group-title so Kodi can group channels by country.
 
-import argparse, csv, io, json, os, re
+import argparse, csv, io, json, os, re, unicodedata
 from datetime import datetime
 from dataclasses import dataclass, field
-from typing import Dict, List, Tuple, Optional, Sequence
+from typing import Dict, List, Tuple, Optional, Sequence, Set
 
 ENV_PATH = os.path.expanduser("~/Kodi/.env")
+
+COUNTRY_CODES: Dict[str, str] = {
+    "AD": "Andorra",
+    "AE": "United Arab Emirates",
+    "AF": "Afghanistan",
+    "AG": "Antigua & Barbuda",
+    "AI": "Anguilla",
+    "AL": "Albania",
+    "AM": "Armenia",
+    "AO": "Angola",
+    "AQ": "Antarctica",
+    "AR": "Argentina",
+    "AS": "Samoa (American)",
+    "AT": "Austria",
+    "AU": "Australia",
+    "AW": "Aruba",
+    "AX": "Aland Islands",
+    "AZ": "Azerbaijan",
+    "BA": "Bosnia & Herzegovina",
+    "BB": "Barbados",
+    "BD": "Bangladesh",
+    "BE": "Belgium",
+    "BF": "Burkina Faso",
+    "BG": "Bulgaria",
+    "BH": "Bahrain",
+    "BI": "Burundi",
+    "BJ": "Benin",
+    "BL": "St Barthelemy",
+    "BM": "Bermuda",
+    "BN": "Brunei",
+    "BO": "Bolivia",
+    "BQ": "Caribbean NL",
+    "BR": "Brazil",
+    "BS": "Bahamas",
+    "BT": "Bhutan",
+    "BV": "Bouvet Island",
+    "BW": "Botswana",
+    "BY": "Belarus",
+    "BZ": "Belize",
+    "CA": "Canada",
+    "CC": "Cocos (Keeling) Islands",
+    "CD": "Congo (Dem. Rep.)",
+    "CF": "Central African Rep.",
+    "CG": "Congo (Rep.)",
+    "CH": "Switzerland",
+    "CI": "Cote d'Ivoire",
+    "CK": "Cook Islands",
+    "CL": "Chile",
+    "CM": "Cameroon",
+    "CN": "China",
+    "CO": "Colombia",
+    "CR": "Costa Rica",
+    "CU": "Cuba",
+    "CV": "Cape Verde",
+    "CW": "Curacao",
+    "CX": "Christmas Island",
+    "CY": "Cyprus",
+    "CZ": "Czech Republic",
+    "DE": "Germany",
+    "DJ": "Djibouti",
+    "DK": "Denmark",
+    "DM": "Dominica",
+    "DO": "Dominican Republic",
+    "DZ": "Algeria",
+    "EC": "Ecuador",
+    "EE": "Estonia",
+    "EG": "Egypt",
+    "EH": "Western Sahara",
+    "ER": "Eritrea",
+    "ES": "Spain",
+    "ET": "Ethiopia",
+    "FI": "Finland",
+    "FJ": "Fiji",
+    "FK": "Falkland Islands",
+    "FM": "Micronesia",
+    "FO": "Faroe Islands",
+    "FR": "France",
+    "GA": "Gabon",
+    "GB": "Britain (UK)",
+    "GD": "Grenada",
+    "GE": "Georgia",
+    "GF": "French Guiana",
+    "GG": "Guernsey",
+    "GH": "Ghana",
+    "GI": "Gibraltar",
+    "GL": "Greenland",
+    "GM": "Gambia",
+    "GN": "Guinea",
+    "GP": "Guadeloupe",
+    "GQ": "Equatorial Guinea",
+    "GR": "Greece",
+    "GS": "South Georgia & the South Sandwich Islands",
+    "GT": "Guatemala",
+    "GU": "Guam",
+    "GW": "Guinea-Bissau",
+    "GY": "Guyana",
+    "HK": "Hong Kong",
+    "HM": "Heard Island & McDonald Islands",
+    "HN": "Honduras",
+    "HR": "Croatia",
+    "HT": "Haiti",
+    "HU": "Hungary",
+    "ID": "Indonesia",
+    "IE": "Ireland",
+    "IL": "Israel",
+    "IM": "Isle of Man",
+    "IN": "India",
+    "IO": "British Indian Ocean Territory",
+    "IQ": "Iraq",
+    "IR": "Iran",
+    "IS": "Iceland",
+    "IT": "Italy",
+    "JE": "Jersey",
+    "JM": "Jamaica",
+    "JO": "Jordan",
+    "JP": "Japan",
+    "KE": "Kenya",
+    "KG": "Kyrgyzstan",
+    "KH": "Cambodia",
+    "KI": "Kiribati",
+    "KM": "Comoros",
+    "KN": "St Kitts & Nevis",
+    "KP": "Korea (North)",
+    "KR": "Korea (South)",
+    "KW": "Kuwait",
+    "KY": "Cayman Islands",
+    "KZ": "Kazakhstan",
+    "LA": "Laos",
+    "LB": "Lebanon",
+    "LC": "St Lucia",
+    "LI": "Liechtenstein",
+    "LK": "Sri Lanka",
+    "LR": "Liberia",
+    "LS": "Lesotho",
+    "LT": "Lithuania",
+    "LU": "Luxembourg",
+    "LV": "Latvia",
+    "LY": "Libya",
+    "MA": "Morocco",
+    "MC": "Monaco",
+    "MD": "Moldova",
+    "ME": "Montenegro",
+    "MF": "St Martin (French)",
+    "MG": "Madagascar",
+    "MH": "Marshall Islands",
+    "MK": "North Macedonia",
+    "ML": "Mali",
+    "MM": "Myanmar (Burma)",
+    "MN": "Mongolia",
+    "MO": "Macau",
+    "MP": "Northern Mariana Islands",
+    "MQ": "Martinique",
+    "MR": "Mauritania",
+    "MS": "Montserrat",
+    "MT": "Malta",
+    "MU": "Mauritius",
+    "MV": "Maldives",
+    "MW": "Malawi",
+    "MX": "Mexico",
+    "MY": "Malaysia",
+    "MZ": "Mozambique",
+    "NA": "Namibia",
+    "NC": "New Caledonia",
+    "NE": "Niger",
+    "NF": "Norfolk Island",
+    "NG": "Nigeria",
+    "NI": "Nicaragua",
+    "NL": "Netherlands",
+    "NO": "Norway",
+    "NP": "Nepal",
+    "NR": "Nauru",
+    "NU": "Niue",
+    "NZ": "New Zealand",
+    "OM": "Oman",
+    "PA": "Panama",
+    "PE": "Peru",
+    "PF": "French Polynesia",
+    "PG": "Papua New Guinea",
+    "PH": "Philippines",
+    "PK": "Pakistan",
+    "PL": "Poland",
+    "PM": "St Pierre & Miquelon",
+    "PN": "Pitcairn",
+    "PR": "Puerto Rico",
+    "PS": "Palestine",
+    "PT": "Portugal",
+    "PW": "Palau",
+    "PY": "Paraguay",
+    "QA": "Qatar",
+    "RE": "Reunion",
+    "RO": "Romania",
+    "RS": "Serbia",
+    "RU": "Russia",
+    "RW": "Rwanda",
+    "SA": "Saudi Arabia",
+    "SB": "Solomon Islands",
+    "SC": "Seychelles",
+    "SD": "Sudan",
+    "SE": "Sweden",
+    "SG": "Singapore",
+    "SH": "St Helena",
+    "SI": "Slovenia",
+    "SJ": "Svalbard & Jan Mayen",
+    "SK": "Slovakia",
+    "SL": "Sierra Leone",
+    "SM": "San Marino",
+    "SN": "Senegal",
+    "SO": "Somalia",
+    "SR": "Suriname",
+    "SS": "South Sudan",
+    "ST": "Sao Tome & Principe",
+    "SV": "El Salvador",
+    "SX": "St Maarten (Dutch)",
+    "SY": "Syria",
+    "SZ": "Eswatini (Swaziland)",
+    "TC": "Turks & Caicos Is",
+    "TD": "Chad",
+    "TF": "French S. Terr.",
+    "TG": "Togo",
+    "TH": "Thailand",
+    "TJ": "Tajikistan",
+    "TK": "Tokelau",
+    "TL": "East Timor",
+    "TM": "Turkmenistan",
+    "TN": "Tunisia",
+    "TO": "Tonga",
+    "TR": "Turkey",
+    "TT": "Trinidad & Tobago",
+    "TV": "Tuvalu",
+    "TW": "Taiwan",
+    "TZ": "Tanzania",
+    "UA": "Ukraine",
+    "UG": "Uganda",
+    "UM": "US minor outlying islands",
+    "US": "United States",
+    "UY": "Uruguay",
+    "UZ": "Uzbekistan",
+    "VA": "Vatican City",
+    "VC": "St Vincent",
+    "VE": "Venezuela",
+    "VG": "Virgin Islands (UK)",
+    "VI": "Virgin Islands (US)",
+    "VN": "Vietnam",
+    "VU": "Vanuatu",
+    "WF": "Wallis & Futuna",
+    "WS": "Samoa (western)",
+    "YE": "Yemen",
+    "YT": "Mayotte",
+    "ZA": "South Africa",
+    "ZM": "Zambia",
+    "ZW": "Zimbabwe",
+}
+
+COUNTRY_TOKEN_REPLACEMENTS: Dict[str, str] = {
+    "st": "saint",
+    "ste": "sainte",
+    "sts": "saints",
+    "dem": "democratic",
+    "rep": "republic",
+    "terr": "territory",
+    "isl": "islands",
+    "is": "islands",
+}
+
+MANUAL_COUNTRY_ALIASES: Dict[str, str] = {
+    "united kingdom": "GB",
+    "great britain": "GB",
+    "england": "GB",
+    "scotland": "GB",
+    "wales": "GB",
+    "northern ireland": "GB",
+    "uk": "GB",
+    "u k": "GB",
+    "britain": "GB",
+    "united states": "US",
+    "united states of america": "US",
+    "usa": "US",
+    "u s a": "US",
+    "america": "US",
+    "u s": "US",
+    "uae": "AE",
+    "u a e": "AE",
+    "ivory coast": "CI",
+    "czechia": "CZ",
+    "south korea": "KR",
+    "north korea": "KP",
+    "south sudan": "SS",
+    "north macedonia": "MK",
+    "macedonia": "MK",
+    "vatican": "VA",
+    "vatican city state": "VA",
+    "democratic republic of congo": "CD",
+    "republic of congo": "CG",
+    "british virgin islands": "VG",
+    "united states virgin islands": "VI",
+    "american samoa": "AS",
+    "western samoa": "WS",
+    "caribbean netherlands": "BQ",
+    "cabo verde": "CV",
+    "myanmar": "MM",
+    "burma": "MM",
+    "timor leste": "TL",
+}
+
+COUNTRY_CODE_NORMALIZATION: Dict[str, str] = {
+    "UK": "GB",
+}
+
+def _tokenize_country_text(text: str) -> List[str]:
+    if not text:
+        return []
+    normalized = unicodedata.normalize("NFKD", text).encode("ascii", "ignore").decode("ascii")
+    normalized = normalized.lower()
+    tokens: List[str] = []
+    for raw in re.split(r"[^a-z0-9]+", normalized):
+        if not raw:
+            continue
+        token = COUNTRY_TOKEN_REPLACEMENTS.get(raw, raw)
+        tokens.append(token)
+    return tokens
+
+def _normalize_country_label(label: str) -> str:
+    return " ".join(_tokenize_country_text(label))
+
+def _build_country_alias_maps() -> Tuple[Dict[str, str], Dict[str, str]]:
+    alias: Dict[str, str] = {}
+    compact: Dict[str, str] = {}
+    for code, name in COUNTRY_CODES.items():
+        norm = _normalize_country_label(name)
+        if norm:
+            alias[norm] = code
+            compact.setdefault(norm.replace(" ", ""), code)
+        if "&" in name:
+            amp = _normalize_country_label(name.replace("&", "and"))
+            if amp:
+                alias.setdefault(amp, code)
+                compact.setdefault(amp.replace(" ", ""), code)
+        base = re.sub(r"\([^)]*\)", "", name).strip()
+        if base:
+            norm_base = _normalize_country_label(base)
+            if norm_base:
+                alias.setdefault(norm_base, code)
+                compact.setdefault(norm_base.replace(" ", ""), code)
+        matches = re.findall(r"\(([^)]*)\)", name)
+        for match in matches:
+            swapped = f"{match} {base}".strip()
+            alt = _normalize_country_label(swapped)
+            if alt:
+                alias.setdefault(alt, code)
+                compact.setdefault(alt.replace(" ", ""), code)
+    for raw_alias, code in MANUAL_COUNTRY_ALIASES.items():
+        norm_alias = _normalize_country_label(raw_alias)
+        if not norm_alias:
+            continue
+        alias[norm_alias] = code
+        compact[norm_alias.replace(" ", "")] = code
+    return alias, compact
+
+COUNTRY_NAME_ALIASES, COUNTRY_ALIAS_COMPACT = _build_country_alias_maps()
+COUNTRY_NAME_KEYWORDS = sorted([name for name in COUNTRY_NAME_ALIASES.keys() if len(name) >= 3],
+                               key=len, reverse=True)
+COUNTRY_CODE_TOKENS: Dict[str, Set[str]] = {
+    code: set(_tokenize_country_text(name)) for code, name in COUNTRY_CODES.items()
+}
+
+def _normalize_country_code(value: str) -> str:
+    if not value:
+        return ""
+    cand = value.strip().upper()
+    return cand if cand in COUNTRY_CODES else ""
+
+def _country_code_from_name(value: str) -> str:
+    norm = _normalize_country_label(value)
+    if not norm:
+        return ""
+    direct = COUNTRY_NAME_ALIASES.get(norm)
+    if direct:
+        return direct
+    compact = norm.replace(" ", "")
+    if compact in COUNTRY_ALIAS_COMPACT:
+        return COUNTRY_ALIAS_COMPACT[compact]
+    padded = f" {norm} "
+    for name in COUNTRY_NAME_KEYWORDS:
+        if f" {name} " in padded:
+            return COUNTRY_NAME_ALIASES[name]
+    tokens = set(_tokenize_country_text(value))
+    best_code = ""
+    best_size = 0
+    for code, required in COUNTRY_CODE_TOKENS.items():
+        if not required:
+            continue
+        if required.issubset(tokens) and len(required) > best_size:
+            best_code = code
+            best_size = len(required)
+    if best_code:
+        return best_code
+    for token in tokens:
+        if len(token) == 2:
+            code = token.upper()
+            if code in COUNTRY_CODES:
+                return code
+    return ""
+
+def _country_code_from_tvg(tvg_id: str) -> str:
+    if not tvg_id:
+        return ""
+    cleaned = tvg_id
+    if cleaned.upper().endswith("@SD"):
+        cleaned = cleaned[:-3]
+    lowered = cleaned.lower()
+    matches = re.findall(r"\.([a-z]{2})(?=$|[^a-z])", lowered)
+    while matches:
+        code = matches.pop().upper()
+        code = COUNTRY_CODE_NORMALIZATION.get(code, code)
+        if code in COUNTRY_CODES:
+            return code
+    matches = re.findall(r"[_-]([a-z]{2})(?=$|[^a-z])", lowered)
+    while matches:
+        code = matches.pop().upper()
+        code = COUNTRY_CODE_NORMALIZATION.get(code, code)
+        if code in COUNTRY_CODES:
+            return code
+    return ""
+
+def _infer_country_code(group_title: str,
+                        tvg_id: str,
+                        country_value: str = "",
+                        playlist_country: str = "") -> Tuple[str, str]:
+    explicit = _normalize_country_code(playlist_country) or _country_code_from_name(playlist_country)
+    if explicit:
+        return explicit, "tvg-country"
+    group_code = _country_code_from_name(group_title)
+    if group_code:
+        label = f"group-title:{group_title}" if group_title else "group-title"
+        return group_code, label
+    existing = _normalize_country_code(country_value) or _country_code_from_name(country_value)
+    if existing:
+        label = f"country-field:{country_value}" if country_value else "country-field"
+        return existing, label
+    suffix = _country_code_from_tvg(tvg_id)
+    if suffix:
+        return suffix, "tvg-id"
+    return "", ""
+
+def _country_label_from_code(code: str, fallback: str = "") -> str:
+    if not code:
+        return fallback
+    label = COUNTRY_CODES.get(code.upper())
+    return label or fallback
 
 def parse_env_file(path: str) -> Dict[str, str]:
     env: Dict[str, str] = {}
@@ -365,8 +814,8 @@ def _preferred_source_kinds(row: Dict[str, str], hdr: Dict[str, str]) -> List[st
     return [kind] if kind else []
 
 def _group_title_label(country_code: str, existing_group: str, source_kind: str) -> str:
-    code = (country_code or "").strip().upper()
-    if source_kind == "iptv_org":
+    code = _normalize_country_code(country_code or "")
+    if code and source_kind == "iptv_org":
         iptv_map = {
             "CA": "Canada",
             "DE": "Germany",
@@ -377,16 +826,21 @@ def _group_title_label(country_code: str, existing_group: str, source_kind: str)
         mapped = iptv_map.get(code)
         if mapped:
             return mapped
-    generic_map = {
-        "UK": "United Kingdom",
-        "GB": "United Kingdom",
-        "DE": "Germany",
-        "CA": "Canada",
-        "US": "United States",
-    }
-    mapped = generic_map.get(code)
-    if mapped:
-        return mapped
+    if code:
+        generic_map = {
+            "UK": "United Kingdom",
+            "GB": "United Kingdom",
+            "DE": "Germany",
+            "CA": "Canada",
+            "US": "United States",
+        }
+        mapped = generic_map.get(code)
+        if mapped:
+            return mapped
+        label = _country_label_from_code(code)
+        if label:
+            return label
+        return code
     if country_code:
         return country_code.strip()
     if existing_group:
@@ -444,15 +898,9 @@ def _sync_favourites_with_master(tv_fav_path: str,
         group_name = _get(row, hdr, "GroupTitle", "Group", "Category")
         country = _get(row, hdr, "Country", "tvg-country")
         preferred_kinds = _preferred_source_kinds(row, hdr)
-        source_hint = (_get(row, hdr, "m3u_source", "Source") or "").lower()
-        country_source_hint = (_get(row, hdr, "CountrySource") or "").lower()
-        is_row_free = "free-tv" in source_hint or "free-tv" in country_source_hint or ("free_tv" in preferred_kinds)
         master_entry = None
-        master_kind = ""
-        if master_lookup and (not country or not group_name or not is_row_free):
+        if master_lookup:
             master_entry = _find_master_entry(master_lookup, name, tvg, url, preferred_kinds=preferred_kinds)
-            if master_entry:
-                master_kind = _classify_source(master_entry.source, master_entry.origin_path)
         if not group_name and master_entry:
             group_name = (master_entry.attrs.get("group-title")
                           or master_entry.attrs.get("group")
@@ -461,21 +909,33 @@ def _sync_favourites_with_master(tv_fav_path: str,
             if group_name:
                 _set_field(row, hdr, headers, "GroupTitle", group_name)
                 updated_existing += 1
-        should_fill_country = (not country) and group_name and (is_row_free or master_kind == "free_tv")
-        if should_fill_country:
-            base_source = (_source_category(master_entry.source, master_entry.origin_path)
-                           if master_entry else "Free-TV")
-            if base_source:
-                label = base_source if base_source.lower().startswith("free-tv") else "Free-TV"
-            else:
-                label = "Free-TV"
-            if "group" not in label.lower():
-                label = f"{label} (group)"
-            _set_field(row, hdr, headers, "Country", group_name)
-            _set_field(row, hdr, headers, "CountrySource", label)
-            country = group_name
+        playlist_country = ""
+        if master_entry:
+            playlist_country = (master_entry.attrs.get("tvg-country")
+                                or master_entry.attrs.get("country")
+                                or "")
+        infer_code, infer_source = _infer_country_code(
+            group_name,
+            tvg or (master_entry.tvg_id if master_entry else ""),
+            country,
+            playlist_country
+        )
+        country_source_value = _get(row, hdr, "CountrySource")
+        if infer_code:
+            normalized_existing = (country or "").strip().upper()
+            if infer_code != normalized_existing:
+                _set_field(row, hdr, headers, "Country", infer_code)
+                country = infer_code
+                updated_existing += 1
+                if infer_source.startswith("group-title"):
+                    backfilled_countries += 1
+            if infer_source and infer_source != (country_source_value or "").strip():
+                _set_field(row, hdr, headers, "CountrySource", infer_source)
+                country_source_value = infer_source
+                updated_existing += 1
+        elif playlist_country and not country and not country_source_value:
+            _set_field(row, hdr, headers, "CountrySource", "tvg-country")
             updated_existing += 1
-            backfilled_countries += 1
 
     today = datetime.utcnow().strftime("%Y%m%d")
     changed = 0
@@ -502,14 +962,18 @@ def _sync_favourites_with_master(tv_fav_path: str,
         _set_field(row, hdr, headers, "Favourite", "0")
         _set_field(row, hdr, headers, "New", "1")
         _set_field(row, hdr, headers, "AddedOn", today)
-        country = entry.attrs.get("tvg-country") or entry.attrs.get("country") or ""
+        playlist_country = entry.attrs.get("tvg-country") or entry.attrs.get("country") or ""
         country_source_label = _source_category(entry.source, entry.origin_path)
-        if not country and kind == "free_tv" and group_name:
-            # Free-TV playlists group channels by country name, so fall back to that label.
-            country = group_name
-            country_source_label = f"{country_source_label} (group)"
-        _set_field(row, hdr, headers, "Country", country)
-        _set_field(row, hdr, headers, "CountrySource", country_source_label)
+        inferred_country, inferred_source = _infer_country_code(
+            group_name,
+            entry.tvg_id or entry.attrs.get("tvg-id", ""),
+            "",
+            playlist_country
+        )
+        final_country = inferred_country or ""
+        final_source_label = inferred_source or country_source_label
+        _set_field(row, hdr, headers, "Country", final_country)
+        _set_field(row, hdr, headers, "CountrySource", final_source_label)
         _apply_source_label(row, hdr, headers, _m3u_source_label(entry.source, entry.origin_path))
         favs.append(row)
         existing_keys.add(key)
@@ -519,7 +983,7 @@ def _sync_favourites_with_master(tv_fav_path: str,
     if needs_write:
         _write_favourites(tv_fav_path, favs, headers, mirrors)
     if backfilled_countries:
-        print(f"[info] Filled country via group-title for {backfilled_countries} Free-TV entries in {tv_fav_path}")
+        print(f"[info] Inferred ISO countries from group-title for {backfilled_countries} entries in {tv_fav_path}")
     return changed
 
 def _find_master_entry(lookup: Optional[Dict[str, Dict[str, MasterEntry]]],
@@ -591,17 +1055,20 @@ def write_pruned_m3u_from_favs(favs, hdr, out_path, cc_map_path=None,
                 source_kind = preferred_kinds[0]
 
             tvg  = tvg_seed or _attr_lookup(master_attrs, "tvg-id","tvg_id","tvgid")
-            cc_raw = _get(r, hdr, "Country","tvg-country") or _attr_lookup(master_attrs, "tvg-country","country")
-            cc = cc_raw.strip()
-            if cc and len(cc) <= 3:
-                cc = cc.upper()
+            row_country_value = _get(r, hdr, "Country","tvg-country")
+            playlist_country = _attr_lookup(master_attrs, "tvg-country","country")
             grp  = _get(r, hdr, "GroupTitle","Group","Category") or _attr_lookup(master_attrs, "group-title","group","category")
+            inferred_cc, _ = _infer_country_code(grp, tvg, row_country_value, playlist_country)
+            cc = inferred_cc or ""
+            cc_raw = row_country_value or playlist_country or ""
             logo = _get(r, hdr, "Logo", "tvg-logo", "TvgLogo") or _attr_lookup(master_attrs, "tvg-logo","logo")
             if not name and master_entry and master_entry.name:
                 name = master_entry.name
             ext = "#EXTINF:-1"
             if tvg: ext = set_attr(ext, "tvg-id", tvg)
-            if cc:  ext = set_attr(ext, "tvg-country", cc)
+            if cc:
+                ext = set_attr(ext, "tvg-country", cc)
+                ext = set_attr(ext, "group-id", cc)
             if logo:
                 ext = set_attr(ext, "tvg-logo", logo)
             tvg_name_attr = _attr_lookup(master_attrs, "tvg-name","tvg_name")

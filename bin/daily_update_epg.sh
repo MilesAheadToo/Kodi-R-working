@@ -16,14 +16,7 @@ mkdir -p "${BIN_DIR}" "${M3U_DIR}" "${EPG_DIR}" "${LOG_DIR}"
 
 LOG_FILE="${LOG_DIR}/daily_update_epg.log"
 echo "[$(date -Iseconds)] Start daily_update_epg" | tee -a "${LOG_FILE}"
-
-for url in ${COUNTRY_EPG_URLS}; do
-  [ -n "$url" ] || continue
-  fname="$(basename "$url")"
-  out="${EPG_DIR}/${fname}"
-  echo "Downloading ${url} -> ${out}" | tee -a "${LOG_FILE}"
-  curl -fsSL "${url}" -o "${out}"
-done
+echo "[info] EPG downloads driven by match_epg_m3u.py country scanning" | tee -a "${LOG_FILE}"
 
 # Never process previous pruned output as input
 if [ -n "${EPG:-}" ] && [ -f "${EPG_DIR}/${EPG}" ]; then
